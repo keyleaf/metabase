@@ -165,7 +165,7 @@
 (defn- ag->name-info [ag]
   (let [ag-name (aggregation-name ag)]
     {:name         ag-name
-     :display_name ag-name}))
+     :display_name (str (tru (str (str/upper-case (subs ag-name 0 1)) (subs ag-name 1))))}))
 
 (defn- col-info-for-aggregation-clause
   "Return appropriate column metadata for an `:aggregation` clause."

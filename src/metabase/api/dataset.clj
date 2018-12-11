@@ -103,7 +103,7 @@
     (if (= status :completed)
       ;; successful query, send file
       {:status  200
-       :body    ((:export-fn export-conf) columns (maybe-modify-date-values cols rows))
+       :body    ((:export-fn export-conf) columns (maybe-modify-date-values cols rows) cols)
        :headers {"Content-Type"        (str (:content-type export-conf) "; charset=utf-8")
                  "Content-Disposition" (str "attachment; filename=\"query_result_" (du/date->iso-8601) "." (:ext export-conf) "\"")}}
       ;; failed query, send error message
