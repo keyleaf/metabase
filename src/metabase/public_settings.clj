@@ -58,7 +58,7 @@
   :setter  (fn [new-value]
              (setting/set-string! :site-locale new-value)
              (set-locale new-value))
-  :default "en")
+  :default "zh")
 
 (defsetting admin-email
   (tru "The email address users should be referred to if they encounter a problem."))
