@@ -52,9 +52,6 @@
                         (csv/write-csv *out* (into [(mapv name columns)] rows))))
   ([columns rows cols]
    (def columns_ex (for [col cols] (get-in col [:display_name])))
-   (prn "columns_ex is :" columns_ex)
-   (prn "cols is :" cols)
-   (prn "rows is :" rows)
    (with-out-str
      ;; turn keywords into strings, otherwise we get colons in our output
      (csv/write-csv *out* (into [(mapv name columns_ex)] rows)))))
