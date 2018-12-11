@@ -204,6 +204,7 @@
                             (require 'metabase.setup)
                             ((resolve 'metabase.setup/token-value)))
    :site_name             (site-name)
+   :site_locale           (site-locale)
    :site_url              (site-url)
    :timezone_short        (short-timezone-name (setting/get :report-timezone))
    :timezones             common/timezones
