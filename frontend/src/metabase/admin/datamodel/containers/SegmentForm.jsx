@@ -16,6 +16,7 @@ import { reduxForm } from "redux-form";
 import cx from "classnames";
 import Metadata from "metabase-lib/lib/metadata/Metadata";
 import Table from "metabase-lib/lib/metadata/Table";
+import UserPicker from "metabase/admin/datamodel/components/UserPicker";
 
 @reduxForm(
   {
@@ -27,6 +28,7 @@ import Table from "metabase-lib/lib/metadata/Table";
       "table_id",
       "definition",
       "revision_message",
+      "segment_users",
     ],
     validate: values => {
       const errors = {};
@@ -56,6 +58,7 @@ import Table from "metabase-lib/lib/metadata/Table";
       table_id: null,
       definition: { filter: [] },
       revision_message: null,
+      segment_users: [],
     },
   },
   (state, props) => segmentFormSelectors(state, props),
@@ -97,14 +100,18 @@ export default class SegmentForm extends Component {
 
   render() {
     const {
-      fields: { id, name, description, definition, revision_message },
+      fields: { id, name, description, definition, revision_message, segment_users },
       segment,
       metadata,
       tableMetadata,
       handleSubmit,
       previewSummary,
+      users,
     } = this.props;
 
+    if (!segment_users || !segment_users.value || segment_users.value == "") {
+      segment_users.value = [];
+    }
     return (
       <LoadingAndErrorWrapper loading={!tableMetadata}>
         {() => (
@@ -131,7 +138,7 @@ export default class SegmentForm extends Component {
                   metadata={
                     metadata &&
                     tableMetadata &&
-                    metadata.tables &&
+                    metadata.tables && metadata.tables[tableMetadata.id] &&
                     metadata.tables[tableMetadata.id].fields &&
                     Object.assign(new Metadata(), metadata, {
                       tables: {
@@ -157,6 +164,20 @@ export default class SegmentForm extends Component {
                 />
               </FormLabel>
               <div style={{ maxWidth: "575px" }}>
+                <FormLabel
+                  title={"行级权限用户配置"}
+                  description={"配置的用户在查询此表时默认应用上面配置的过滤条件"}
+                >
+                  <UserPicker
+                    field={segment_users}
+                    autoFocus={false}
+                    recipients={segment_users.value}
+                    users={users}
+                    isNewPulse={true}
+                    onRecipientsChange={recipients =>
+                      this.onChannelPropertyChange(1, "segment_users", recipients)}
+                  />
+                </FormLabel>
                 <FormLabel
                   title={t`Name Your Segment`}
                   description={t`Give your segment a name to help others find it.`}

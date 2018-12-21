@@ -11,6 +11,7 @@ import * as actions from "../datamodel";
 import { clearRequestState } from "metabase/redux/requests";
 import { getMetadata } from "metabase/selectors/metadata";
 import { fetchTableMetadata } from "metabase/redux/metadata";
+import { entityListLoader } from "metabase/entities/containers/EntityListLoader";
 
 const mapDispatchToProps = {
   ...actions,
@@ -24,6 +25,7 @@ const mapStateToProps = (state, props) => ({
   metadata: getMetadata(state, props),
 });
 
+@entityListLoader({ entityType: "users" })
 @connect(mapStateToProps, mapDispatchToProps)
 export default class SegmentApp extends Component {
   async componentWillMount() {

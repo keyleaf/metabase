@@ -2060,6 +2060,34 @@ databaseChangeLog:
             columns:
               column:
                 name: table_id
+        - createTable:
+            tableName: segment_user
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: segment_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    references: segment(id)
+                    foreignKeyName: fk_segment_user_ref_segment_id
+                    deferrable: false
+                    initiallyDeferred: false
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    references: core_user(id)
+                    foreignKeyName: fk_segment_user_ref_user_id
+                    deferrable: false
+                    initiallyDeferred: false
         - modifySql:
             dbms: postgresql
             replace:

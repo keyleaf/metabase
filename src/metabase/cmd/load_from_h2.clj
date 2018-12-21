@@ -49,6 +49,7 @@
              [pulse-channel-recipient :refer [PulseChannelRecipient]]
              [revision :refer [Revision]]
              [segment :refer [Segment]]
+             [segment-user :refer [SegmentUser]]
              [session :refer [Session]]
              [setting :refer [Setting]]
              [table :refer [Table]]
@@ -71,6 +72,7 @@
    Field
    FieldValues
    Segment
+   SegmentUser
    Metric
    MetricImportantField
    Revision
