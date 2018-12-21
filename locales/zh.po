@@ -116,7 +116,7 @@ msgstr "是否要删除这个数据库？"
 
 #: frontend/src/metabase/admin/databases/components/DeleteDatabaseModal.jsx:66
 msgid "All saved questions, metrics, and segments that rely on this database will be lost."
-msgstr "所有依赖这个数据库保存的问题，指标，数据段将要丢失。"
+msgstr "所有依赖这个数据库保存的图表，指标，数据段将要丢失。"
 
 #: frontend/src/metabase/admin/databases/components/DeleteDatabaseModal.jsx:67
 msgid "This cannot be undone."
@@ -340,7 +340,7 @@ msgstr "作废{0}？"
 
 #: frontend/src/metabase/admin/datamodel/components/ObjectRetireModal.jsx:38
 msgid "Saved questions and other things that depend on this {0} will continue to work, but this {1} will no longer be selectable from the query builder."
-msgstr "保存的问题和依赖于此{0}的其他内容将继续有效，但不再可以从查询构建器中选择此{1}。"
+msgstr "保存的图表和依赖于此{0}的其他内容将继续有效，但不再可以从查询构建器中选择此{1}。"
 
 #: frontend/src/metabase/admin/datamodel/components/ObjectRetireModal.jsx:39
 msgid "If you're sure you want to retire this {0}, please write a quick explanation of why it's being retired:"
@@ -664,7 +664,7 @@ msgstr "缓存字段值"
 
 #: frontend/src/metabase/admin/datamodel/containers/FieldApp.jsx:365
 msgid "Metabase can scan the values for this field to enable checkbox filters in dashboards and questions."
-msgstr "Metabase 通过扫描该字段，以启用仪表盘和问题的多选框筛选。"
+msgstr "Metabase 通过扫描该字段，以启用仪表盘和图表的多选框筛选。"
 
 #: frontend/src/metabase/admin/datamodel/components/UpdateCachedFieldValues.jsx:14
 msgid "Re-scan this field"
@@ -823,7 +823,7 @@ msgstr "设置"
 
 #: frontend/src/metabase/admin/datamodel/containers/TableSettingsApp.jsx:103
 msgid "Metabase can scan the values in this table to enable checkbox filters in dashboards and questions."
-msgstr "Metabase扫描此表中的值以启用仪表板和问题中的复选框过滤器。"
+msgstr "Metabase扫描此表中的值以启用仪表板和图表中的复选框过滤器。"
 
 #: frontend/src/metabase/admin/datamodel/containers/TableSettingsApp.jsx:108
 msgid "Re-scan this table"
@@ -1206,7 +1206,7 @@ msgstr "权限被更改。"
 
 #: frontend/src/metabase/admin/permissions/containers/CollectionPermissionsModal.jsx:52
 msgid "Permissions for this collection"
-msgstr "这个集合的权限"
+msgstr "这个空间的权限"
 
 #: frontend/src/metabase/admin/permissions/containers/PermissionsApp.jsx:53
 msgid "You have unsaved changes"
@@ -1317,11 +1317,11 @@ msgstr "能够写原始查询语句"
 
 #: frontend/src/metabase/admin/permissions/selectors.js:277
 msgid "Curate collection"
-msgstr "修改集合"
+msgstr "修改空间"
 
 #: frontend/src/metabase/admin/permissions/selectors.js:284
 msgid "View collection"
-msgstr "查看集合"
+msgstr "查看空间"
 
 #: frontend/src/metabase/admin/permissions/selectors.js:327
 #: frontend/src/metabase/admin/permissions/selectors.js:423
@@ -1468,7 +1468,7 @@ msgstr "允许用户用他们自己的邮箱注册，如果他们的Google账户
 
 #: frontend/src/metabase/admin/settings/components/SettingsSlackForm.jsx:242
 msgid "Answers sent right to your Slack #channels"
-msgstr "答案发送到您的Slack #channels"
+msgstr "查询发送到您的Slack #channels"
 
 #: frontend/src/metabase/admin/settings/components/SettingsSlackForm.jsx:251
 msgid "Create a Slack Bot User for MetaBot"
@@ -1608,7 +1608,7 @@ msgstr "输入你从Metabase商店购买的token"
 
 #: frontend/src/metabase/admin/settings/components/widgets/EmbeddingLevel.jsx:53
 msgid "Premium embedding lets you disable \"Powered by Metabase\" on your embedded dashboards and questions."
-msgstr "高级嵌入允许您在嵌入式仪表板和问题上禁用“Powered by Metabase”。"
+msgstr "高级嵌入允许您在嵌入式仪表板和图表上禁用“Powered by Metabase”。"
 
 #: frontend/src/metabase/admin/settings/components/widgets/EmbeddingLevel.jsx:60
 msgid "Buy a token"
@@ -1670,7 +1670,7 @@ msgstr "公共卡片列表"
 
 #: frontend/src/metabase/admin/settings/components/widgets/PublicLinksListing.jsx:163
 msgid "No questions have been publicly shared yet."
-msgstr "还没有公开分享任何问题。"
+msgstr "还没有公开分享任何图表。"
 
 #: frontend/src/metabase/admin/settings/components/widgets/PublicLinksListing.jsx:172
 msgid "Embedded Dashboard Listing"
@@ -1743,7 +1743,7 @@ msgstr "客服邮箱"
 
 #: frontend/src/metabase/admin/settings/selectors.js:48
 msgid "Report Timezone"
-msgstr "报表时区"
+msgstr "图表时区"
 
 #: frontend/src/metabase/admin/settings/selectors.js:51
 msgid "Database Default"
@@ -1942,7 +1942,7 @@ msgstr "嵌入的仪表板"
 
 #: frontend/src/metabase/admin/settings/selectors.js:403
 msgid "Embedded Questions"
-msgstr "嵌入的问题"
+msgstr "嵌入的图表"
 
 #: frontend/src/metabase/admin/settings/selectors.js:410
 msgid "Caching"
@@ -2115,11 +2115,11 @@ msgstr "好"
 
 #: frontend/src/metabase/components/ArchiveCollectionModal.jsx:40
 msgid "Archive this collection?"
-msgstr "归档集合"
+msgstr "归档空间"
 
 #: frontend/src/metabase/components/ArchiveCollectionModal.jsx:45
 msgid "The dashboards, collections, and pulses in this collection will also be archived."
-msgstr "此集合中的仪表板，集合和定时通知也将被归档。"
+msgstr "此空间中的仪表板，空间和定时通知也将被归档。"
 
 #: frontend/src/metabase/components/ArchiveCollectionModal.jsx:49
 #: frontend/src/metabase/components/CollectionLanding.jsx:587
@@ -2226,15 +2226,15 @@ msgstr "要发送{0}，管理员需要设置{1}集成。"
 
 #: frontend/src/metabase/components/CollectionEmptyState.jsx:15
 msgid "This collection is empty, like a blank canvas"
-msgstr "这个集合空空如也，什么都没有"
+msgstr "这个空间空空如也，什么都没有"
 
 #: frontend/src/metabase/components/CollectionEmptyState.jsx:16
 msgid "You can use collections to organize and group dashboards, questions and pulses for your team or yourself"
-msgstr "您可以使用集合来为您的团队或您自己组织和分组仪表板、问题和定时通知。"
+msgstr "您可以使用空间来为您的团队或您自己组织和分组仪表板、图表和定时通知。"
 
 #: frontend/src/metabase/components/CollectionEmptyState.jsx:28
 msgid "Create another collection"
-msgstr "再创建一个集合"
+msgstr "再创建一个空间"
 
 #: frontend/src/metabase/components/CollectionLanding.jsx:61
 msgid "Dashboards let you collect and share data in one place."
@@ -2246,7 +2246,7 @@ msgstr "定时通知允许您通过电子邮件或Slack向团队发送最新数�
 
 #: frontend/src/metabase/components/CollectionLanding.jsx:79
 msgid "Questions are a saved look at your data."
-msgstr "问题是对保存的数据查看。"
+msgstr "图表是对保存的数据查看。"
 
 #: frontend/src/metabase/components/CollectionLanding.jsx:275
 msgid "Pins"
@@ -2261,7 +2261,7 @@ msgstr "把东西拖到这里将它固定在顶部"
 #: frontend/src/metabase/home/containers/SearchApp.jsx:35
 #: frontend/src/metabase/home/containers/SearchApp.jsx:96
 msgid "Collections"
-msgstr "集合"
+msgstr "空间"
 
 #: frontend/src/metabase/components/CollectionLanding.jsx:411
 #: frontend/src/metabase/components/CollectionLanding.jsx:434
@@ -2290,21 +2290,21 @@ msgstr "移动"
 
 #: frontend/src/metabase/components/CollectionLanding.jsx:656
 msgid "Edit this collection"
-msgstr "修改集合"
+msgstr "修改空间"
 
 #: frontend/src/metabase/components/CollectionLanding.jsx:664
 msgid "Archive this collection"
-msgstr "归档集合"
+msgstr "归档空间"
 
 #: frontend/src/metabase/components/CollectionList.jsx:64
 #: frontend/src/metabase/entities/collections.js:148
 msgid "My personal collection"
-msgstr "我的个人集合"
+msgstr "我的个人空间"
 
 #: frontend/src/metabase/components/CollectionList.jsx:106
 #: frontend/src/metabase/containers/CollectionForm.jsx:9
 msgid "New collection"
-msgstr "新建集合"
+msgstr "新建空间"
 
 #: frontend/src/metabase/components/CopyButton.jsx:35
 msgid "Copied!"
@@ -2600,7 +2600,7 @@ msgstr "看板"
 #: frontend/src/metabase/components/ItemTypeFilterBar.jsx:23
 #: frontend/src/metabase/home/containers/SearchApp.jsx:119
 msgid "Questions"
-msgstr "报表"
+msgstr "图表"
 
 #: frontend/src/metabase/components/ItemTypeFilterBar.jsx:28
 #: frontend/src/metabase/routes.jsx:320
@@ -2837,23 +2837,23 @@ msgstr "替换还是保存为新的？"
 
 #: frontend/src/metabase/containers/SaveQuestionModal.jsx:173
 msgid "Replace original question, \"{0}\""
-msgstr "替换原始问题“{0}”"
+msgstr "替换原始图表“{0}”"
 
 #: frontend/src/metabase/containers/SaveQuestionModal.jsx:178
 msgid "Save as new question"
-msgstr "保存为新问题"
+msgstr "保存为新的图表"
 
 #: frontend/src/metabase/containers/SaveQuestionModal.jsx:187
 msgid "First, save your question"
-msgstr "首先，保存您的问题"
+msgstr "首先，保存您的图表"
 
 #: frontend/src/metabase/containers/SaveQuestionModal.jsx:188
 msgid "Save question"
-msgstr "保存问题"
+msgstr "保存图表"
 
 #: frontend/src/metabase/containers/SaveQuestionModal.jsx:224
 msgid "What is the name of your card?"
-msgstr "这个卡片叫什么名字？"
+msgstr "这个图表叫什么名字？"
 
 #: frontend/src/metabase/containers/SaveQuestionModal.jsx:232
 #: frontend/src/metabase/entities/collections.js:94
@@ -2877,7 +2877,7 @@ msgstr "这是可选的，但非常有帮助"
 #: frontend/src/metabase/containers/SaveQuestionModal.jsx:245
 #: frontend/src/metabase/entities/dashboards.js:108
 msgid "Which collection should this go in?"
-msgstr "将这个放到哪个集合中？"
+msgstr "将这个放到哪个空间中？"
 
 #: frontend/src/metabase/containers/UndoListing.jsx:34
 msgid "modified"
@@ -2897,11 +2897,11 @@ msgstr "正在使用的图表"
 
 #: frontend/src/metabase/dashboard/components/AddSeriesModal.jsx:274
 msgid "That question isn't compatible"
-msgstr "那个问题不兼容"
+msgstr "那个图表不兼容"
 
 #: frontend/src/metabase/dashboard/components/AddSeriesModal.jsx:310
 msgid "Search for a question"
-msgstr "查找问题"
+msgstr "查找图表"
 
 #: frontend/src/metabase/dashboard/components/AddSeriesModal.jsx:339
 msgid "We're not sure if this question is compatible"
@@ -2921,7 +2921,7 @@ msgstr "这个仪表盘看起来是空的"
 
 #: frontend/src/metabase/dashboard/components/Dashboard.jsx:289
 msgid "Add a question to start making it useful!"
-msgstr "添加一个疑问来让它变得有用"
+msgstr "添加一个图表来让它变得有用"
 
 #: frontend/src/metabase/dashboard/components/DashboardActions.jsx:38
 msgid "Daytime mode"
@@ -2947,11 +2947,11 @@ msgstr "保存中"
 
 #: frontend/src/metabase/dashboard/components/DashboardHeader.jsx:216
 msgid "Add a question"
-msgstr "添加报表"
+msgstr "添加图表"
 
 #: frontend/src/metabase/dashboard/components/DashboardHeader.jsx:219
 msgid "Add a question to this dashboard"
-msgstr "添加报表到看板"
+msgstr "添加图表到看板"
 
 #: frontend/src/metabase/dashboard/components/DashboardHeader.jsx:248
 msgid "Add a filter"
@@ -3044,7 +3044,7 @@ msgstr "刷新于"
 
 #: frontend/src/metabase/dashboard/components/RemoveFromDashboardModal.jsx:36
 msgid "Remove this question?"
-msgstr "移除这个疑问？"
+msgstr "移除这个图表？"
 
 #: frontend/src/metabase/dashboard/containers/AutomaticDashboardApp.jsx:71
 msgid "Your dashboard was saved"
@@ -3103,15 +3103,15 @@ msgstr "删除一个关于……的警报"
 
 #: frontend/src/metabase/home/components/Activity.jsx:152
 msgid "saved a question about "
-msgstr "保存一个关于……的疑问"
+msgstr "保存一个关于……的图表"
 
 #: frontend/src/metabase/home/components/Activity.jsx:165
 msgid "saved a question"
-msgstr "存储一个疑问"
+msgstr "存储一个图表"
 
 #: frontend/src/metabase/home/components/Activity.jsx:169
 msgid "deleted a question"
-msgstr "删除一个疑问"
+msgstr "删除一个图表"
 
 #: frontend/src/metabase/home/components/Activity.jsx:172
 msgid "created a dashboard"
@@ -3124,12 +3124,12 @@ msgstr "删除一个仪表盘"
 #: frontend/src/metabase/home/components/Activity.jsx:181
 #: frontend/src/metabase/home/components/Activity.jsx:196
 msgid "added a question to the dashboard - "
-msgstr "添加一个疑问到仪表盘"
+msgstr "添加一个图表到仪表盘"
 
 #: frontend/src/metabase/home/components/Activity.jsx:206
 #: frontend/src/metabase/home/components/Activity.jsx:221
 msgid "removed a question from the dashboard - "
-msgstr "从仪表盘中移除一个问题"
+msgstr "从仪表盘中移除一个图表"
 
 #: frontend/src/metabase/home/components/Activity.jsx:231
 #: frontend/src/metabase/home/components/Activity.jsx:238
@@ -3212,11 +3212,11 @@ msgstr "嗯……无事发生"
 
 #: frontend/src/metabase/home/components/Activity.jsx:532
 msgid "Save a question and get this baby going!"
-msgstr "存储一个问题并让它运行"
+msgstr "存储一个图表并让它运行"
 
 #: frontend/src/metabase/home/components/NewUserOnboardingModal.jsx:19
 msgid "Ask questions and explore"
-msgstr "提问并探索"
+msgstr "创建图表并查看"
 
 #: frontend/src/metabase/home/components/NewUserOnboardingModal.jsx:20
 msgid "Click on charts or tables to explore, or ask a new question using the easy interface or the powerful SQL editor."
@@ -4144,11 +4144,11 @@ msgstr "自定义"
 #: frontend/src/metabase/new_query/containers/NewQueryOptions.jsx:150
 #: frontend/src/metabase/query_builder/components/QueryHeader.jsx:517
 msgid "New question"
-msgstr "新的疑问"
+msgstr "新的图表"
 
 #: frontend/src/metabase/new_query/containers/NewQueryOptions.jsx:152
 msgid "Use the simple question builder to see trends, lists of things, or to create your own metrics."
-msgstr "使用简单的疑问创建器来查看趋势、列表或者事物，或者创建你自己的指标。"
+msgstr "使用简单的图表创建器来查看趋势、列表或者事物，或者创建你自己的指标。"
 
 #: frontend/src/metabase/new_query/containers/NewQueryOptions.jsx:161
 #: src/metabase/automagic_dashboards/core.clj
@@ -4158,7 +4158,7 @@ msgstr "原生查询"
 
 #: frontend/src/metabase/new_query/containers/NewQueryOptions.jsx:162
 msgid "For more complicated questions, you can write your own SQL or native query."
-msgstr "为了回答更多复杂的疑问，你可以写下你自己的SQL语句或者原生查询。"
+msgstr "为了回答更多复杂的图表，你可以写下你自己的SQL语句或者原生查询。"
 
 #: frontend/src/metabase/parameters/components/ParameterValueWidget.jsx:240
 msgid "Select a default value…"
@@ -4443,7 +4443,7 @@ msgstr "什么是定时任务"
 
 #: frontend/src/metabase/pulse/components/PulseEdit.jsx:141
 msgid "Got it"
-msgstr "得到结果了！"
+msgstr "执行完成了！"
 
 #: frontend/src/metabase/pulse/components/PulseEdit.jsx:157
 msgid "Where should this data go?"
@@ -4481,7 +4481,7 @@ msgstr "会在你的定时任务展示前20行前10列的表。如果邮件发�
 
 #: frontend/src/metabase/pulse/components/PulseEditCards.jsx:112
 msgid "Raw data questions can only be included as email attachments"
-msgstr "原始数据疑问仅能以邮件附件的形式包含在内"
+msgstr "原始数据图表仅能以邮件附件的形式包含在内"
 
 #: frontend/src/metabase/pulse/components/PulseEditCards.jsx:119
 msgid "Looks like this pulse is getting big"
@@ -4553,7 +4553,7 @@ msgstr "Slack"
 
 #: frontend/src/metabase/pulse/components/PulseEditCollection.jsx:12
 msgid "Which collection should this pulse live in?"
-msgstr "将这个定时通知放到哪个集合中？"
+msgstr "将这个定时通知放到哪个空间中？"
 
 #: frontend/src/metabase/pulse/components/PulseEditName.jsx:35
 msgid "Name your pulse"
@@ -4648,7 +4648,7 @@ msgstr "查看下层的{0}记录"
 
 #: frontend/src/metabase/qb/components/actions/XRayCard.jsx:20
 msgid "X-Ray this question"
-msgstr "透视这个疑问"
+msgstr "透视这个图表"
 
 #: frontend/src/metabase/qb/components/drill/AutomaticDashboardDrill.jsx:32
 msgid "X-ray {0} {1}"
@@ -4897,7 +4897,7 @@ msgstr "结果"
 
 #: frontend/src/metabase/query_builder/components/AlertModals.jsx:677
 msgid "{0} This kind of alert is most useful when your saved question doesn’t {1} return any results, but you want to know when it does."
-msgstr "{0}这种类型的警报是最有效果的，当你存储疑问没有"
+msgstr "{0}这种类型的警报是最有效果的，当你存储图表没有"
 
 #: frontend/src/metabase/query_builder/components/AlertModals.jsx:678
 msgid "Tip"
@@ -4986,7 +4986,7 @@ msgstr "匹配"
 #: frontend/src/metabase/query_builder/components/GuiQueryEditor.jsx:152
 #: frontend/src/metabase/query_builder/components/GuiQueryEditor.jsx:160
 msgid "Add filters to narrow your answer"
-msgstr "添加筛选条件来缩小你的答案范围"
+msgstr "添加筛选条件来缩小你的查询范围"
 
 #: frontend/src/metabase/query_builder/components/GuiQueryEditor.jsx:284
 msgid "Add a grouping"
@@ -5027,7 +5027,7 @@ msgstr "没有"
 
 #: frontend/src/metabase/query_builder/components/NativeQueryEditor.jsx:345
 msgid "This question is written in {0}."
-msgstr "这个疑问已经被写入{0}"
+msgstr "这个图表已经被写入{0}"
 
 #: frontend/src/metabase/query_builder/components/NativeQueryEditor.jsx:353
 msgid "Hide Editor"
@@ -5088,7 +5088,7 @@ msgstr "移动图表"
 
 #: frontend/src/metabase/query_builder/components/QueryHeader.jsx:283
 msgid "Which collection should this be in?"
-msgstr "将这个放到哪个集合中？"
+msgstr "将这个放到哪个空间中？"
 
 #: frontend/src/metabase/query_builder/components/QueryHeader.jsx:313
 #: frontend/src/metabase/query_builder/components/template_tags/TagEditorHelp.jsx:110
@@ -5175,15 +5175,15 @@ msgstr "我该如何使用这个？"
 
 #: frontend/src/metabase/query_builder/components/RunButton.jsx:28
 msgid "Get Answer"
-msgstr "得到答案"
+msgstr "查询"
 
 #: frontend/src/metabase/query_builder/components/SavedQuestionIntroModal.jsx:12
 msgid "It's okay to play around with saved questions"
-msgstr "随便看看已经存储的疑问吧"
+msgstr "随便看看已经存储的图表吧"
 
 #: frontend/src/metabase/query_builder/components/SavedQuestionIntroModal.jsx:14
 msgid "You won't make any permanent changes to a saved question unless you click the edit icon in the top-right."
-msgstr "除非您单击右上角的编辑图标，否则您不会对保存的问题进行任何永久性更改。"
+msgstr "除非您单击右上角的编辑图标，否则您不会对保存的图表进行任何永久性更改。"
 
 #: frontend/src/metabase/query_builder/components/SearchBar.jsx:28
 msgid "Search for"
@@ -5203,7 +5203,7 @@ msgstr "时间分组"
 
 #: frontend/src/metabase/query_builder/components/VisualizationError.jsx:46
 msgid "Your question took too long"
-msgstr "你的疑问花了很长时间"
+msgstr "你的图表花了很长时间"
 
 #: frontend/src/metabase/query_builder/components/VisualizationError.jsx:47
 msgid "We didn't get an answer back from your database in time, so we had to stop. You can try again in a minute, or if the problem persists, you can email an admin to let them know."
@@ -5219,7 +5219,7 @@ msgstr "等待一两分钟后，再刷新页面。如果问题依旧存在，请
 
 #: frontend/src/metabase/query_builder/components/VisualizationError.jsx:88
 msgid "There was a problem with your question"
-msgstr "你的疑问有故障"
+msgstr "你的图表有故障"
 
 #: frontend/src/metabase/query_builder/components/VisualizationError.jsx:89
 msgid "Most of the time this is caused by an invalid selection or bad input value. Double check your inputs and retry your query."
@@ -5227,7 +5227,7 @@ msgstr "大多数情况，是由于无效查询或错误输入值导致。请确
 
 #: frontend/src/metabase/query_builder/components/VisualizationResult.jsx:60
 msgid "This may be the answer you’re looking for. If not, try removing or changing your filters to make them less specific."
-msgstr "这可能是您正在寻找的答案。如果不是，请尝试删除或更改过滤器，使其不那么具体。"
+msgstr "这可能是您正在寻找的查询。如果不是，请尝试删除或更改过滤器，使其不那么具体。"
 
 #: frontend/src/metabase/query_builder/components/VisualizationResult.jsx:66
 msgid "You can also {0} when there are some results."
@@ -5235,7 +5235,7 @@ msgstr "你也可以{0}，当有一些结果时。"
 
 #: frontend/src/metabase/query_builder/components/VisualizationResult.jsx:68
 msgid "get an alert"
-msgstr "得到一个预警"
+msgstr "设置预警"
 
 #: frontend/src/metabase/query_builder/components/VisualizationResult.jsx:77
 msgid "Back to last run"
@@ -5252,7 +5252,7 @@ msgstr "没有设置描述"
 
 #: frontend/src/metabase/query_builder/components/dataref/DetailPane.jsx:21
 msgid "Use for current question"
-msgstr "为当前疑问使用"
+msgstr "为当前图表使用"
 
 #: frontend/src/metabase/query_builder/components/dataref/DetailPane.jsx:33
 #: frontend/src/metabase/reference/components/UsefulQuestions.jsx:16
@@ -5294,12 +5294,12 @@ msgstr "数据参考"
 
 #: frontend/src/metabase/query_builder/components/dataref/MainPane.jsx:13
 msgid "Learn more about your data structure to ask more useful questions"
-msgstr "了解更多关于你的数据结构并提出更多有用的疑问"
+msgstr "了解更多关于你的数据结构并提出更多有用的图表"
 
 #: frontend/src/metabase/query_builder/components/dataref/MetricPane.jsx:58
 #: frontend/src/metabase/query_builder/components/dataref/SegmentPane.jsx:84
 msgid "Could not find the table metadata prior to creating a new question"
-msgstr "在创建一个新的疑问之前不能找到表单元数据"
+msgstr "在创建一个新的图表之前不能找到表单元数据"
 
 #: frontend/src/metabase/query_builder/components/dataref/MetricPane.jsx:80
 msgid "See {0}"
@@ -5481,7 +5481,7 @@ msgstr "原生查询中的变量允许使用筛选组件或URL参数来动态替
 
 #: frontend/src/metabase/query_builder/components/template_tags/TagEditorHelp.jsx:112
 msgid "{0} creates a variable in this SQL template called \"variable_name\". Variables can be given types in the side panel, which changes their behavior. All variable types other than \"Field Filter\" will automatically cause a filter widget to be placed on this question; with Field Filters, this is optional. When this filter widget is filled in, that value replaces the variable in the SQL template."
-msgstr "{0}在此SQL模板中创建一个名为“variable_name”的变量。变量可以在侧面板中给出类型，这会改变它们的行为。除“字段过滤器”之外的所有变量类型都将自动导致过滤器小部件放在此问题上;使用字段过滤器，这是可选的。填充此过滤器窗口小部件时，该值将替换SQL模板中的变量。"
+msgstr "{0}在此SQL模板中创建一个名为“variable_name”的变量。变量可以在侧面板中给出类型，这会改变它们的行为。除“字段过滤器”之外的所有变量类型都将自动导致过滤器小部件放在此图表上;使用字段过滤器，这是可选的。填充此过滤器窗口小部件时，该值将替换SQL模板中的变量。"
 
 #: frontend/src/metabase/query_builder/components/template_tags/TagEditorHelp.jsx:121
 msgid "Field Filters"
@@ -5493,7 +5493,7 @@ msgstr "为变量提供“字段过滤器”类型将允许您链接SQL卡到仪
 
 #: frontend/src/metabase/query_builder/components/template_tags/TagEditorHelp.jsx:126
 msgid "When adding a Field Filter variable, you'll need to map it to a specific field. You can then choose to display a filter widget on your question, but even if you don't, you can now map your Field Filter variable to a dashboard filter when adding this question to a dashboard. Field Filters should be used inside of a \"WHERE\" clause."
-msgstr "添加“字段筛选器”变量时，您需要将其映射到特定字段。 然后，您可以选择在问题上显示过滤组件，但即使不这样做，现在可以在将此问题添加到仪表板时将“字段筛选器”变量映射到仪表盘过滤器。 字段筛选器应在“WHERE”子句中使用。"
+msgstr "添加“字段筛选器”变量时，您需要将其映射到特定字段。 然后，您可以选择在图表上显示过滤组件，但即使不这样做，现在可以在将此图表添加到仪表板时将“字段筛选器”变量映射到仪表盘过滤器。 字段筛选器应在“WHERE”子句中使用。"
 
 #: frontend/src/metabase/query_builder/components/template_tags/TagEditorHelp.jsx:130
 msgid "Optional Clauses"
@@ -5557,11 +5557,11 @@ msgstr "这个图表会从已引用的看板或定时任务中移除"
 
 #: frontend/src/metabase/query_builder/containers/QueryBuilder.jsx:136
 msgid "Question"
-msgstr "疑问"
+msgstr "图表"
 
 #: frontend/src/metabase/questions/containers/AddToDashboard.jsx:11
 msgid "Pick a question to add"
-msgstr "选择一个疑问来添加"
+msgstr "选择一个图表来添加"
 
 #: frontend/src/metabase/reference/components/EditHeader.jsx:19
 msgid "You are editing this page"
@@ -5713,7 +5713,7 @@ msgstr "关于这个数据库需要了解的事情"
 #: frontend/src/metabase/reference/databases/DatabaseList.jsx:46
 #: frontend/src/metabase/reference/guide/BaseSidebar.jsx:39
 msgid "Databases and tables"
-msgstr "数据库和报表"
+msgstr "数据库和图表"
 
 #: frontend/src/metabase/admin/tasks/containers/TasksApp.jsx:68
 #: frontend/src/metabase/reference/databases/DatabaseSidebar.jsx:27
@@ -5732,7 +5732,7 @@ msgstr "细节"
 #: frontend/src/metabase/reference/databases/DatabaseSidebar.jsx:33
 #: frontend/src/metabase/reference/databases/TableList.jsx:111
 msgid "Tables in {0}"
-msgstr "{0}中的报表"
+msgstr "{0}中的图表"
 
 #: frontend/src/metabase/reference/databases/FieldDetail.jsx:222
 #: frontend/src/metabase/reference/databases/TableDetail.jsx:200
@@ -5814,14 +5814,14 @@ msgstr "当在这个数据库中添加表单时，它们将会出现在这里"
 
 #: frontend/src/metabase/reference/databases/TableQuestions.jsx:34
 msgid "Questions about this table will appear here as they're added"
-msgstr "当关于这个表单的疑问被添加时，它们将会出现在这里"
+msgstr "当关于这个表单的图表被添加时，它们将会出现在这里"
 
 #: frontend/src/metabase/reference/databases/TableQuestions.jsx:71
 #: frontend/src/metabase/reference/metrics/MetricQuestions.jsx:75
 #: frontend/src/metabase/reference/metrics/MetricSidebar.jsx:36
 #: frontend/src/metabase/reference/segments/SegmentQuestions.jsx:74
 msgid "Questions about {0}"
-msgstr "关于{0}的疑问"
+msgstr "关于{0}的图表"
 
 #: frontend/src/metabase/reference/databases/TableQuestions.jsx:95
 #: frontend/src/metabase/reference/metrics/MetricQuestions.jsx:99
@@ -5835,7 +5835,7 @@ msgstr "在这个表单中的区域"
 
 #: frontend/src/metabase/reference/databases/TableSidebar.jsx:48
 msgid "Questions about this table"
-msgstr "关于这个表单的疑问"
+msgstr "关于这个表单的图表"
 
 #: frontend/src/metabase/reference/guide/GettingStartedGuide.jsx:157
 msgid "Help your team get started with your data."
@@ -5887,7 +5887,7 @@ msgstr "查看所有的区间"
 
 #: frontend/src/metabase/reference/guide/GettingStartedGuide.jsx:293
 msgid "See all tables"
-msgstr "查看所有的表单"
+msgstr "查看所有的表格"
 
 #: frontend/src/metabase/reference/guide/GettingStartedGuide.jsx:301
 msgid "Other things to know about our data"
@@ -5903,11 +5903,11 @@ msgstr "了解数据的一个好方法就是花时间去看下不同的表格还
 
 #: frontend/src/metabase/reference/guide/GettingStartedGuide.jsx:313
 msgid "Explore our data"
-msgstr "探索我们的数据"
+msgstr "开始BI分析"
 
 #: frontend/src/metabase/reference/guide/GettingStartedGuide.jsx:321
 msgid "Have questions?"
-msgstr "有问题吗？"
+msgstr "有图表吗？"
 
 #: frontend/src/metabase/reference/guide/GettingStartedGuide.jsx:326
 msgid "Contact {0}"
@@ -6012,7 +6012,7 @@ msgstr "你可以通过聚合这个指标形成的其他领域"
 
 #: frontend/src/metabase/reference/metrics/MetricDetail.jsx:294
 msgid "Fields you can group this metric by"
-msgstr "你可以通过聚合这个指标得到的领域"
+msgstr "你可以通过聚合这个指标配置要查询的字段"
 
 #: frontend/src/metabase/reference/metrics/MetricList.jsx:23
 msgid "Metrics are the official numbers that your team cares about"
@@ -6070,7 +6070,7 @@ msgstr "学习如何创建区间"
 
 #: frontend/src/metabase/reference/segments/SegmentQuestions.jsx:35
 msgid "Questions about this segment will appear here as they're added"
-msgstr "当它们被添加时，关于这个区间的问题将会出现在这里"
+msgstr "当它们被添加时，关于这个区间的图表将会出现在这里"
 
 #: frontend/src/metabase/reference/segments/SegmentRevisions.jsx:29
 msgid "There are no revisions for this segment"
@@ -6191,7 +6191,7 @@ msgstr "欢迎来到Metabase"
 
 #: frontend/src/metabase/setup/components/Setup.jsx:96
 msgid "Looks like everything is working. Now let’s get to know you, connect to your data, and start finding you some answers!"
-msgstr "看起来一切都在正常工作，现在让我们了解你吧，连接到你的数据，并且开始寻找一些属于你的答案！"
+msgstr "看起来一切都在正常工作，现在让我们了解你吧，连接到你的数据，并且开始寻找一些属于你的查询！"
 
 #: frontend/src/metabase/setup/components/Setup.jsx:100
 msgid "Let's get started"
@@ -6285,11 +6285,11 @@ msgstr "我暂时完成了探索"
 
 #: frontend/src/metabase/tutorial/QueryBuilderTutorial.jsx:20
 msgid "Welcome to the Query Builder!"
-msgstr "欢迎使用报表设计器！"
+msgstr "欢迎使用图表设计器！"
 
 #: frontend/src/metabase/tutorial/QueryBuilderTutorial.jsx:22
 msgid "The Query Builder lets you assemble questions (or \"queries\") to ask about your data."
-msgstr "查询创建器允许你收集问题（或者“查询”）来向你的数据提问。"
+msgstr "查询创建器允许你组合图表聚合查询数据。"
 
 #: frontend/src/metabase/tutorial/QueryBuilderTutorial.jsx:26
 msgid "Tell me more"
@@ -6297,7 +6297,7 @@ msgstr "告诉我更多"
 
 #: frontend/src/metabase/tutorial/QueryBuilderTutorial.jsx:43
 msgid "Start by picking the table with the data that you have a question about."
-msgstr "选择你有相关疑问的数据表单来开始吧"
+msgstr "选择你有相关图表的数据表单来开始吧"
 
 #: frontend/src/metabase/tutorial/QueryBuilderTutorial.jsx:45
 msgid "Go ahead and select the \"Orders\" table from the dropdown menu."
@@ -6373,11 +6373,11 @@ msgstr "感谢"
 
 #: frontend/src/metabase/tutorial/QueryBuilderTutorial.jsx:235
 msgid "Save Your Questions"
-msgstr "保存你的疑问"
+msgstr "保存你的图表"
 
 #: frontend/src/metabase/tutorial/QueryBuilderTutorial.jsx:237
 msgid "By the way, you can save your questions so you can refer to them later. Saved Questions can also be put into dashboards or Pulses."
-msgstr "环比，你可以存储你的疑问，你以后可以引用他们。已存储的疑问统一能够被放进仪表盘或者波动中。"
+msgstr "环比，你可以存储你的图表，你以后可以引用他们。已存储的图表统一能够被放进仪表盘或者波动中。"
 
 #: frontend/src/metabase/tutorial/QueryBuilderTutorial.jsx:241
 msgid "Sounds good"
@@ -7384,11 +7384,11 @@ msgstr "如果你的数据包含技术性的或者相关的信息，你可以隐
 
 #: src/metabase/api/setup.clj
 msgid "Organize questions"
-msgstr "组织疑问"
+msgstr "组织图表"
 
 #: src/metabase/api/setup.clj
 msgid "Have a lot of saved questions in {0}? Create collections to help manage them and add context."
-msgstr "在{0}中有很多已保存的问题？创建集合以帮助管理它们并添加上下文。"
+msgstr "在{0}中有很多已保存的图表？创建空间以帮助管理它们并添加上下文。"
 
 #. This is the very first log message that will get printed.
 #. It's here because this is one of the very first namespaces that gets loaded, and the first that has access to the logger
@@ -7403,7 +7403,7 @@ msgstr "创建指标"
 
 #: src/metabase/api/setup.clj
 msgid "Define canonical metrics to make it easier for the rest of your team to get the right answers."
-msgstr "定义标准指标来让它更容易被团队其他成员用来得到正确的答案。"
+msgstr "定义标准指标来让它更容易被团队其他成员用来执行正确的查询。"
 
 #: src/metabase/api/setup.clj
 msgid "Create segments"
@@ -7601,7 +7601,7 @@ msgstr "字段 {0}"
 
 #: src/metabase/automagic_dashboards/core.clj
 msgid "\"{0}\" question"
-msgstr "问题 “{0}”"
+msgstr "图表 “{0}”"
 
 #: src/metabase/automagic_dashboards/comparison.clj
 #: src/metabase/automagic_dashboards/core.clj
@@ -7691,7 +7691,7 @@ msgstr "更详细地查看{0}"
 
 #: src/metabase/automagic_dashboards/core.clj
 msgid "A closer look at the {0}"
-msgstr "仔细观察这个集合{ 0 }"
+msgstr "仔细观察这个空间{ 0 }"
 
 #: src/metabase/automagic_dashboards/populate.clj
 msgid "Adding %s cards to dashboard %s:n%s"
@@ -8067,7 +8067,7 @@ msgstr "从 https://api.slack.com/web#authentication 获取的Slack API的不记
 
 #: src/metabase/metabot.clj
 msgid "Enable MetaBot, which lets you search for and view your saved questions directly via Slack."
-msgstr "启用MetaBot，可让您直接通过Slack搜索和查看已保存的问题。"
+msgstr "启用MetaBot，可让您直接通过Slack搜索和查看已保存的图表。"
 
 #: src/metabase/metabot.clj
 msgid "Last MetaBot checkin was {0} ago."
@@ -8171,7 +8171,7 @@ msgstr "查看{0}获取更多信息。"
 
 #: src/metabase/models/card.clj
 msgid "Cannot save Question: source query has circular references."
-msgstr "不能保存疑问：源查询拥有循环引用。"
+msgstr "不能保存图表：源查询拥有循环引用。"
 
 #: src/metabase/models/card.clj src/metabase/models/query/permissions.clj
 #: src/metabase/query_processor/middleware/permissions.clj
@@ -8192,7 +8192,7 @@ msgstr "必须是有效的6个字符的十六进制颜色代码"
 
 #: src/metabase/models/collection.clj
 msgid "Collection name cannot be blank!"
-msgstr "集合名字不能为空！"
+msgstr "空间名字不能为空！"
 
 #: src/metabase/models/collection.clj
 msgid "cannot be blank"
@@ -8200,60 +8200,60 @@ msgstr "不能是空白的"
 
 #: src/metabase/models/collection.clj
 msgid "Invalid Collection location: path is invalid."
-msgstr "集合位置无效：路径无效。"
+msgstr "空间位置无效：路径无效。"
 
 #: src/metabase/models/collection.clj
 msgid "You cannot move a Personal Collection."
-msgstr "您无法移动个人集合。"
+msgstr "您无法移动个人空间。"
 
 #: src/metabase/models/collection.clj
 msgid "Invalid Collection location: some or all ancestors do not exist."
-msgstr "集合位置无效：部分或全部祖先不存在。"
+msgstr "空间位置无效：部分或全部祖先不存在。"
 
 #: src/metabase/models/collection.clj
 msgid "You cannot archive the Root Collection."
-msgstr "您无法归档根集合。"
+msgstr "您无法归档根空间。"
 
 #: src/metabase/models/collection.clj
 msgid "You cannot archive a Personal Collection."
-msgstr "您无法归档个人集合。"
+msgstr "您无法归档个人空间。"
 
 #: src/metabase/models/collection.clj
 msgid "You cannot move the Root Collection."
-msgstr "您无法移动根集合。"
+msgstr "您无法移动根空间。"
 
 #: src/metabase/models/collection.clj
 msgid "You cannot move a Collection into itself or into one of its descendants."
-msgstr "您无法将一个集合移动到其自身或其后代中。"
+msgstr "您无法将一个空间移动到其自身或其后代中。"
 
 #. first move this Collection
 #: src/metabase/models/collection.clj
 msgid "Moving Collection {0} and its descendants from {1} to {2}"
-msgstr "将集合{0}及其后代从{1}移动到{2}"
+msgstr "将空间{0}及其后代从{1}移动到{2}"
 
 #: src/metabase/models/collection.clj
 msgid "You're not allowed to change the owner of a Personal Collection."
-msgstr "您无权更改个人集合的所有者。"
+msgstr "您无权更改个人空间的所有者。"
 
 #: src/metabase/models/collection.clj
 msgid "You're not allowed to move a Personal Collection."
-msgstr "您无权移动个人集合。"
+msgstr "您无权移动个人空间。"
 
 #: src/metabase/models/collection.clj
 msgid "You cannot move a Collection and archive it at the same time."
-msgstr "您无法同时移动集合并将其存档。"
+msgstr "您无法同时移动空间并将其存档。"
 
 #: src/metabase/models/collection.clj
 msgid "You cannot delete a Personal Collection!"
-msgstr "您无法删除个人集合！"
+msgstr "您无法删除个人空间！"
 
 #: src/metabase/models/collection.clj
 msgid "{0} {1}''s Personal Collection"
-msgstr "{0} {1}的个人集合"
+msgstr "{0} {1}的个人空间"
 
 #: src/metabase/models/collection_revision.clj
 msgid "You cannot update a CollectionRevision!"
-msgstr "您无法更新集合修订版！"
+msgstr "您无法更新空间修订版！"
 
 #: src/metabase/models/field_values.clj
 msgid "Field {0} was previously automatically set to show a list widget, but now has {1} values."
@@ -8301,7 +8301,7 @@ msgstr "删除它并且创建一个新的"
 
 #: src/metabase/models/permissions.clj
 msgid "You cannot edit permissions for a Personal Collection or its descendants."
-msgstr "您无法编辑个人集合或其后代的权限。"
+msgstr "您无法编辑个人空间或其后代的权限。"
 
 #: src/metabase/models/permissions.clj
 msgid "Looks like someone else edited the permissions and your data is out of date."
@@ -8475,15 +8475,15 @@ msgstr "采用可视化地图的过程中，要使用地图服务器的url模板
 
 #: src/metabase/public_settings.clj
 msgid "Enable admins to create publicly viewable links (and embeddable iframes) for Questions and Dashboards?"
-msgstr "启用管理员来为疑问和仪表盘创建公开的可浏览链接（并且可嵌入的iframes框架）吗？"
+msgstr "启用管理员来为图表和仪表盘创建公开的可浏览链接（并且可嵌入的iframes框架）吗？"
 
 #: src/metabase/public_settings.clj
 msgid "Allow admins to securely embed questions and dashboards within other applications?"
-msgstr "允许管理员在其他应用程序中安全地嵌入报表和仪表板?"
+msgstr "允许管理员在其他应用程序中安全地嵌入图表和仪表板?"
 
 #: src/metabase/public_settings.clj
 msgid "Allow using a saved question as the source for other queries?"
-msgstr "允许使用一个已经存储的疑问作为"
+msgstr "允许使用一个已经存储的图表作为"
 
 #: src/metabase/public_settings.clj
 msgid "Enabling caching will save the results of queries that take a long time to run."
@@ -8499,7 +8499,7 @@ msgstr "保留任何缓存查询结果的绝对最长时间（以秒为单位）
 
 #: src/metabase/public_settings.clj
 msgid "Metabase will cache all saved questions with an average query execution time longer than this many seconds:"
-msgstr "Metabase会捕捉所有平均查询时间大于这么多秒的已保存问题"
+msgstr "Metabase会捕捉所有平均查询时间大于这么多秒的已保存图表"
 
 #: src/metabase/public_settings.clj
 msgid "To determine how long each saved question''s cached result should stick around, we take the query''s average execution time and multiply that by whatever you input here."
@@ -8561,7 +8561,7 @@ msgstr "无法将结果与警报目标进行比较"
 
 #: src/metabase/pulse.clj
 msgid "Question ID is ''{0}'' with visualization settings ''{1}''"
-msgstr "疑问ID是“{0}”，可视化设置是“{1}”"
+msgstr "图表ID是“{0}”，可视化设置是“{1}”"
 
 #: src/metabase/pulse.clj
 msgid "Unrecognized alert with condition ''{0}''"
@@ -8609,7 +8609,7 @@ msgstr "无法替换“{0}”：参数未指定。n未找到：{1}"
 
 #: src/metabase/query_processor/middleware/permissions.clj
 msgid "You do not have permissions to view Card {0}."
-msgstr "没有查看报表{0}的权限"
+msgstr "没有查看图表{0}的权限"
 
 #: src/metabase/query_processor/middleware/permissions.clj
 msgid "You do not have permissions to run this query."
@@ -8724,7 +8724,7 @@ msgstr "jvm域数据库时区不一致"
 
 #: src/metabase/util/date.clj
 msgid "Configure a report timezone to ensure proper date and time conversions."
-msgstr "正确配置报表的日期格式"
+msgstr "正确配置图表的日期格式"
 
 #: src/metabase/util/embed.clj
 msgid "Secret key used to sign JSON Web Tokens for requests to `/api/embed` endpoints."
@@ -8880,39 +8880,39 @@ msgstr "数据权限"
 
 #: frontend/src/metabase/admin/permissions/components/PermissionsTabs.jsx:13
 msgid "Collection permissions"
-msgstr "文件夹权限"
+msgstr "空间权限"
 
 #: frontend/src/metabase/admin/permissions/containers/CollectionPermissionsModal.jsx:56
 msgid "See all collection permissions"
-msgstr "查看所有文件夹权限"
+msgstr "查看所有空间权限"
 
 #: frontend/src/metabase/admin/permissions/containers/TogglePropagateAction.jsx:25
 msgid "Also change sub-collections"
-msgstr "同时更改子集合"
+msgstr "同时更改子空间"
 
 #: frontend/src/metabase/admin/permissions/selectors.js:278
 msgid "Can edit this collection and its contents"
-msgstr "允许修改集合及其内容"
+msgstr "允许修改空间及其内容"
 
 #: frontend/src/metabase/admin/permissions/selectors.js:285
 msgid "Can view items in this collection"
-msgstr "允许查看该集合的内容"
+msgstr "允许查看该空间的内容"
 
 #: frontend/src/metabase/admin/permissions/selectors.js:745
 msgid "Collection Access"
-msgstr "集合的权限"
+msgstr "空间的权限"
 
 #: frontend/src/metabase/admin/permissions/selectors.js:821
 msgid "This group has permission to view at least one subcollection of this collection."
-msgstr "该组有权查看此集合的至少一个子集合。"
+msgstr "该组有权查看此空间的至少一个子空间。"
 
 #: frontend/src/metabase/admin/permissions/selectors.js:826
 msgid "This group has permission to edit at least one subcollection of this collection."
-msgstr "该组有权编辑此集合的至少一个子集合。"
+msgstr "该组有权编辑此空间的至少一个子空间。"
 
 #: frontend/src/metabase/admin/permissions/selectors.js:839
 msgid "View sub-collections"
-msgstr "查看子集合"
+msgstr "查看子空间"
 
 #: frontend/src/metabase/auth/containers/LoginApp.jsx:211
 msgid "Remember Me"
@@ -8924,11 +8924,11 @@ msgstr "透视这个图表"
 
 #: frontend/src/metabase/components/CollectionLanding.jsx:246
 msgid "Edit the permissions for this collection"
-msgstr "修改集合权限"
+msgstr "修改空间权限"
 
 #: frontend/src/metabase/containers/AddToDashSelectDashModal.jsx:51
 msgid "Add this question to a dashboard"
-msgstr "把报表添加到dashboard"
+msgstr "把图表添加到dashboard"
 
 #: frontend/src/metabase/containers/AddToDashSelectDashModal.jsx:61
 msgid "Create a new dashboard"
@@ -8944,11 +8944,11 @@ msgstr "选择{0}"
 
 #: frontend/src/metabase/containers/Overworld.jsx:190
 msgid "Save dashboards, questions, and collections in \"{0}\""
-msgstr "在“{0}”中保存仪表板，问题和集合"
+msgstr "在“{0}”中保存仪表板，图表和空间"
 
 #: frontend/src/metabase/containers/Overworld.jsx:193
 msgid "Access dashboards, questions, and collections in \"{0}\""
-msgstr "访问“{0}”中的仪表板，问题和集合"
+msgstr "访问“{0}”中的仪表板，图表和空间"
 
 #: frontend/src/metabase/dashboard/containers/AutomaticDashboardApp.jsx:221
 msgid "Compare"
@@ -9001,12 +9001,12 @@ msgstr "迁移的Pulses"
 
 #: src/metabase/db/migrations.clj
 msgid "Migrated Questions"
-msgstr "迁移的报表"
+msgstr "迁移的图表"
 
 #. 4. move everything not in this Collection to a new Collection
 #: src/metabase/db/migrations.clj
 msgid "Moving instances of {0} that aren't in a Collection to {1} Collection {2}"
-msgstr "移动{0}中不在集合{1}到集合{2}中的实例"
+msgstr "移动{0}中不在空间{1}到空间{2}中的实例"
 
 #: src/metabase/models/permissions.clj
 msgid "Failed to grant permissions: {0}"
@@ -9018,7 +9018,7 @@ msgstr "无法解密已加密的字符。你是否忘记设置 MB_ENCRYPTION_SEC
 
 #: frontend/src/metabase/entities/collections.js:157
 msgid "All personal collections"
-msgstr "所有个人集合"
+msgstr "所有个人空间"
 
 #: src/metabase/driver.clj
 msgid "Host"
@@ -9193,7 +9193,7 @@ msgstr "添加成员"
 
 #: frontend/src/metabase/entities/collections.js:108
 msgid "Collection it's saved in"
-msgstr "集合保存在"
+msgstr "空间保存在"
 
 #: frontend/src/metabase/lib/groups.js:4
 msgid "All Users"
