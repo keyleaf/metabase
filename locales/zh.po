@@ -5875,7 +5875,7 @@ msgstr "表格"
 
 #: frontend/src/metabase/reference/guide/GettingStartedGuide.jsx:262
 msgid "Segments and tables are the building blocks of your company's data. Tables are collections of the raw information while segments are specific slices with specific meanings, like {0}"
-msgstr "划分和表格是公司数据的构建块。 表格是原始信息的集合，而划分是具有特定含义的切片，如{0}"
+msgstr "划分和表格是公司数据的构建块。 表格是原始信息的空间，而划分是具有特定含义的切片，如{0}"
 
 #: frontend/src/metabase/reference/guide/GettingStartedGuide.jsx:267
 msgid "Tables are the building blocks of your company's data."
@@ -8633,7 +8633,7 @@ msgstr "{0}生成水印错误"
 
 #: src/metabase/sync/field_values.clj
 msgid "Updated {0} field value sets, created {1}, deleted {2} with {3} errors"
-msgstr "更新{0}领域值集合，创建了{1}，删除了{2}和{3}错误"
+msgstr "更新{0}领域值空间，创建了{1}，删除了{2}和{3}错误"
 
 #: src/metabase/sync/sync_metadata.clj
 msgid "Total number of fields sync''d {0}, number of fields updated {1}"
