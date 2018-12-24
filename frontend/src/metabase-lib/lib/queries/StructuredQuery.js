@@ -229,7 +229,11 @@ export default class StructuredQuery extends AtomicQuery {
    * FIXME: actual return type should be `?Table`
    */
   table(): Table {
-    return this._metadata.tables[this.tableId()];
+    if (this._metadata) {
+      return this._metadata.tables[this.tableId()];
+    } else {
+      return null;
+    }
   }
 
   /**

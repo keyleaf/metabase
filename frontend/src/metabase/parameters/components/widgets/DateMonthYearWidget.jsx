@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 
 import YearPicker from "./YearPicker.jsx";
+import MetabaseSettings from "metabase/lib/settings";
 
 import moment from "moment";
+moment.locale(MetabaseSettings.get("site_locale") == 'zh' ? 'zh-cn' : "en");
 import _ from "underscore";
 import cx from "classnames";
 

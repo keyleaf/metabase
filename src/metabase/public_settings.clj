@@ -58,7 +58,7 @@
   :setter  (fn [new-value]
              (setting/set-string! :site-locale new-value)
              (set-locale new-value))
-  :default "en")
+  :default "zh")
 
 (defsetting admin-email
   (tru "The email address users should be referred to if they encounter a problem."))
@@ -204,6 +204,7 @@
                             (require 'metabase.setup)
                             ((resolve 'metabase.setup/token-value)))
    :site_name             (site-name)
+   :site_locale           (site-locale)
    :site_url              (site-url)
    :timezone_short        (short-timezone-name (setting/get :report-timezone))
    :timezones             common/timezones

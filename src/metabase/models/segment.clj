@@ -2,18 +2,30 @@
   "A Segment is a saved MBQL 'macro', expanding to a `:filter` subclause. It is passed in as a `:filter` subclause but is
   replaced by the `expand-macros` middleware with the appropriate clauses."
   (:require [medley.core :as m]
+            [clojure.set :as set]
             [metabase
              [events :as events]
              [util :as u]]
             [metabase.models
              [interface :as i]
-             [revision :as revision]]
+             [revision :as revision]
+             [user :refer [User]]
+             [segment-user :refer [SegmentUser]]]
             [toucan
              [db :as db]
              [hydrate :refer [hydrate]]
              [models :as models]]))
 
 (models/defmodel Segment :segment)
+
+(defn ^:hydrate segment_users
+  "Return the `SegmentUser` associated with this Segment."
+  [{:keys [id]}]
+  (into (mapv (partial array-map :email) {})
+        (db/select [User :id :email :first_name :last_name]
+                   :id [:in {:select [:user_id]
+                             :from   [SegmentUser]
+                             :where  [:= :segment_id id]}])))
 
 (defn- perms-objects-set [segment read-or-write]
   (let [table (or (:table segment)
@@ -62,13 +74,37 @@
           :diff-map           diff-segments}))
 
 
+(defn update-segment-users!
+  "Update the `segment_user` for Segment.
+   USER-IDS should be a definitive collection of *all* IDs of users who should use the segment.
+
+   *  If an ID in USER-IDS has no corresponding existing `SegmentUser` object, one will be created.
+   *  If an existing `SegmentUser` has no corresponding ID in USER-IDs, it will be deleted."
+  [id user-ids]
+  {:pre [(integer? id)
+         (coll? user-ids)
+         (every? integer? user-ids)]}
+  (prn "update-segment-users! user-ids is :" user-ids)
+  (prn "update-segment-users! id is :" id)
+  (let [segment-users-old (set (db/select-field :user_id SegmentUser, :segment_id id))
+        segment-users-new (set user-ids)
+        segment-users+    (set/difference segment-users-new segment-users-old)
+        segment-users-    (set/difference segment-users-old segment-users-new)]
+    (when (seq segment-users+)
+      (let [vs (map #(assoc {:segment_id id} :user_id %) segment-users+)]
+        (db/insert-many! SegmentUser vs)))
+    (when (seq segment-users-)
+      (db/simple-delete! SegmentUser
+                         :segment_id id
+                         :user_id          [:in segment-users-]))))
+
 ;; ## Persistence Functions
 
 (defn create-segment!
   "Create a new `Segment`.
 
    Returns the newly created `Segment` or throws an Exception."
-  [table-id segment-name description creator-id definition]
+  [table-id segment-name description creator-id definition segment_users]
   {:pre [(integer? table-id)
          (string? segment-name)
          (integer? creator-id)
@@ -79,8 +115,10 @@
                   :name        segment-name
                   :description description
                   :definition  definition)]
+    (let [segment-users-by-type (group-by integer? (filter identity (map #(:id %) segment_users)))]
+      (update-segment-users! (:id segment) (or (get segment-users-by-type true) [])))
     (-> (events/publish-event! :segment-create segment)
-        (hydrate :creator))))
+        (hydrate :creator :segment_users))))
 
 (defn exists?
   "Does an *active* `Segment` with ID exist?"
@@ -93,7 +131,7 @@
   [id]
   {:pre [(integer? id)]}
   (-> (Segment id)
-      (hydrate :creator)))
+      (hydrate :creator :segment_users)))
 
 (defn retrieve-segments
   "Fetch all `Segments` for a given `Table`.  Optional second argument allows filtering by active state by
@@ -110,7 +148,7 @@
 (defn update-segment!
   "Update an existing `Segment`.
    Returns the updated `Segment` or throws an Exception."
-  [{:keys [id name description caveats points_of_interest show_in_getting_started definition revision_message]
+  [{:keys [id name description caveats points_of_interest show_in_getting_started definition revision_message segment_users]
     :as   body}
    user-id]
   {:pre [(integer? id)
@@ -123,6 +161,8 @@
     (u/select-keys-when body
       :present #{:name :description :caveats :definition}
       :non-nil #{:points_of_interest :show_in_getting_started}))
+  (let [segment-users-by-type (group-by integer? (filter identity (map #(:id %) segment_users)))]
+    (update-segment-users! id (or (get segment-users-by-type true) [])))
   (u/prog1 (retrieve-segment id)
     (events/publish-event! :segment-update (assoc <> :actor_id user-id, :revision_message revision_message))))
 

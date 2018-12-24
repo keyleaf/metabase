@@ -24,12 +24,19 @@
   (cons (map :display_name (get-in results [:result :data :cols]))
         (get-in results [:result :data :rows])))
 
-(defn- export-to-xlsx [columns rows]
-  (let [wb  (spreadsheet/create-workbook "Query result" (cons (mapv name columns) rows))
-        ;; note: byte array streams don't need to be closed
-        out (ByteArrayOutputStream.)]
-    (spreadsheet/save-workbook! out wb)
-    (ByteArrayInputStream. (.toByteArray out))))
+(defn- export-to-xlsx ([columns rows]
+                       (let [wb  (spreadsheet/create-workbook "Query result" (cons (mapv name columns) rows))
+                             ;; note: byte array streams don't need to be closed
+                             out (ByteArrayOutputStream.)]
+                         (spreadsheet/save-workbook! out wb)
+                         (ByteArrayInputStream. (.toByteArray out))))
+  ([columns rows cols]
+   (def columns_ex (for [col cols] (get-in col [:display_name])))
+   (let [wb  (spreadsheet/create-workbook "Query result" (cons (mapv name columns_ex) rows))
+         ;; note: byte array streams don't need to be closed
+         out (ByteArrayOutputStream.)]
+     (spreadsheet/save-workbook! out wb)
+     (ByteArrayInputStream. (.toByteArray out)))))
 
 (defn export-to-xlsx-file
   "Write an XLS file to `FILE` with the header a and rows found in `RESULTS`"
@@ -39,10 +46,15 @@
          (spreadsheet/create-workbook "Query result" )
          (spreadsheet/save-workbook! file-path))))
 
-(defn- export-to-csv [columns rows]
-  (with-out-str
-    ;; turn keywords into strings, otherwise we get colons in our output
-    (csv/write-csv *out* (into [(mapv name columns)] rows))))
+(defn- export-to-csv ([columns rows]
+                      (with-out-str
+                        ;; turn keywords into strings, otherwise we get colons in our output
+                        (csv/write-csv *out* (into [(mapv name columns)] rows))))
+  ([columns rows cols]
+   (def columns_ex (for [col cols] (get-in col [:display_name])))
+   (with-out-str
+     ;; turn keywords into strings, otherwise we get colons in our output
+     (csv/write-csv *out* (into [(mapv name columns_ex)] rows)))))
 
 (defn export-to-csv-writer
   "Write a CSV to `FILE` with the header a and rows found in `RESULTS`"
@@ -50,9 +62,13 @@
   (with-open [fw (java.io.FileWriter. file)]
     (csv/write-csv fw (results->cells results))))
 
-(defn- export-to-json [columns rows]
-  (for [row rows]
-    (zipmap columns row)))
+(defn- export-to-json ([columns rows]
+                       (for [row rows]
+                         (zipmap columns row)))
+  ([columns rows cols]
+   (def columns_ex (for [col cols] (get-in col [:display_name])))
+   (for [row rows]
+     (zipmap columns_ex row))))
 
 (def export-formats
   "Map of export types to their relevant metadata"

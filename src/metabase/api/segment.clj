@@ -15,13 +15,13 @@
 
 (api/defendpoint POST "/"
   "Create a new `Segment`."
-  [:as {{:keys [name description table_id definition]} :body}]
+  [:as {{:keys [name description table_id definition segment_users]} :body}]
   {name       su/NonBlankString
    table_id   su/IntGreaterThanZero
    definition su/Map}
   (api/check-superuser)
   (api/write-check Table table_id)
-  (api/check-500 (segment/create-segment! table_id name description api/*current-user-id* definition)))
+  (api/check-500 (segment/create-segment! table_id name description api/*current-user-id* definition segment_users)))
 
 
 (api/defendpoint GET "/:id"
@@ -48,7 +48,7 @@
   (api/write-check Segment id)
   (segment/update-segment!
    (assoc (select-keys body #{:name :description :caveats :points_of_interest :show_in_getting_started :definition
-                              :revision_message})
+                              :revision_message :segment_users})
      :id id)
    api/*current-user-id*))
 

@@ -9,7 +9,9 @@
             [metabase.mbql.schema :as mbql.s]
             [metabase.models
              [query :as query]
-             [query-execution :as query-execution :refer [QueryExecution]]]
+             [query-execution :as query-execution :refer [QueryExecution]]
+             [segment :refer [Segment]]
+             [segment-user :refer [SegmentUser]]]
             [metabase.query-processor.middleware
              [add-dimension-projections :as add-dim]
              [add-implicit-clauses :as implicit-clauses]
@@ -52,6 +54,47 @@
              [i18n :refer [tru]]]
             [schema.core :as s]
             [toucan.db :as db]))
+
+
+(defn- assemble-query
+  "数据行级权限： 根据配置的segment，在原query基础上进行扩展"
+  [query options]
+  (prn "assemble-query options is :" options)
+  (prn "assemble-query query is :" query)
+  (def executed-by (:executed-by options))
+  (def source-table (:source-table (:query query)))
+  ;(prn "process-query-and-save-with-max! query is :" query)
+  ;(prn "process-query-and-save-with-max! options is :" options)
+  ;select * from segment t where t.table_id = ? and t.id in (select id from segment_user su where su.user_id = ?)
+  (def segment-on-user (db/select-ids Segment
+                                      :table_id source-table
+                                      :archived false
+                                      :id [:in {:select [:segment_id]
+                                                :from   [SegmentUser]
+                                                :where  [:= :user_id executed-by]}]))
+  (prn "assemble-query segment-on-user is :" segment-on-user)
+  (def segment-on-user-vector (into [] (for [x segment-on-user] (vector "segment" x))))
+  (prn "assemble-query segment-on-user-vector is :" segment-on-user-vector)
+
+  (if (nil? segment-on-user)
+    query
+    (let [{{filter :filter} :query} query]
+      (prn "process-query-and-save-with-max! filter is :" filter)
+      (if (or (nil? filter) (= 0 (count filter)))
+        (if (= 1 (count segment-on-user-vector))
+          (def filter-ex (first segment-on-user-vector))
+          (def filter-ex (into ["and"] segment-on-user-vector)))
+        (if (= (first filter) "and")
+          (def filter-ex (into filter segment-on-user-vector))
+          (if (= 1 (count segment-on-user-vector))
+            (def filter-ex (conj ["and"] filter (first segment-on-user-vector)))
+            (def filter-ex (into (conj ["and"] filter) segment-on-user-vector)))))
+      (prn "process-query-and-save-with-max! filter-ex is :" filter-ex)
+      ;query-ex是织入行级数据权限限制后的SQL
+      (def query-ex (conj query {:query (conj (:query query) {:filter filter-ex})}))
+      (prn "process-query-and-save-with-max! query-ex is :" query-ex)
+      query-ex)))
+
 
 ;;; +----------------------------------------------------------------------------------------------------------------+
 ;;; |                                                QUERY PROCESSOR                                                 |
@@ -351,7 +394,7 @@
   OPTIONS must conform to the `mbql.s/Info` schema; refer to that for more details."
   {:style/indent 1}
   [query, options :- mbql.s/Info]
-  (run-and-save-query! (assoc-query-info query options)))
+  (run-and-save-query! (assoc-query-info (assemble-query query options) options)))
 
 (def ^:private ^:const max-results-bare-rows
   "Maximum number of rows to return specifically on :rows type queries via the API."
