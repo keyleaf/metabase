@@ -104,6 +104,11 @@
                      :url         "app/assets/geojson/world.json"
                      :region_key  "ISO_A2"
                      :region_name "NAME"
+                     :builtin     true}
+   :china           {:name        "中国"
+                     :url         "app/assets/geojson/China.json"
+                     :region_key  "name"
+                     :region_name "name"
                      :builtin     true}})
 
 (defn- validate-custom-geo-json [geojson-value]
