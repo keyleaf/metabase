@@ -8009,7 +8009,7 @@ msgstr "启用LDAP身份验证。"
 
 #: src/metabase/integrations/ldap.clj
 msgid "Server hostname."
-msgstr "服务器主机名"
+msgstr "服务器地址"
 
 #: src/metabase/integrations/ldap.clj
 msgid "Server port, usually 389 or 636 if SSL is used."
