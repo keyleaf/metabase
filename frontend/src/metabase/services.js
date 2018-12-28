@@ -121,6 +121,10 @@ export const LdapApi = {
   updateSettings: PUT("/api/ldap/settings"),
 };
 
+export const AuthCenterApi = {
+  updateSettings: PUT("/api/auth-center/settings"),
+};
+
 export const MetabaseApi = {
   db_list: GET("/api/database"),
   db_list_with_tables: GET(

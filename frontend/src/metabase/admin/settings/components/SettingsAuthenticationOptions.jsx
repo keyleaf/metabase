@@ -29,6 +29,18 @@ class SettingsAuthenticationOptions extends Component {
             >{t`Configure`}</Link>
           </div>
         </li>
+
+        <li className="mt3">
+          <div className="bordered rounded shadowed bg-white p4">
+            <h2>{t`权限中心`}</h2>
+            <p
+            >{t`对接权限中心`}</p>
+            <Link
+              className="Button"
+              to="/admin/settings/authentication/auth"
+            >{t`Configure`}</Link>
+          </div>
+        </li>
       </ul>
     );
   }

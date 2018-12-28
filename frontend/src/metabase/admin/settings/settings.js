@@ -5,7 +5,7 @@ import {
   combineReducers,
 } from "metabase/lib/redux";
 
-import { SettingsApi, EmailApi, SlackApi, LdapApi } from "metabase/services";
+import { SettingsApi, EmailApi, SlackApi, LdapApi, AuthCenterApi } from "metabase/services";
 
 import { refreshSiteSettings } from "metabase/redux/settings";
 
@@ -110,6 +110,23 @@ export const updateSlackSettings = createThunkAction(
     };
   },
   {},
+);
+
+export const UPDATE_AUTH_CENTER_SETTINGS =
+  "metabase/admin/settings/UPDATE_AUTH_CENTER_SETTINGS";
+export const updateAuthCenterSettings = createThunkAction(
+  UPDATE_AUTH_CENTER_SETTINGS,
+  function(settings) {
+    return async function(dispatch, getState) {
+      try {
+        await AuthCenterApi.updateSettings(settings);
+        await dispatch(refreshSiteSettings());
+      } catch (error) {
+        console.log("error updating Auth Center settings", settings, error);
+        throw error;
+      }
+    };
+  },
 );
 
 export const UPDATE_LDAP_SETTINGS =
