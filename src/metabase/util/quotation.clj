@@ -33,4 +33,4 @@
 (defn random-quote
   "Get a randomized quotation about working with data."
   []
-  (rand-nth quotations))
+  {})
