@@ -11,15 +11,15 @@ type Props = {
 
 const LogoBadge = ({ dark }: Props) => (
   <a
-    href="http://www.metabase.com/"
+    href="http://bi.mamcharge.com/"
     target="_blank"
     className="h4 flex text-bold align-center no-decoration"
   >
     <LogoIcon size={28} dark={dark} />
     <span className="text-small">
-      <span className="ml1 text-medium">Powered by</span>{" "}
+      <span className="ml1 text-medium"></span>{" "}
       <span className={cx({ "text-brand": !dark }, { "text-white": dark })}>
-        Metabase
+        猛犸BI
       </span>
     </span>
   </a>
