@@ -149,7 +149,7 @@
 (defmethod create-notification [:pulse :email]
   [{:keys [id name] :as pulse} results {:keys [recipients] :as channel}]
   (log/debug (format "Sending Pulse (%d: %s) via Channel :email" id name))
-  (let [email-subject    (str "Pulse: " name)
+  (let [email-subject    (str "" name)
         email-recipients (filterv u/email? (map :email recipients))
         timezone         (-> results first :card defaulted-timezone)]
     {:subject      email-subject
