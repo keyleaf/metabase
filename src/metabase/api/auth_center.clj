@@ -12,6 +12,13 @@
   {:auth-center-enabled             :enabled
    :auth-center-host                :host})
 
+(defn- humanize-error-messages
+  "Convert raw error message responses from our Auth-Center tests into our normal api error response structure."
+  [{:keys [status message]}]
+  (when (not= :SUCCESS status)
+    (log/warn "Problem connecting to AUTH-CENTER server:" message)
+    {:message "通信失败，无法保存"}))
+
 (defendpoint PUT "/settings"
   "Update auth center related settings. You must be a superuser to do this."
   [:as {settings :body}]

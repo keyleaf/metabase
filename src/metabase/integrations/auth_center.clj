@@ -41,4 +41,4 @@
           {:status :SUCCESS})
       )
     (catch Exception e
-      {:status :ERROR, :message "通信失败，无法保存"})))
+      {:status :ERROR, :message (.getMessage e)})))
