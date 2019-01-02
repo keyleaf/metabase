@@ -71,7 +71,7 @@
                                :logoHeader   true}
                               (random-quote-context)))]
     (email/send-message!
-      :subject      (str "You're invited to join " company "'s Metabase")
+      :subject      (str "你被邀请加入" company "的BI报表")
       :recipients   [(:email invited)]
       :message-type :html
       :message      message-body)))
