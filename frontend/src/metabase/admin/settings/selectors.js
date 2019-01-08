@@ -297,6 +297,27 @@ const SECTIONS = [
     ],
   },
   {
+    name: t`权限中心`,
+    slug: "auth_center",
+    sidebar: false,
+    settings: [
+      {
+        key: "auth-center-enabled",
+        display_name: t`是否对接权限中心`,
+        description: null,
+        type: "boolean",
+      },
+      {
+        key: "auth-center-host",
+        display_name: t`服务器信息`,
+        placeholder: "http://192.168.1.26:9003/",
+        type: "string",
+        required: true,
+        autoFocus: true,
+      },
+    ],
+  },
+  {
     name: t`Maps`,
     slug: "maps",
     settings: [

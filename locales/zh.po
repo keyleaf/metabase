@@ -2374,7 +2374,7 @@ msgstr "您想如何使用这个数据库？"
 #: frontend/src/metabase/setup/components/PreferencesStep.jsx:116
 #: frontend/src/metabase/setup/components/UserStep.jsx:308
 msgid "Next"
-msgstr "下一步"
+msgstr "下一个"
 
 #: frontend/src/metabase/components/DeleteModalWithConfirm.jsx:80
 msgid "Delete this {0}"
@@ -4098,7 +4098,7 @@ msgstr "并且它在加州，旧金山精心被打造"
 
 #: frontend/src/metabase/nav/containers/Navbar.jsx:195
 msgid "Metabase Admin"
-msgstr "Metabase管理员"
+msgstr "管理员"
 
 #: frontend/src/metabase/nav/containers/Navbar.jsx:301
 #: frontend/src/metabase/reference/databases/TableQuestions.jsx:36
@@ -8009,7 +8009,7 @@ msgstr "启用LDAP身份验证。"
 
 #: src/metabase/integrations/ldap.clj
 msgid "Server hostname."
-msgstr "服务器主机名"
+msgstr "服务器地址"
 
 #: src/metabase/integrations/ldap.clj
 msgid "Server port, usually 389 or 636 if SSL is used."

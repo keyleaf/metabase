@@ -13,6 +13,7 @@
             [metabase.api.common :as api]
             [metabase.email.messages :as email]
             [metabase.integrations.ldap :as ldap]
+            [metabase.integrations.auth-center :as auth-center]
             [metabase.models
              [session :refer [Session]]
              [setting :refer [defsetting]]
@@ -46,6 +47,8 @@
 
 (def ^:private password-fail-message (tru "Password did not match stored password."))
 (def ^:private password-fail-snippet (tru "did not match stored password"))
+(def ^:private call-fail-auth-center (tru "调用权限中心接口失败"))
+(def ^:private password-fail-auth-center (tru "权限中心校验失败"))
 
 (defn- ldap-login
   "If LDAP is enabled and a matching user exists return a new Session for them, or `nil` if they couldn't be
@@ -66,6 +69,37 @@
         (log/error
          (u/format-color 'red
              (trs "Problem connecting to LDAP server, will fall back to local authentication: {0}" (.getMessage e))))))))
+
+(defn- auth-center-login
+  "权限中心登录"
+  [username password]
+  (prn "是否走权限中心登录？" (auth-center/auth-center-configured?))
+  (when (auth-center/auth-center-configured?)
+    (let [{:keys [status body] :as response} (http/post "http://192.168.1.26:9003/api/login" {:body (str "{\"username\":\"" username "\",\"password\":\"" password "\"}")
+                                                                                      :content-type :json :accept :json})]
+      (log/info
+        (u/format-color 'green
+                        (trs "auth-center-login : username is {0}, password is {1}" username password)))
+      (log/info
+        (u/format-color 'green
+                        (trs "auth-center-login : status is {0}, body is {1}" status body)))
+      (when-not (= status 200)
+        (throw (ui18n/ex-info call-fail-auth-center {:status-code 400 :errors {:password call-fail-auth-center}})))
+      (u/prog1 (json/parse-string body keyword)
+               (when-not (= (:errcode <>) 0)
+                 (throw (ui18n/ex-info password-fail-auth-center {:status-code 400 :errors {:password password-fail-auth-center}}))))
+      ;用户密码验证成功后需要判断用户是否有配置metabase的权限或者角色
+      ;如果上述条件满足，需要判断该用户是否存在于metabase的数据库中
+      (let [user (db/select-one [User :id :password_salt :password :last_login], :email username)]
+        (if (nil? user)
+          ;用户不存在，需要创建用户 (select-keys body [:first_name :last_name :email :password :login_attributes])
+          (let [new-user-id (u/get-id (user/insert-new-user! {:first_name username :last_name "." :email username :password password}))]
+            {:id (create-session! (user/fetch-user :id new-user-id))})
+
+
+          ;用户存在，更新状态及密码等
+          {:id (create-session! user)}
+          )))))
 
 (defn- email-login
   "Find a matching `User` if one exists and return a new Session for them, or `nil` if they couldn't be authenticated."
@@ -91,6 +125,7 @@
   (throttle-check (login-throttlers :username)   username)
   ;; Primitive "strategy implementation", should be reworked for modular providers in #3210
   (or (ldap-login username password)  ; First try LDAP if it's enabled
+      (auth-center-login username password)
       (email-login username password) ; Then try local authentication
       ;; If nothing succeeded complain about it
       ;; Don't leak whether the account doesn't exist or the password was incorrect

@@ -167,7 +167,10 @@
    :first_name su/NonBlankString
    s/Any       s/Any})
 
-(s/defn ^:private insert-new-user!
+(defn fetch-user [& query-criteria]
+  (apply db/select-one (vec (cons User admin-or-self-visible-columns)) query-criteria))
+
+(s/defn insert-new-user!
   "Creates a new user, defaulting the password when not provided"
   [new-user :- NewUser]
   (db/insert! User (update new-user :password #(or % (str (UUID/randomUUID))))))

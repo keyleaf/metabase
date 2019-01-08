@@ -30,6 +30,7 @@ import {
   getNewVersionAvailable,
 } from "../selectors";
 import * as settingsActions from "../settings";
+import SettingsAuthCenterForm from "metabase/admin/settings/components/SettingsAuthCenterForm";
 
 const mapStateToProps = (state, props) => {
   return {
@@ -57,6 +58,7 @@ export default class SettingsEditorApp extends Component {
     updateEmailSettings: PropTypes.func.isRequired,
     updateSlackSettings: PropTypes.func.isRequired,
     updateLdapSettings: PropTypes.func.isRequired,
+    updateAuthCenterSettings: PropTypes.func.isRequired,
     sendTestEmail: PropTypes.func.isRequired,
     clearEmailSettings: PropTypes.func.isRequired,
   };
@@ -159,7 +161,17 @@ export default class SettingsEditorApp extends Component {
       // since allowing for multi page settings more broadly would require
       // a fairly significant refactor of how settings does its routing logic
       if (this.props.params.authType) {
-        if (this.props.params.authType === "ldap") {
+        if (this.props.params.authType === "auth") {
+          return (
+            <SettingsAuthCenterForm
+              elements={
+                _.findWhere(this.props.sections, { slug: "auth_center" }).settings
+              }
+              updateAuthCenterSettings={this.props.updateAuthCenterSettings}
+              settingValues={settingValues}
+            />
+          );
+        } else if (this.props.params.authType === "ldap") {
           return (
             <SettingsLdapForm
               elements={
