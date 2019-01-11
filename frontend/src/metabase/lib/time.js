@@ -50,7 +50,7 @@ export function parseTimestamp(value, unit) {
   } else if (unit in NUMERIC_UNIT_FORMATS) {
     return NUMERIC_UNIT_FORMATS[unit](value);
   } else {
-    if (value.toString().length == 10) {
+    if (typeof value === "number" && value.toString().length == 10) {
       return moment.unix(value).utc();
     } else {
       return moment.utc(value);
