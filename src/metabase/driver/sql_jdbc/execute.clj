@@ -199,8 +199,12 @@
   [driver settings connection]
   (let [timezone      (u/prog1 (:report-timezone settings)
                         (assert (re-matches #"[A-Za-z\/_]+" <>)))
+        rawOffset (/ (.getRawOffset (TimeZone/getTimeZone timezone)) 3600000)
+        tz (if (< rawOffset 0) (str "'" rawOffset ":00'") (str "'+" rawOffset ":00'"))
         format-string (set-timezone-sql driver)
-        sql           (format format-string (str \' timezone \'))]
+        sql           (format format-string tz)]
+    (prn "set-timezone! sql is :" sql)
+    (prn "set-timezone! (TimeZone/getTimeZone timezone) is :" (TimeZone/getTimeZone timezone))
     (log/debug (u/format-color 'green (tru "Setting timezone with statement: {0}" sql)))
     (jdbc/db-do-prepared connection [sql])))
 
