@@ -282,7 +282,7 @@ export default class PieChart extends Component {
             showPercentInTooltip && slice.percentage != null
               ? [
                   {
-                    key: "Percentage",
+                    key: "百分比",
                     value: formatPercent(slice.percentage),
                   },
                 ]
