@@ -74,8 +74,9 @@
   "权限中心登录"
   [username password]
   (prn "是否走权限中心登录？" (auth-center/auth-center-configured?))
+  (prn "权限中心接口地址为" (str (auth-center/auth-center-host) "/api/login"))
   (when (auth-center/auth-center-configured?)
-    (let [{:keys [status body] :as response} (http/post "http://192.168.1.26:9003/api/login" {:body (str "{\"username\":\"" username "\",\"password\":\"" password "\"}")
+    (let [{:keys [status body] :as response} (http/post (str (auth-center/auth-center-host) "/api/login") {:body (str "{\"username\":\"" username "\",\"password\":\"" password "\"}")
                                                                                       :content-type :json :accept :json})]
       (log/info
         (u/format-color 'green
