@@ -151,7 +151,7 @@ const IsNotAuthenticated = MetabaseIsSetup(
 );
 
 export const getRoutes = store => (
-  <Route title="Metabase" component={App}>
+  <Route title="猛犸BI" component={App}>
     {/* SETUP */}
     <Route
       path="/setup"

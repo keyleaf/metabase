@@ -1222,11 +1222,11 @@ msgstr "对不起，发生错误。"
 
 #: frontend/src/metabase/admin/permissions/selectors.js:59
 msgid "Administrators always have the highest level of access to everything in Metabase."
-msgstr "管理员始终对Metabase中的所有内容具有最高级别的访问权限。"
+msgstr "管理员始终对猛犸BI中的所有内容具有最高级别的访问权限。"
 
 #: frontend/src/metabase/admin/permissions/selectors.js:61
 msgid "Every Metabase user belongs to the All Users group. If you want to limit or restrict a group's access to something, make sure the All Users group has an equal or lower level of access."
-msgstr "每个Metabase用户都属于“所有用户”组。如果要限制一个用户组对某些内容的访问权限，请确保“所有用户”组具有相同或更低级别的访问权限。"
+msgstr "每个猛犸BI用户都属于“所有用户”组。如果要限制一个用户组对某些内容的访问权限，请确保“所有用户”组具有相同或更低级别的访问权限。"
 
 #: frontend/src/metabase/admin/permissions/selectors.js:63
 msgid "MetaBot is Metabase's Slack bot. You can choose what it has access to here."
@@ -1372,7 +1372,7 @@ msgstr "LDAP资源管理服务（权限管理）"
 
 #: frontend/src/metabase/admin/settings/components/SettingsAuthenticationOptions.jsx:25
 msgid "Allows users within your LDAP directory to log in to Metabase with their LDAP credentials, and allows automatic mapping of LDAP groups to Metabase groups."
-msgstr "允许用户在没有你的LDAP字典的情况下使用他们的LDAP证书来登录到Metabase，并且允许自动LDAP群组的自动同步到Metabase的群组"
+msgstr "允许用户在没有你的LDAP字典的情况下使用他们的LDAP证书来登录到猛犸BI，并且允许自动LDAP群组的自动同步到猛犸BI的群组"
 
 #: frontend/src/metabase/admin/settings/components/SettingsBatchForm.jsx:17
 #: frontend/src/metabase/admin/settings/components/SettingsSlackForm.jsx:69
@@ -1444,7 +1444,7 @@ msgstr "开始设置向导"
 
 #: frontend/src/metabase/admin/settings/components/SettingsSetupList.jsx:106
 msgid "A few things you can do to get the most out of Metabase."
-msgstr "您可以采取一些措施来充分利用Metabase。"
+msgstr "您可以采取一些措施来充分利用猛犸BI。"
 
 #: frontend/src/metabase/admin/settings/components/SettingsSetupList.jsx:115
 msgid "Recommended next step"
@@ -1476,15 +1476,15 @@ msgstr "为MetaBot创建一个Slack Bot用户"
 
 #: frontend/src/metabase/admin/settings/components/SettingsSlackForm.jsx:261
 msgid "Once you're there, give it a name and click {0}. Then copy and paste the Bot API Token into the field below. Once you are done, create a \"metabase_files\" channel in Slack. Metabase needs this to upload graphs."
-msgstr "进入后，请为其命名并单击{0}。然后将Bot API令牌复制并粘贴到下面的字段中。完成后，在Slack中创建“metabase_files”通道。Metabase需要这个来上传图表。"
+msgstr "进入后，请为其命名并单击{0}。然后将Bot API令牌复制并粘贴到下面的字段中。完成后，在Slack中创建“metabase_files”通道。猛犸BI需要这个来上传图表。"
 
 #: frontend/src/metabase/admin/settings/components/SettingsUpdatesForm.jsx:90
 msgid "You're running Metabase {0} which is the latest and greatest!"
-msgstr "你正在运行的Metabase {0}是最新版本的。"
+msgstr "你正在运行的猛犸BI {0}是最新版本的。"
 
 #: frontend/src/metabase/admin/settings/components/SettingsUpdatesForm.jsx:99
 msgid "Metabase {0} is available.  You're running {1}"
-msgstr "Metabase {0}可更新。你正在运行是{1}"
+msgstr "猛犸BI {0}可更新。你正在运行是{1}"
 
 #: frontend/src/metabase/admin/settings/components/SettingsUpdatesForm.jsx:112
 #: frontend/src/metabase/components/form/StandardForm.jsx:67
@@ -1898,7 +1898,7 @@ msgstr "地图贴片服务器URL"
 
 #: frontend/src/metabase/admin/settings/selectors.js:306
 msgid "Metabase uses OpenStreetMaps by default."
-msgstr "Metabase默认使用PoenStreet地图"
+msgstr "猛犸BI默认使用PoenStreet地图"
 
 #: frontend/src/metabase/admin/settings/selectors.js:311
 msgid "Custom Maps"
@@ -1930,7 +1930,7 @@ msgstr "嵌入在其他的应用中"
 
 #: frontend/src/metabase/admin/settings/selectors.js:381
 msgid "Enable Embedding Metabase in other Applications"
-msgstr "启用将Metabase嵌入到其他应用中"
+msgstr "启用将猛犸BI嵌入到其他应用中"
 
 #: frontend/src/metabase/admin/settings/selectors.js:391
 msgid "Embedding secret key"
@@ -2012,7 +2012,7 @@ msgstr "忘记密码"
 
 #: frontend/src/metabase/auth/containers/ForgotPasswordApp.jsx:84
 msgid "The email you use for your Metabase account"
-msgstr "你作为Metabase账户的Email地址"
+msgstr "你作为猛犸BI账户的Email地址"
 
 #: frontend/src/metabase/auth/containers/ForgotPasswordApp.jsx:99
 msgid "Send password reset email"
@@ -2024,7 +2024,7 @@ msgstr "检查你的邮件来获取重置密码说明"
 
 #: frontend/src/metabase/auth/containers/LoginApp.jsx:128
 msgid "Sign in to Metabase"
-msgstr "登录Metabase"
+msgstr "登录猛犸BI"
 
 #: frontend/src/metabase/auth/containers/LoginApp.jsx:138
 msgid "OR"
@@ -2312,7 +2312,7 @@ msgstr "已复制！"
 
 #: frontend/src/metabase/components/DatabaseDetailsForm.jsx:216
 msgid "Use an SSH-tunnel for database connections"
-msgstr "为Metabse连接使用SSH通道"
+msgstr "为猛犸BI连接使用SSH通道"
 
 #: frontend/src/metabase/components/DatabaseDetailsForm.jsx:218
 msgid "Some database installations can only be accessed by connecting through an SSH bastion host.\n"
@@ -2324,7 +2324,7 @@ msgstr "一些数据库安装只有通过SSH通道访问的服务器有权访问
 
 #: frontend/src/metabase/components/DatabaseDetailsForm.jsx:271
 msgid "This is a large database, so let me choose when Metabase syncs and scans"
-msgstr "这是一个大型数据库，让我选择Metabase同步和扫描的时间"
+msgstr "这是一个大型数据库，让我选择猛犸BI同步和扫描的时间"
 
 #: frontend/src/metabase/components/DatabaseDetailsForm.jsx:273
 msgid "By default, Metabase does a lightweight hourly sync and an intensive daily scan of field values.\n"
@@ -4069,8 +4069,8 @@ msgid "Help"
 msgstr "帮助"
 
 #: frontend/src/metabase/nav/components/ProfileLink.jsx:76
-msgid "About Metabase"
-msgstr "关于Metabase"
+msgid "About Mamcharge BI"
+msgstr "关于猛犸BI"
 
 #: frontend/src/metabase/nav/components/ProfileLink.jsx:82
 msgid "Sign out"
@@ -7965,7 +7965,7 @@ msgstr "成功用JDBC注册Metabse.驱动.修复的Hive驱动"
 #. TODO - smtp-port should be switched to type :integer
 #: src/metabase/email.clj
 msgid "Email address you want to use as the sender of Metabase."
-msgstr "你想要使用的作为Metabse发送者的邮箱地址"
+msgstr "你想要使用的作为猛犸BI发送者的邮箱地址"
 
 #: src/metabase/email.clj
 msgid "The address of the SMTP server that handles your emails."
@@ -8273,7 +8273,7 @@ msgstr "保存Field{0}的FieldValues"
 
 #: src/metabase/models/humanization.clj
 msgid "Metabase can attempt to transform your table and field names into more sensible, human-readable versions, e.g. \"somehorriblename\" becomes \"Some Horrible Name\"."
-msgstr "Metabase 会尝试将数据表名称和表中字段名称转换为适合阅读的版本，例如：将somehorriblename转换为 Some Horrible Name。"
+msgstr "猛犸BI会尝试将数据表名称和表中字段名称转换为适合阅读的版本，例如：将somehorriblename转换为 Some Horrible Name。"
 
 #: src/metabase/models/humanization.clj
 msgid "This doesn’t work all that well if the names are in a language other than English, however."
@@ -8439,23 +8439,23 @@ msgstr "（如果你已经用这个方法运行了Metabse，你可以忽略这�
 
 #: src/metabase/public_settings.clj
 msgid "Identify when new versions of Metabase are available."
-msgstr "确定新版本的Metabase何时可用。"
+msgstr "确定新版本的猛犸BI何时可用。"
 
 #: src/metabase/public_settings.clj
 msgid "Information about available versions of Metabase."
-msgstr "关于Metabase可用版本的信息"
+msgstr "关于猛犸BI可用版本的信息"
 
 #: src/metabase/public_settings.clj
 msgid "The name used for this instance of Metabase."
-msgstr "用于此Metabase实例的名称。"
+msgstr "用于此猛犸BI实例的名称。"
 
 #: src/metabase/public_settings.clj
 msgid "The base URL of this Metabase instance, e.g. \"http://metabase.my-company.com\"."
-msgstr "此Metabase实例的基本URL，例如“http://metabase.my-company.com”。"
+msgstr "此猛犸BI实例的基本URL，例如“http://metabase.my-company.com”。"
 
 #: src/metabase/public_settings.clj
 msgid "The default language for this Metabase instance."
-msgstr "这个Metabse实例的默认语言"
+msgstr "这个猛犸BI实例的默认语言"
 
 #: src/metabase/public_settings.clj
 msgid "This only applies to emails, Pulses, etc. Users'' browsers will specify the language used in the user interface."
@@ -8467,7 +8467,7 @@ msgstr "如果碰到问题，可以使用用户的邮件地址"
 
 #: src/metabase/public_settings.clj
 msgid "Enable the collection of anonymous usage data in order to help Metabase improve."
-msgstr "启用匿名使用数据的收集，以帮助改进Metabase。"
+msgstr "启用匿名使用数据的收集，以帮助改进猛犸BI。"
 
 #: src/metabase/public_settings.clj
 msgid "The map tile server URL template used in map visualizations, for example from OpenStreetMaps or MapBox."
@@ -8499,7 +8499,7 @@ msgstr "保留任何缓存查询结果的绝对最长时间（以秒为单位）
 
 #: src/metabase/public_settings.clj
 msgid "Metabase will cache all saved questions with an average query execution time longer than this many seconds:"
-msgstr "Metabase会捕捉所有平均查询时间大于这么多秒的已保存图表"
+msgstr "猛犸BI会捕捉所有平均查询时间大于这么多秒的已保存图表"
 
 #: src/metabase/public_settings.clj
 msgid "To determine how long each saved question''s cached result should stick around, we take the query''s average execution time and multiply that by whatever you input here."

@@ -47,8 +47,13 @@
 
 (def ^:private password-fail-message (tru "Password did not match stored password."))
 (def ^:private password-fail-snippet (tru "did not match stored password"))
-(def ^:private call-fail-auth-center (tru "调用权限中心接口失败"))
-(def ^:private password-fail-auth-center (tru "权限中心校验失败"))
+(def ^:private check-password-fail (tru "对接权限中心验证账号密码失败"))
+(def ^:private call-check-password-fail (tru "调用权限中心登录接口失败"))
+(def ^:private call-check-role-info-fail (tru "调用权限中心登录接口失败"))
+(def ^:private check-role-info-fail (tru "对接权限中心验证角色信息失败"))
+(def ^:private no-right-role-info (tru "没有对应的角色权限"))
+
+
 
 (defn- ldap-login
   "If LDAP is enabled and a matching user exists return a new Session for them, or `nil` if they couldn't be
@@ -73,34 +78,47 @@
 (defn- auth-center-login
   "权限中心登录"
   [username password]
+  (log/info
+    (u/format-color 'green
+      (trs "auth-center-login : username is {0}, password is {1}" username password)))
   (prn "是否走权限中心登录？" (auth-center/auth-center-configured?))
-  (prn "权限中心接口地址为" (str (auth-center/auth-center-host) "/api/login"))
+  (prn "权限中心接口地址为" (str (auth-center/auth-center-host)))
   (when (auth-center/auth-center-configured?)
-    (let [{:keys [status body] :as response} (http/post (str (auth-center/auth-center-host) "/api/login") {:body (str "{\"username\":\"" username "\",\"password\":\"" password "\"}")
-                                                                                      :content-type :json :accept :json})]
-      (log/info
-        (u/format-color 'green
-                        (trs "auth-center-login : username is {0}, password is {1}" username password)))
-      (log/info
-        (u/format-color 'green
-                        (trs "auth-center-login : status is {0}, body is {1}" status body)))
+    (let [{:keys [status body] :as response} (http/post (str (auth-center/auth-center-host) "/api/login") {:body (str "{\"username\":\"" username "\",\"password\":\"" password "\"}") :content-type :json :accept :json})]
+      (log/info (u/format-color 'green (trs "对接权限中心验证账号密码 response is : {0}" response)))
       (when-not (= status 200)
-        (throw (ui18n/ex-info call-fail-auth-center {:status-code 400 :errors {:password call-fail-auth-center}})))
+        (throw (ui18n/ex-info call-check-password-fail {:status-code 400 :errors {:password call-check-password-fail}})))
       (u/prog1 (json/parse-string body keyword)
                (when-not (= (:errcode <>) 0)
-                 (throw (ui18n/ex-info password-fail-auth-center {:status-code 400 :errors {:password password-fail-auth-center}}))))
-      ;用户密码验证成功后需要判断用户是否有配置metabase的权限或者角色
-      ;如果上述条件满足，需要判断该用户是否存在于metabase的数据库中
-      (let [user (db/select-one [User :id :password_salt :password :last_login], :email username)]
-        (if (nil? user)
-          ;用户不存在，需要创建用户 (select-keys body [:first_name :last_name :email :password :login_attributes])
-          (let [new-user-id (u/get-id (user/insert-new-user! {:first_name username :last_name "." :email username :password password}))]
-            {:id (create-session! (user/fetch-user :id new-user-id))})
+                 (throw (ui18n/ex-info check-password-fail {:status-code 400 :errors {:password check-password-fail}})))
+               (def token (:data <>))))
 
+    (let [{:keys [status body] :as response} (http/post (str (auth-center/auth-center-host) "/api/roleInfo/token") {:body (str "{\"id\":\"101\"}") :content-type :json :accept :json :headers {"token" token}})]
+      (log/info (u/format-color 'green (trs "对接权限中心验证角色信息 response is : {0}" response)))
+      (when-not (= status 200)
+        (throw (ui18n/ex-info call-check-role-info-fail {:status-code 400 :errors {:password call-check-role-info-fail}})))
+      (u/prog1 (json/parse-string body keyword)
+               (when-not (= (:errcode <>) 0)
+                 (throw (ui18n/ex-info check-role-info-fail {:status-code 400 :errors {:password check-role-info-fail}})))
+               (when (or (nil? (:roleList (:data <>))) (= (.length (:roleList (:data <>))) 0))
+                 (throw (ui18n/ex-info check-role-info-fail {:status-code 400 :errors {:password check-role-info-fail}})))
+               (def bi-roles (filter (fn [x] (or (.endsWith (:name x) "猛犸BI管理员") (.endsWith (:name x) "猛犸BI普通用户"))) (:roleList (:data <>))))
+               (when (= (count bi-roles) 0)
+                 (throw (ui18n/ex-info no-right-role-info {:status-code 400 :errors {:password no-right-role-info}})))))
 
-          ;用户存在，更新状态及密码等
-          {:id (create-session! user)}
-          )))))
+    ;用户密码验证成功后需要判断用户是否有配置metabase的权限或者角色
+    ;如果上述条件满足，需要判断该用户是否存在于metabase的数据库中
+    (let [user (db/select-one [User :id :password_salt :password :last_login], :email username)]
+      (if (nil? user)
+        ;用户不存在，需要创建用户 (select-keys body [:first_name :last_name :email :password :login_attributes])
+        (let [new-user-id (u/get-id (user/insert-new-user! {:first_name username :last_name "." :email username :password password}))]
+          (if (> (count (filter (fn [x] (.endsWith (:name x) "猛犸BI管理员")) bi-roles)) 0)
+            (db/update! User new-user-id, :is_superuser true))
+          {:id (create-session! (user/fetch-user :id new-user-id))})
+
+        ;用户存在，更新状态及密码等
+        {:id (create-session! user)}))
+    ))
 
 (defn- email-login
   "Find a matching `User` if one exists and return a new Session for them, or `nil` if they couldn't be authenticated."
