@@ -108,16 +108,23 @@
 
     ;用户密码验证成功后需要判断用户是否有配置metabase的权限或者角色
     ;如果上述条件满足，需要判断该用户是否存在于metabase的数据库中
-    (let [user (db/select-one [User :id :password_salt :password :last_login], :email username)]
-      (if (nil? user)
+    (let [user (db/select-one [User :id :password_salt :password :last_login :is_superuser], :email username)]
+      (def is-admin-in-auth-center (> (count (filter (fn [x] (.endsWith (:name x) "猛犸BI管理员")) bi-roles)) 0))
+      (when (nil? user)
+        (prn "用户为空，需要创建新用户")
         ;用户不存在，需要创建用户 (select-keys body [:first_name :last_name :email :password :login_attributes])
         (let [new-user-id (u/get-id (user/insert-new-user! {:first_name username :last_name "." :email username :password password}))]
-          (if (> (count (filter (fn [x] (.endsWith (:name x) "猛犸BI管理员")) bi-roles)) 0)
+          (when is-admin-in-auth-center
             (db/update! User new-user-id, :is_superuser true))
-          {:id (create-session! (user/fetch-user :id new-user-id))})
-
-        ;用户存在，更新状态及密码等
-        {:id (create-session! user)}))
+          {:id (create-session! (user/fetch-user :id new-user-id))}))
+      (when-not (nil? user)
+        (prn "用户不为空")
+        ;用户存在的情况下，要判断下当前用户是否有管理员权限，如果BI和权限中心不一致，需要同步更新。
+        (when-not (= (:is_superuser user) is-admin-in-auth-center)
+          (prn "BI和权限中心的用户角色不一致，需同步更新，权限中心是否有配置管理员角色？ " is-admin-in-auth-center)
+          (db/update! User (:id user), :is_superuser is-admin-in-auth-center))
+        {:id (create-session! user)}
+        ))
     ))
 
 (defn- email-login
