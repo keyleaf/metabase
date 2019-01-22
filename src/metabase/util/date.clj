@@ -126,7 +126,8 @@
   ([coercible-to-ts]
    {:pre [(or (not (string? coercible-to-ts))
               (and (string? coercible-to-ts) (bound? #'*report-timezone*)))]}
-   (->Timestamp coercible-to-ts *report-timezone*))
+   (prn "*report-timezone* is :" *report-timezone*)
+   (->Timestamp coercible-to-ts "UTC"))
   ([coercible-to-ts timezone]
    {:pre [(or (not (string? coercible-to-ts))
               (and (string? coercible-to-ts) timezone))]}
