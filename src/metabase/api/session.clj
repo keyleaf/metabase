@@ -47,7 +47,7 @@
 
 (def ^:private password-fail-message (tru "Password did not match stored password."))
 (def ^:private password-fail-snippet (tru "did not match stored password"))
-(def ^:private check-password-fail (tru "对接权限中心验证账号密码失败"))
+(def ^:private check-password-fail (tru "对接权限中心验证账号或密码失败"))
 (def ^:private call-check-password-fail (tru "调用权限中心登录接口失败"))
 (def ^:private call-check-role-info-fail (tru "调用权限中心登录接口失败"))
 (def ^:private check-role-info-fail (tru "对接权限中心验证角色信息失败"))

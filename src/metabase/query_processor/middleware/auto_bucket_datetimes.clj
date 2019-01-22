@@ -48,7 +48,7 @@
   [x]
   (or
    ;; do not autobucket Fields in a filter clause that either:
-   (when (mbql.preds/Filter? x)
+   (when (and (not (and (vector? x) (= (first x) :and))) (mbql.preds/Filter? x))
      (or
       ;; *  is not and equality or comparison filter. e.g. wouldn't make sense to bucket a field and then check if it is
       ;;    `NOT NULL`
@@ -89,7 +89,8 @@
   [{{breakouts :breakout, filter-clause :filter} :query, :as query} :- mbql.s/Query]
   ;; find any breakouts or filters in the query that are just plain `[:field-id ...]` clauses (unwrapped by any other
   ;; clause)
-  (if-let [unbucketed-fields (mbql.u/match (cons filter-clause breakouts)
+  ;(if-let [unbucketed-fields (mbql.u/match (cons filter-clause breakouts)
+  (if-let [unbucketed-fields (mbql.u/match (cons (rest filter-clause) breakouts)
                                (_ :guard should-not-be-autobucketed?) nil
                                [:field-literal _ _]                   &match
                                [:field-id _]                          &match)]

@@ -130,7 +130,10 @@
   [date-obj :- java.util.Date
    date-literal-or-string :- (s/either s/Str Literal)]
   (let [date-as-dt                 (tcoerce/from-date date-obj)
-        report-timezone-offset-str (timezone-id->offset-str (driver/report-timezone) date-as-dt)]
+        report-timezone-offset-str (timezone-id->offset-str "UTC" date-as-dt)]
+    (prn "create-hsql-for-date (driver/report-timezone) is :" (driver/report-timezone))
+    (prn "create-hsql-for-date date-as-dt is :" date-as-dt)
+    (prn "create-hsql-for-date report-timezone-offset-str is :" report-timezone-offset-str)
     (if (and report-timezone-offset-str
              (not (.hasSameRules utc (TimeZone/getTimeZone (driver/report-timezone)))))
       ;; if we have a report timezone we want to generate SQL like convert_tz('2004-01-01T12:00:00','-8:00','-2:00')
