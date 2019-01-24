@@ -61,6 +61,8 @@ const MetabaseSettings = {
 
   hideEmbedBranding: () => mb_settings.hide_embed_branding,
 
+  enableWatermark: () => mb_settings.enable_watermark,
+
   metastoreUrl: () => mb_settings.metastore_url,
 
   newVersionAvailable: function(settings) {

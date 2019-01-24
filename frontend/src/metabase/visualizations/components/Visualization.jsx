@@ -49,6 +49,8 @@ import type {
   OnChangeCardAndRun,
 } from "metabase/meta/types/Visualization";
 import Metadata from "metabase-lib/lib/metadata/Metadata";
+import Watermark from "metabase/components/Watermark";
+
 
 type Props = {
   rawSeries: RawSeries,
@@ -425,7 +427,7 @@ export default class Visualization extends Component {
     }
 
     return (
-      <div className={cx(className, "flex flex-column")}>
+      <div className={cx(className, "flex flex-column Watermark-target")}>
         {(showTitle &&
           (settings["card.title"] || extra) &&
           (loading ||
@@ -543,6 +545,7 @@ export default class Visualization extends Component {
             onClose={this.hideActions}
           />
         )}
+        <Watermark selector=".Watermark-target" {...this.props}></Watermark>
       </div>
     );
   }

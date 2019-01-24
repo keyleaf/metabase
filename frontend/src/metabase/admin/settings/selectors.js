@@ -66,6 +66,11 @@ const SECTIONS = [
         getHidden: () => MetabaseSettings.get("available_locales").length < 2,
       },
       {
+        key: "enable-watermark",
+        display_name: t`开启水印功能`,
+        type: "boolean",
+      },
+      {
         key: "anon-tracking-enabled",
         display_name: t`Anonymous Tracking`,
         type: "boolean",
