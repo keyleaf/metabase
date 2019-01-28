@@ -110,6 +110,7 @@
    [ring/ring-json "0.4.0"]                                           ; Ring middleware for reading/writing JSON automatically
    [stencil "0.5.0"]                                                  ; Mustache templates for Clojure
    [expectations "2.2.0-beta2"]
+   [org.apache.poi/ooxml-schemas "1.0"]                               ; POI excel background image
    [toucan "1.1.9" :exclusions [org.clojure/java.jdbc honeysql]]]     ; Model layer, hydration, and DB utilities
 
   :main ^:skip-aot metabase.core
