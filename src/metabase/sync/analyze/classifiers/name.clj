@@ -99,6 +99,7 @@
    [#"score"                       number-type      :type/Score]
    [#"rating"                      number-type      :type/Score]
    [#"stars"                       number-type      :type/Score]
+   [#"desensitization"             text-type        :type/Desensitization]
    [#"description"                 text-type        :type/Description]
    [#"title"                       text-type        :type/Title]
    [#"comment"                     text-type        :type/Comment]

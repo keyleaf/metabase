@@ -230,6 +230,11 @@ export const field_special_types = [
     name: t`Birthday`,
     section: t`Common`,
   },
+  {
+    id: TYPE.Desensitization,
+    name: t`数据脱敏`,
+    section: t`Common`,
+  },
 ];
 
 export const field_special_types_map = field_special_types.reduce(
