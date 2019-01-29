@@ -16,7 +16,11 @@
              [export :as ex]
              [i18n :refer [trs tru]]
              [schema :as su]]
-            [schema.core :as s]))
+            [schema.core :as s]
+            [toucan
+             [db :as db]
+             [hydrate :refer [hydrate]]]
+            ))
 
 ;;; -------------------------------------------- Running a Query Normally --------------------------------------------
 
@@ -75,10 +79,36 @@
     (subs date-str 0 time-index)
     date-str))
 
+
+(defn- data-desensitization
+  "数据脱敏 隐私数据用*处理"
+  [raw-data]
+  (when raw-data
+    (let [raw-data-str (str raw-data)
+          str-length (count raw-data-str)]
+      (if (< str-length 3)
+        (str "***")
+        (let [sub-length (Math/floor (/ str-length 3))]
+          (str (subs raw-data-str 0 sub-length) (clojure.string/join "" (repeat sub-length (str "*"))  ) (subs raw-data-str (- str-length sub-length) str-length))))
+      )))
+
 (defn- swap-date-columns [date-col-indexes]
   (fn [row]
     (reduce (fn [acc idx]
               (update acc idx datetime-str->date)) row date-col-indexes)))
+
+(defn- swap-desensitization-columns [date-col-indexes]
+  (fn [row]
+    (reduce (fn [acc idx]
+              (update acc idx data-desensitization)) row date-col-indexes)))
+
+(defn- desensitization-column-indexes
+  "Given `column-metadata` find the `:type/Desensitization` columns"
+  [column-metadata]
+  (transduce (comp (map-indexed (fn [idx col-map] [idx (:special_type col-map)]))
+                   (filter (fn [[idx special-type]] (isa? special-type :type/Desensitization)))
+                   (map first))
+             conj [] column-metadata))
 
 (defn- date-column-indexes
   "Given `column-metadata` find the `:type/Date` columns"
@@ -95,6 +125,13 @@
       (map (comp (swap-date-columns date-indexes) vec) rows)
       rows)))
 
+(defn- maybe-modify-desensitization-values [column-metadata rows]
+  (let [desensitization-indexes (desensitization-column-indexes column-metadata)]
+    (if (seq desensitization-indexes)
+      ;; Not sure why, but rows aren't vectors, they're lists which makes updating difficult
+      (map (comp (swap-desensitization-columns desensitization-indexes) vec) rows)
+      rows)))
+
 (defn as-format
   "Return a response containing the RESULTS of a query in the specified format."
   {:style/indent 1, :arglists '([export-format results])}
@@ -103,7 +140,7 @@
     (if (= status :completed)
       ;; successful query, send file
       {:status  200
-       :body    ((:export-fn export-conf) columns (maybe-modify-date-values cols rows) cols)
+       :body    ((:export-fn export-conf) columns (->> (maybe-modify-date-values cols rows) (maybe-modify-desensitization-values cols)) cols)
        :headers {"Content-Type"        (str (:content-type export-conf) "; charset=utf-8")
                  "Content-Disposition" (str "attachment; filename=\"query_result_" (du/date->iso-8601) "." (:ext export-conf) "\"")}}
       ;; failed query, send error message

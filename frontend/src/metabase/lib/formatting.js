@@ -516,6 +516,33 @@ export function formatUrl(
   }
 }
 
+/**
+ * 格式化脱敏数据
+ * @param value
+ * @param jsx
+ * @param rich
+ * @param view_as
+ * @param link_text
+ * @returns {*}
+ */
+export function formatDesensitizationData(
+  value: Value,
+  { jsx, rich, view_as = "auto", link_text }: FormattingOptions = {},
+) {
+  if (value) {
+    const rawData = String(value);
+    let length = rawData.length;
+    let level = 3;
+    if (length < level) {
+      return "***";
+    } else {
+      let subLength = Math.floor(length/level);
+      return rawData.substring(0, subLength) + "*".repeat(subLength) + rawData.substring(length - subLength);
+    }
+  }
+  return value;
+}
+
 export function formatImage(
   value: Value,
   { jsx, rich, view_as = "auto", link_text }: FormattingOptions = {},
@@ -611,6 +638,8 @@ export function formatValueRaw(value: Value, options: FormattingOptions = {}) {
     return formatUrl(value, options);
   } else if (column && isa(column.special_type, TYPE.Email)) {
     return formatEmail(value, options);
+  } else if (column && isa(column.special_type, TYPE.Desensitization)) {
+    return formatDesensitizationData(value, options);
   } else if (column && isa(column.base_type, TYPE.Time)) {
     return formatTime(value);
   } else if (column && column.unit != null) {

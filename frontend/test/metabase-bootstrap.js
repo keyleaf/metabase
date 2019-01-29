@@ -83,5 +83,6 @@ window.MetabaseBootstrap = {
     "type/DateTime": ["type/*"],
     "type/UNIXTimestamp": ["type/Integer", "type/DateTime"],
     "type/Enum": ["type/Category", "type/*"],
+    "type/Desensitization": ["type/Text"],
   },
 };

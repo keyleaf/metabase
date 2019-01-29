@@ -78,6 +78,8 @@
 
 (derive :type/PostgresEnum :type/Text)
 
+(derive :type/Desensitization :type/Text)
+
 ;;; DateTime Types
 
 (derive :type/DateTime :type/*)
