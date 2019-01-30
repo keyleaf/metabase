@@ -431,8 +431,8 @@
                       :export-format dataset-api/export-format-regex]
   "Fetch the results of running a Card belonging to a Dashboard using a JSON Web Token signed with the
   `embedding-secret-key` return the data in one of the export formats"
-  [token export-format dashcard-id card-id & query-params]
+  [token export-format dashcard-id card-id file_name & query-params]
   {export-format dataset-api/ExportFormat}
-  (dataset-api/as-format export-format (card-for-signed-token token dashcard-id card-id query-params )))
+  (dataset-api/as-format export-format (card-for-signed-token token dashcard-id card-id query-params ) file_name))
 
 (api/define-routes)
