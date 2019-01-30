@@ -135,17 +135,20 @@
 (defn as-format
   "Return a response containing the RESULTS of a query in the specified format."
   {:style/indent 1, :arglists '([export-format results])}
-  [export-format {{:keys [columns rows cols]} :data, :keys [status], :as response}]
+  ([export-format {{:keys [columns rows cols]} :data, :keys [status], :as response}]
+  (as-format export-format response nil))
+  ([export-format {{:keys [columns rows cols]} :data, :keys [status], :as response} file-name]
   (api/let-404 [export-conf (ex/export-formats export-format)]
     (if (= status :completed)
       ;; successful query, send file
       {:status  200
        :body    ((:export-fn export-conf) columns (->> (maybe-modify-date-values cols rows) (maybe-modify-desensitization-values cols)) cols)
        :headers {"Content-Type"        (str (:content-type export-conf) "; charset=utf-8")
-                 "Content-Disposition" (str "attachment; filename=\"query_result_" (du/date->iso-8601) "." (:ext export-conf) "\"")}}
+                 "Content-Disposition" (str (if (nil? file-name) "attachment; filename=\"query_result_" (str "attachment; filename=\"" file-name "_"))  (.format (java.text.SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ss.SSS") (new java.util.Date))
+                                            "." (:ext export-conf) "\"")}}
       ;; failed query, send error message
       {:status 500
-       :body   (:error response)})))
+       :body   (:error response)}))))
 
 (def export-format-regex
   "Regex for matching valid export formats (e.g., `json`) for queries.

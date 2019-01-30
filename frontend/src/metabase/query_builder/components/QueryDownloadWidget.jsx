@@ -109,7 +109,7 @@ const UnsavedQueryButton = ({ type, result: { json_query }, card }) => (
 const SavedQueryButton = ({ type, result: { json_query }, card }) => (
   <DownloadButton
     url={`api/card/${card.id}/query/${type}`}
-    params={{ parameters: JSON.stringify(json_query.parameters) }}
+    params={{ parameters: JSON.stringify(json_query.parameters), file_name: card.name }}
     extensions={[type]}
   >
     {type}
@@ -153,7 +153,13 @@ const DashboardEmbedQueryButton = ({
   token,
   card,
   params,
-}) => (
+}) => {
+
+  if (params != null) {
+    params['file_name']=card['name'];
+  }
+  console.log("params is :", params);
+  return (
   <DownloadButton
     method="GET"
     url={`api/embed/dashboard/${token}/dashcard/${dashcardId}/card/${
@@ -164,7 +170,7 @@ const DashboardEmbedQueryButton = ({
   >
     {type}
   </DownloadButton>
-);
+);};
 
 QueryDownloadWidget.propTypes = {
   card: PropTypes.object,
