@@ -144,7 +144,7 @@
       {:status  200
        :body    ((:export-fn export-conf) columns (->> (maybe-modify-date-values cols rows) (maybe-modify-desensitization-values cols)) cols)
        :headers {"Content-Type"        (str (:content-type export-conf) "; charset=utf-8")
-                 "Content-Disposition" (str (if (nil? file-name) "attachment; filename=\"query_result_" (str "attachment; filename=\"" file-name "_"))  (.format (java.text.SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ss.SSS") (new java.util.Date))
+                 "Content-Disposition" (str (if (nil? file-name) "attachment; filename=\"query_result_" (str "attachment; filename=\"" (String. (.getBytes file-name "UTF-8") "ISO-8859-1") "_"))  (.format (java.text.SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ss.SSS") (new java.util.Date))
                                             "." (:ext export-conf) "\"")}}
       ;; failed query, send error message
       {:status 500
