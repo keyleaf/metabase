@@ -4,7 +4,7 @@
   (:require [metabase.util.date :as du]))
 
 (defn- format-rows* [{:keys [report-timezone]} rows]
-  (let [timezone (or report-timezone (System/getProperty "user.timezone"))]
+  (let [timezone (or report-timezone "UTC")]
     (for [row rows]
       (for [v row]
         ;; NOTE: if we don't have an explicit report-timezone then use the JVM timezone
@@ -24,6 +24,9 @@
   [qp]
   (fn [{:keys [settings middleware] :as query}]
     (let [results (qp query)]
+      ;(prn "format-rows settings is :" settings)
+      ;(prn "format-rows results is :" results)
+      ;(prn "format-rows (:format-rows? middleware true) is :" (:format-rows? middleware true))
       (if-not (and (:rows results)
                    (:format-rows? middleware true))
         results
