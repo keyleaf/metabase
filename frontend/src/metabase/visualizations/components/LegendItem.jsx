@@ -53,7 +53,7 @@ export default class LegendItem extends Component {
             "cursor-pointer": onClick,
           },
         )}
-        style={{ overflowX: "hidden", flex: "0 1 auto" }}
+        style={{ float: "left" }}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         onClick={onClick}
