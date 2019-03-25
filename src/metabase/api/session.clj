@@ -115,10 +115,12 @@
         ;用户不存在，需要创建用户 (select-keys body [:first_name :last_name :email :password :login_attributes])
         (let [new-user-id (u/get-id (user/insert-new-user! {:first_name username :last_name "." :email username :password password}))]
           (when is-admin-in-auth-center
-            (db/update! User new-user-id, :is_superuser true))
+            (db/update! User new-user-id, :is_superuser true, :login_attributes {:auth_center_token token}))
           {:id (create-session! (user/fetch-user :id new-user-id))}))
       (when-not (nil? user)
         (prn "用户不为空")
+        (db/update! User (:id user), :login_attributes {:auth_center_token token})
+
         ;用户存在的情况下，要判断下当前用户是否有管理员权限，如果BI和权限中心不一致，需要同步更新。
         (when-not (= (:is_superuser user) is-admin-in-auth-center)
           (prn "BI和权限中心的用户角色不一致，需同步更新，权限中心是否有配置管理员角色？ " is-admin-in-auth-center)
