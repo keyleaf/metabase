@@ -58,8 +58,7 @@
   ;; if query is using another query as its source then there will be no table to add nested fields for
   (and source-table
        (not (or (seq aggregations)
-                (seq breakout)
-                (seq fields)))))
+                (seq breakout)))))
 
 (s/defn ^:private add-implicit-fields :- mbql.s/Query
   "For MBQL queries with no aggregation, add a `:fields` containing all Fields in the source Table as well as any
