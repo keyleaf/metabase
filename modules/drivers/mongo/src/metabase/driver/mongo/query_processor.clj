@@ -521,7 +521,8 @@
     (into {} (for [[k v] row]
                {k (if (and (map? v)
                            (contains? v :___date))
-                    (du/->Timestamp (:___date v) (TimeZone/getDefault))
+                    ;(du/->Timestamp (:___date v) (TimeZone/getDefault))
+                    (du/->Timestamp (:___date v) "UTC")
                     v)}))))
 
 
