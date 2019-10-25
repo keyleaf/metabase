@@ -3,6 +3,7 @@
   (:require [clojure.tools.logging :as log]
             [compojure.core :refer [DELETE GET POST PUT]]
             [metabase.automagic-dashboards.populate :as magic.populate]
+            [metabase.integrations.auth-center :as auth-center]
             [metabase
              [events :as events]
              [query-processor :as qp]
@@ -403,7 +404,7 @@
              (u/prog1 (str (UUID/randomUUID))
                (db/update! Dashboard dashboard-id
                  :public_uuid       <>
-                 :made_public_by_id api/*current-user-id*)))})
+                 :made_public_by_id api/*current-user-id*))) :auth_info (auth-center/fetch-system-info (auth-center/fetch-token-from-db) 999)})
 
 (api/defendpoint DELETE "/:dashboard-id/public_link"
   "Delete the publicly-accessible link to this Dashboard."
