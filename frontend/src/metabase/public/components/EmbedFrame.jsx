@@ -18,6 +18,7 @@ import "./EmbedFrame.css";
 const DEFAULT_OPTIONS = {
   bordered: IFRAMED,
   titled: true,
+  footer: false,
 };
 
 import type { Parameter } from "metabase/meta/types/Parameter";
@@ -92,9 +93,7 @@ export default class EmbedFrame extends Component {
     } = this.props;
     const { innerScroll } = this.state;
 
-    const footer = true;
-
-    const { bordered, titled, theme, hide_parameters } = {
+    const { bordered, titled, footer, theme, hide_parameters } = {
       ...DEFAULT_OPTIONS,
       ...parseHashOptions(location.hash),
     };
