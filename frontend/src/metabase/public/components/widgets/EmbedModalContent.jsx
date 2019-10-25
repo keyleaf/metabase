@@ -41,6 +41,7 @@ export type DisplayOptions = {
   theme: ?string,
   bordered: boolean,
   titled: boolean,
+  footer: boolean,
 };
 
 type Props = {
@@ -97,6 +98,7 @@ export default class EmbedModalContent extends Component {
         theme: null,
         bordered: true,
         titled: true,
+        footer: true,
       },
 
       parameterValues: {},

@@ -18,7 +18,7 @@ import "./EmbedFrame.css";
 const DEFAULT_OPTIONS = {
   bordered: IFRAMED,
   titled: true,
-  footer: false,
+  footer: true,
 };
 
 import type { Parameter } from "metabase/meta/types/Parameter";
