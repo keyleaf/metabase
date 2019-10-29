@@ -467,13 +467,68 @@
     (map merge cols cols-returned-by-driver)
     cols))
 
+; 根据参数获取字段索引
+; cols列集合
+; name列名称
+(defn getIndex [cols name]
+  (->> cols
+       (map-indexed vector)
+       (filter (comp #{name} :name last))
+       (ffirst)))
+
+; 获取LinkText的参数的拼接值
+; 返回结果为集合
+; row行数据
+; cols列集合
+; link_text 格式化链接地址
+(defn getLink-text [row cols link_text]
+  (let [linkVector (str/split link_text #"[#]")]
+    (println linkVector)
+    (for [link-row linkVector]
+      ;(println (re-find #"(?=^[&].+[&]$)(?!&).+(?<!&)" (nth linkVector x)) )
+      (let [booleanLink (re-find #"^[&].+[&]$" link-row)]
+        (if booleanLink
+          ;(println (re-find #"(?!&).+(?<!&)" booleanLink))
+          (let [filedName (re-find #"(?!&).+(?<!&)" booleanLink)]
+            (.get row (getIndex cols (str/upper-case filedName)))) link-row)))))
+
+; 递归获取拼接处理后的row，因为一表存在多个格式化字段
+; 返回结果为row
+; cols列集合
+; row行数据
+(defn handleCols [cols row]
+  (loop [runrow row
+         cnt (- (count cols) 1)]
+       ; If count reaches 0 then exit the loop and return sum
+    (if (= cnt -1)
+      runrow
+         ; Otherwise add count to sum, decrease count and
+         ; use recur to feed the new values back into the loop
+      (recur (if (= (compare (:view_as (:settings (nth cols cnt))) "link") 0)
+               (assoc runrow (getIndex cols (:name (nth cols cnt))) (str/join (getLink-text runrow cols (:link_text (:settings (nth cols cnt)))))) runrow) (dec cnt)))))
+
+; 格式化字段连接需求，中间过渡方法
+; 返回值为rows结果
+(defn- format-rows* [cols rows]
+  (let [abc cols]
+    (for [row rows]
+      ; (assoc row 2 (handleCols cols row))
+      (handleCols cols row))))
+; 格式化字段连接需求，中间过渡方法
+; 返回值为rows结果
+(defn format-row [results cols]
+  (let [abc cols]
+    (cond-> results
+      (and true? (:rows results)) (update :rows (partial format-rows* cols)))))
+
 (s/defn ^:private add-column-info* :- {:cols ColsWithUniqueNames, s/Keyword s/Any}
   [query {cols-returned-by-driver :cols, :as results}]
   ;; merge in `:cols` if returned by the driver, then make sure the `:name` of each map in `:cols` is unique, since
   ;; the FE uses it as a key for stuff like column settings
   (let [cols (deduplicate-cols-names
               (merge-cols-returned-by-driver (column-info query results) cols-returned-by-driver))]
-    (-> results
+    ;字段连接需求格式化处理
+    (-> (format-row results cols)
         (assoc :cols cols)
         ;; remove `:columns` which we no longer need
         (dissoc :columns))))
