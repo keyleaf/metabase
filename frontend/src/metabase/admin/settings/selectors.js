@@ -385,13 +385,9 @@ const SECTIONS = [
         getHidden: settings => !settings["enable-embedding"],
       },
       {
-        widget: EmbeddingLevel,
-        getHidden: settings => !settings["enable-embedding"],
-      },
-      {
-        key: "embedding-secret-key",
-        display_name: t`Embedding secret key`,
-        widget: SecretKeyWidget,
+        key: "enable-hide-embed-branding",
+        display_name: "下标控制",
+        type: "boolean",
         getHidden: settings => !settings["enable-embedding"],
       },
       {
