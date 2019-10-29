@@ -177,6 +177,11 @@
   :getter (fn [] (some-> (setting/get-string :source-address-header)
                          u/lower-case-en)))
 
+(defsetting enable-watermark
+            (deferred-tru "水印格式为：当前用户名 + 当前时间")
+            :type    :boolean
+            :default true)
+
 (defn remove-public-uuid-if-public-sharing-is-disabled
   "If public sharing is *disabled* and OBJECT has a `:public_uuid`, remove it so people don't try to use it (since it
    won't work). Intended for use as part of a `post-select` implementation for Cards and Dashboards."
@@ -219,6 +224,7 @@
    :enable_nested_queries (enable-nested-queries)
    :enable_query_caching  (enable-query-caching)
    :enable_xrays          (enable-xrays)
+   :enable_watermark      (enable-watermark)
    :engines               (driver.u/available-drivers-info)
    :entities              (types/types->parents :entity/*)
    :ga_code               "UA-60817802-1"
