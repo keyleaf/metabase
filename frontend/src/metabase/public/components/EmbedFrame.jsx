@@ -114,7 +114,7 @@ export default class EmbedFrame extends Component {
           })}
         >
           {name ? (
-            <div className="EmbedFrame-header flex align-center p1 sm-p2 lg-p3" style={{ paddingBottom: 0 }}>
+            <div className="EmbedFrame-header flex align-center p1 lg-p3">
               {name && <div className="h4 text-bold sm-h3 md-h2">{name}</div>}
               {parameters && parameters.length > 0 ? (
                 <div className="flex ml-auto" style={{ paddingBottom: 5 }}>
@@ -133,7 +133,7 @@ export default class EmbedFrame extends Component {
               ) : null}
             </div>
           ) : (
-            <div className="EmbedFrame-header flex align-center p1 sm-p2 lg-p3" style={{ paddingBottom: 0 }}>
+            <div className="EmbedFrame-header flex align-center p1 lg-p3">
               {parameters && parameters.length > 0 ? (
                 <div className="flex ml-auto" style={{ marginLeft : 0, paddingBottom: 5 }}>
                   <Parameters
@@ -151,7 +151,7 @@ export default class EmbedFrame extends Component {
               ) : null}
             </div>
           )}
-          <div className="flex flex-column relative full flex-full" style={{ top : -30 }}>
+          <div className="flex flex-column relative full flex-full">
             {children}
           </div>
         </div>
