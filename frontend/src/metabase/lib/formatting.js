@@ -581,8 +581,8 @@ export function formatUrl(
       : isDefaultLinkProtocol(protocol))
   ) {
     return (
-      <ExternalLink className="link link--wrappable" href={url}>
-        {link_text || url}
+      <ExternalLink className="link link--wrappable" href={encodeURI(encodeURI(url))}>
+        {url || link_text}
       </ExternalLink>
     );
   } else {
