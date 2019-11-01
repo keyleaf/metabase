@@ -138,6 +138,7 @@
      "timestamp_milliseconds" "type/UNIXTimestampMilliseconds"
      "timestamp_seconds"      "type/UNIXTimestampSeconds"
      "url"                    "type/URL"
+     "customurl"              "type/CustomURL"
      "zip_code"               "type/ZipCode"})
 
 ;; make sure the new types are all valid

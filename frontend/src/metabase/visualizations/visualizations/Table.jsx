@@ -18,6 +18,7 @@ import {
   isNumber,
   isString,
   isURL,
+  isCustomURL,
   isEmail,
   isImageURL,
   isAvatarURL,
@@ -246,7 +247,7 @@ export default class Table extends Component {
       const options: { name: string, value: null | string }[] = [
         { name: t`Off`, value: null },
       ];
-      if (!column.special_type || isURL(column)) {
+      if (!column.special_type || isURL(column) || isCustomURL(column)) {
         defaultValue = "link";
         options.push({ name: t`Link`, value: "link" });
       }

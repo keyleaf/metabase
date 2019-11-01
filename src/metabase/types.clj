@@ -58,6 +58,7 @@
 (derive :type/UUID :type/Text)
 
 (derive :type/URL :type/Text)
+(derive :type/CustomURL :type/Text)
 (derive :type/ImageURL :type/URL)
 (derive :type/AvatarURL :type/ImageURL)
 
