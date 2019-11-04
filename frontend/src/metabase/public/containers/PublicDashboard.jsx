@@ -161,7 +161,7 @@ export default class PublicDashboard extends Component {
             "Dashboard--fullscreen": isFullscreen,
             "Dashboard--night": isNightMode,
           })}
-          style={{marginTop: -35}}
+          // style={{marginTop: -35}}
           loading={!dashboard}
         >
           {() => (
