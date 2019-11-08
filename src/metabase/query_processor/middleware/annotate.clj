@@ -483,14 +483,15 @@
 ; link_text 格式化链接地址
 (defn getLink-text [row cols link_text]
   (let [linkVector (str/split link_text #"[#]")]
-    (println linkVector)
+    ; (println linkVector)
     (for [link-row linkVector]
       ;(println (re-find #"(?=^[&].+[&]$)(?!&).+(?<!&)" (nth linkVector x)) )
       (let [booleanLink (re-find #"^[&].+[&]$" link-row)]
         (if booleanLink
           ;(println (re-find #"(?!&).+(?<!&)" booleanLink))
           (let [filedName (re-find #"(?!&).+(?<!&)" booleanLink)]
-            (.get row (getIndex cols (str/upper-case filedName)))) link-row)))))
+            (if (getIndex cols filedName) (if (getIndex cols filedName) link-row (.get row (getIndex cols (str/upper-case filedName))))
+                (.get row (getIndex cols (str/upper-case filedName))))) link-row)))))
 
 ; 递归获取拼接处理后的row，因为一表存在多个格式化字段
 ; 返回结果为row
@@ -504,8 +505,12 @@
       runrow
          ; Otherwise add count to sum, decrease count and
          ; use recur to feed the new values back into the loop
-      (recur (if (= (compare (:view_as (:settings (nth cols cnt))) "link") 0)
-               (assoc runrow (getIndex cols (:name (nth cols cnt))) (str/join (getLink-text runrow cols (:link_text (:settings (nth cols cnt)))))) runrow) (dec cnt)))))
+      (recur (let [col (nth cols cnt)]
+               (if (= :type/CustomURL (:special_type col))
+                 (if (not (str/blank? (:link_text (:settings col))))
+                   (assoc runrow (getIndex cols (:name col))
+                          (str "###" (.get row (getIndex cols (:name col))) "###" (str/join (getLink-text runrow cols (:link_text (:settings col)))))) runrow)
+                 runrow)) (dec cnt)))))
 
 ; 格式化字段连接需求，中间过渡方法
 ; 返回值为rows结果

@@ -184,6 +184,7 @@ export const isDescription = field =>
 export const isID = field => isFK(field) || isPK(field);
 
 export const isURL = field => isa(field && field.special_type, TYPE.URL);
+export const isCustomURL = field => isa(field && field.special_type, TYPE.CustomURL);
 export const isEmail = field => isa(field && field.special_type, TYPE.Email);
 export const isAvatarURL = field =>
   isa(field && field.special_type, TYPE.AvatarURL);

@@ -106,6 +106,11 @@ export const field_special_types = [
     section: t`Common`,
   },
   {
+    id: TYPE.CustomURL,
+    name: t`自定义链接`,
+    section: t`Common`,
+  },
+  {
     id: TYPE.ZipCode,
     name: t`Zip Code`,
     section: t`Common`,
