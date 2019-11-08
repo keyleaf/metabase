@@ -65,6 +65,11 @@ const SECTIONS = [
         getHidden: () => MetabaseSettings.get("available_locales").length < 2,
       },
       {
+        key: "enable-watermark",
+        display_name: t`开启水印功能`,
+        type: "boolean",
+      },
+      {
         key: "anon-tracking-enabled",
         display_name: t`Anonymous Tracking`,
         type: "boolean",
@@ -380,13 +385,9 @@ const SECTIONS = [
         getHidden: settings => !settings["enable-embedding"],
       },
       {
-        widget: EmbeddingLevel,
-        getHidden: settings => !settings["enable-embedding"],
-      },
-      {
-        key: "embedding-secret-key",
-        display_name: t`Embedding secret key`,
-        widget: SecretKeyWidget,
+        key: "enable-hide-embed-branding",
+        display_name: "下标控制",
+        type: "boolean",
         getHidden: settings => !settings["enable-embedding"],
       },
       {
