@@ -99,6 +99,11 @@
   :type    :boolean
   :default false)
 
+(defsetting enable-hide-embed-branding
+  (deferred-tru "是否允许在嵌入式仪表板和报表上禁用“Powered by ...”?")
+  :type    :boolean
+  :default false)
+
 (defsetting enable-nested-queries
   (deferred-tru "Allow using a saved question as the source for other queries?")
   :type    :boolean
@@ -176,6 +181,11 @@
   :getter (fn [] (some-> (setting/get-string :source-address-header)
                          u/lower-case-en)))
 
+(defsetting enable-watermark
+            (deferred-tru "水印格式为：当前用户名 + 当前时间")
+            :type    :boolean
+            :default true)
+
 (defn remove-public-uuid-if-public-sharing-is-disabled
   "If public sharing is *disabled* and OBJECT has a `:public_uuid`, remove it so people don't try to use it (since it
    won't work). Intended for use as part of a `post-select` implementation for Cards and Dashboards."
@@ -220,12 +230,13 @@
    :enable_nested_queries (enable-nested-queries)
    :enable_query_caching  (enable-query-caching)
    :enable_xrays          (enable-xrays)
+   :enable_watermark      (enable-watermark)
    :engines               (driver.u/available-drivers-info)
    :entities              (types/types->parents :entity/*)
    :ga_code               "UA-60817802-1"
    :google_auth_client_id (resolve-setting 'metabase.api.session 'google-auth-client-id)
    :has_sample_dataset    (db/exists? 'Database, :is_sample true)
-   :hide_embed_branding   (metastore/hide-embed-branding?)
+   :hide_embed_branding   (enable-hide-embed-branding)
    :ldap_configured       (resolve-setting 'metabase.integrations.ldap 'ldap-configured?)
    :map_tile_server_url   (map-tile-server-url)
    :metastore_url         metastore/store-url

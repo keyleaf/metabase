@@ -50,7 +50,11 @@ export function parseTimestamp(value, unit) {
   } else if (unit in NUMERIC_UNIT_FORMATS) {
     return NUMERIC_UNIT_FORMATS[unit](value);
   } else {
-    return moment.utc(value);
+    if (typeof value === "number" && value.toString().length === 10) {
+      return moment.unix(value).utcOffset(8);
+    } else {
+      return moment.utc(value).utcOffset(8);
+    }
   }
 }
 
@@ -66,6 +70,6 @@ export function parseTime(value) {
       "HH:mm",
     ]);
   } else {
-    return moment.utc(value);
+    return moment.utc(value).utcOffset(8);
   }
 }

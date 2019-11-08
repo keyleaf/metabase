@@ -51,6 +51,7 @@ import type {
   OnChangeCardAndRun,
 } from "metabase/meta/types/Visualization";
 import Metadata from "metabase-lib/lib/metadata/Metadata";
+import Watermark from "metabase/components/Watermark";
 import { memoize } from "metabase-lib/lib/utils";
 
 type Props = {
@@ -473,7 +474,7 @@ export default class Visualization extends React.PureComponent {
     const CardVisualization = visualization;
 
     return (
-      <div className={cx(className, "flex flex-column")} style={style}>
+      <div className={cx(className, "flex flex-column Watermark-target")} style={style}>
         {(showTitle &&
           (settings["card.title"] || extra) &&
           (loading ||
@@ -514,7 +515,7 @@ export default class Visualization extends React.PureComponent {
             }
           >
             <Tooltip tooltip={t`No results!`} isEnabled={small}>
-              <img src={NoResults} />
+              <img src={"app/dist/" + NoResults} />
             </Tooltip>
             {!small && <span className="h4 text-bold">No results!</span>}
           </div>
@@ -591,6 +592,7 @@ export default class Visualization extends React.PureComponent {
             onClose={this.hideActions}
           />
         )}
+        <Watermark selector=".Watermark-target" {...this.props}></Watermark>
       </div>
     );
   }

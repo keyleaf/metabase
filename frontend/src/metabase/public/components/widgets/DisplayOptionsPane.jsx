@@ -48,6 +48,18 @@ const DisplayOptionsPane = ({
       />
       <span className="ml1">{t`Title`}</span>
     </div>
+    <div className="flex align-center my1">
+      <CheckBox
+        checked={displayOptions.footer}
+        onChange={e =>
+          onChangeDisplayOptions({
+            ...displayOptions,
+            footer: e.target.checked,
+          })
+        }
+      />
+      <span className="ml1">下标</span>
+    </div>
     <EmbedSelect
       value={displayOptions.theme}
       options={THEME_OPTIONS}

@@ -18,6 +18,7 @@ import "./EmbedFrame.css";
 const DEFAULT_OPTIONS = {
   bordered: IFRAMED,
   titled: true,
+  footer: true,
 };
 
 import type { Parameter } from "metabase/meta/types/Parameter";
@@ -92,9 +93,7 @@ export default class EmbedFrame extends Component {
     } = this.props;
     const { innerScroll } = this.state;
 
-    const footer = true;
-
-    const { bordered, titled, theme, hide_parameters } = {
+    const { bordered, titled, footer, theme, hide_parameters } = {
       ...DEFAULT_OPTIONS,
       ...parseHashOptions(location.hash),
     };
@@ -114,11 +113,11 @@ export default class EmbedFrame extends Component {
             "scroll-y": innerScroll,
           })}
         >
-          {name || (parameters && parameters.length > 0) ? (
-            <div className="EmbedFrame-header flex align-center p1 sm-p2 lg-p3">
+          {name ? (
+            <div className="EmbedFrame-header flex align-center p1 lg-p3">
               {name && <div className="h4 text-bold sm-h3 md-h2">{name}</div>}
               {parameters && parameters.length > 0 ? (
-                <div className="flex ml-auto">
+                <div className="flex ml-auto" style={{ paddingBottom: 5 }}>
                   <Parameters
                     parameters={parameters.map(p => ({
                       ...p,
@@ -133,7 +132,25 @@ export default class EmbedFrame extends Component {
                 </div>
               ) : null}
             </div>
-          ) : null}
+          ) : (
+            <div className="EmbedFrame-header flex align-center p1 lg-p3">
+              {parameters && parameters.length > 0 ? (
+                <div className="flex ml-auto" style={{ marginLeft : 0, paddingBottom: 5 }}>
+                  <Parameters
+                    parameters={parameters.map(p => ({
+                      ...p,
+                      value: parameterValues && parameterValues[p.id],
+                    }))}
+                    query={location.query}
+                    setParameterValue={setParameterValue}
+                    syncQueryString
+                    hideParameters={hide_parameters}
+                    isQB
+                  />
+                </div>
+              ) : null}
+            </div>
+          )}
           <div className="flex flex-column relative full flex-full">
             {children}
           </div>
