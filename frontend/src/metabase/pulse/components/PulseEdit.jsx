@@ -8,6 +8,7 @@ import PulseEditCollection from "./PulseEditCollection";
 import PulseEditCards from "./PulseEditCards.jsx";
 import PulseEditChannels from "./PulseEditChannels.jsx";
 import PulseEditSkip from "./PulseEditSkip.jsx";
+import PulseEditShowAttachmentsOnly from "./PulseEditShowAttachmentsOnly";
 import WhatsAPulse from "./WhatsAPulse.jsx";
 
 import ActionButton from "metabase/components/ActionButton.jsx";
@@ -162,6 +163,7 @@ export default class PulseEdit extends Component {
             />
           </div>
           <PulseEditSkip {...this.props} setPulse={this.setPulse} />
+          <PulseEditShowAttachmentsOnly {...this.props} setPulse={this.setPulse} />
         </div>
         <div className="PulseEdit-footer flex align-center border-top py3">
           {pulse.archived ? (

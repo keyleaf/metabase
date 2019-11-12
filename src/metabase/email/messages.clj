@@ -194,6 +194,7 @@
 (defn- pulse-context [pulse]
   (merge {:emailType    "pulse"
           :pulseName    (:name pulse)
+          :showAttachOnly    (:show_attach_only pulse)
           :sectionStyle (render/style (render/section-style))
           :colorGrey4   render/color-gray-4
           :logoFooter   true}

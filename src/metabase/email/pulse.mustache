@@ -4,5 +4,7 @@
       {{pulseName}}
     </h1>
   {{/pulseName}}
-  {{{pulse}}}
+{{^showAttachOnly}}
+    {{{pulse}}}
+{{/showAttachOnly}}
 {{> metabase/email/_footer_pulse}}

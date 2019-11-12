@@ -332,6 +332,7 @@
    kvs      :- {:name                                 su/NonBlankString
                 :creator_id                           su/IntGreaterThanZero
                 (s/optional-key :skip_if_empty)       (s/maybe s/Bool)
+                (s/optional-key :show_attach_only)    (s/maybe s/Bool)
                 (s/optional-key :collection_id)       (s/maybe su/IntGreaterThanZero)
                 (s/optional-key :collection_position) (s/maybe su/IntGreaterThanZero)}]
   (let [pulse-id (create-notification-and-add-cards-and-channels! kvs cards channels)]
@@ -370,6 +371,7 @@
                     (s/optional-key :alert_above_goal)    s/Bool
                     (s/optional-key :alert_first_only)    s/Bool
                     (s/optional-key :skip_if_empty)       s/Bool
+                    (s/optional-key :show_attach_only)    s/Bool
                     (s/optional-key :collection_id)       (s/maybe su/IntGreaterThanZero)
                     (s/optional-key :collection_position) (s/maybe su/IntGreaterThanZero)
                     (s/optional-key :cards)               [CoercibleToCardRef]
@@ -378,7 +380,7 @@
   (db/update! Pulse (u/get-id notification)
     (u/select-keys-when notification
       :present [:collection_id :collection_position :archived]
-      :non-nil [:name :alert_condition :alert_above_goal :alert_first_only :skip_if_empty]))
+      :non-nil [:name :alert_condition :alert_above_goal :alert_first_only :skip_if_empty :show_attach_only]))
   ;; update Cards if the 'refs' have changed
   (when (contains? notification :cards)
     (update-notification-cards-if-changed! notification (map card->ref (:cards notification))))
