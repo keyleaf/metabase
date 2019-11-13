@@ -189,7 +189,7 @@ export default class View extends React.Component {
               <div className="flex-no-shrink z3 bg-white relative" style={{ height : 125}}>
                 <ViewTitleHeader
                   {...this.props}
-                  style={{ opacity }}
+                  style={{ opacity, height: 106 }}
                   py={1}
                   className="border-bottom"
                 />
