@@ -47,11 +47,12 @@
 
 (api/defendpoint POST "/"
   "Create a new `Pulse`."
-  [:as {{:keys [name cards channels skip_if_empty collection_id collection_position]} :body}]
+  [:as {{:keys [name cards channels skip_if_empty show_attach_only collection_id collection_position]} :body}]
   {name                su/NonBlankString
    cards               (su/non-empty [pulse/CoercibleToCardRef])
    channels            (su/non-empty [su/Map])
    skip_if_empty       (s/maybe s/Bool)
+   show_attach_only    (s/maybe s/Bool)
    collection_id       (s/maybe su/IntGreaterThanZero)
    collection_position (s/maybe su/IntGreaterThanZero)}
   ;; make sure we are allowed to *read* all the Cards we want to put in this Pulse
@@ -61,6 +62,7 @@
   (let [pulse-data {:name                name
                     :creator_id          api/*current-user-id*
                     :skip_if_empty       skip_if_empty
+                    :show_attach_only    show_attach_only
                     :collection_id       collection_id
                     :collection_position collection_position}]
     (db/transaction
@@ -80,11 +82,12 @@
 
 (api/defendpoint PUT "/:id"
   "Update a Pulse with `id`."
-  [id :as {{:keys [name cards channels skip_if_empty collection_id archived], :as pulse-updates} :body}]
+  [id :as {{:keys [name cards channels skip_if_empty show_attach_only collection_id archived], :as pulse-updates} :body}]
   {name          (s/maybe su/NonBlankString)
    cards         (s/maybe (su/non-empty [pulse/CoercibleToCardRef]))
    channels      (s/maybe (su/non-empty [su/Map]))
    skip_if_empty (s/maybe s/Bool)
+   show_attach_only (s/maybe s/Bool)
    collection_id (s/maybe su/IntGreaterThanZero)
    archived      (s/maybe s/Bool)}
   ;; do various perms checks
@@ -98,7 +101,7 @@
       (api/maybe-reconcile-collection-position! pulse-before-update pulse-updates)
       ;; ok, now update the Pulse
       (pulse/update-pulse!
-       (assoc (select-keys pulse-updates [:name :cards :channels :skip_if_empty :collection_id :collection_position
+       (assoc (select-keys pulse-updates [:name :cards :channels :skip_if_empty :show_attach_only :collection_id :collection_position
                                           :archived])
          :id id))))
   ;; return updated Pulse
@@ -184,11 +187,12 @@
 
 (api/defendpoint POST "/test"
   "Test send an unsaved pulse."
-  [:as {{:keys [name cards channels skip_if_empty collection_id collection_position] :as body} :body}]
+  [:as {{:keys [name cards channels skip_if_empty show_attach_only collection_id collection_position] :as body} :body}]
   {name                su/NonBlankString
    cards               (su/non-empty [pulse/CoercibleToCardRef])
    channels            (su/non-empty [su/Map])
    skip_if_empty       (s/maybe s/Bool)
+   show_attach_only    (s/maybe s/Bool)
    collection_id       (s/maybe su/IntGreaterThanZero)
    collection_position (s/maybe su/IntGreaterThanZero)}
   (check-card-read-permissions cards)
