@@ -16,6 +16,7 @@ import cx from "classnames";
 @Databases.load({ id: (state, { databaseId }) => databaseId, wrapped: true })
 @Tables.load({
   id: (state, { tableId }) => tableId,
+  include_sensitive_fields: (state, { include_sensitive_fields = true }) => include_sensitive_fields,
   wrapped: true,
   selectorName: "getTable",
 })

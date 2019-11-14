@@ -71,13 +71,14 @@ const Tables = createEntity({
     fetchMetadata: compose(
       withAction(FETCH_METADATA),
       withCachedDataAndRequestState(
-        ({ id }) => [...Tables.getObjectStatePath(id)],
-        ({ id }) => [...Tables.getObjectStatePath(id), "fetch_query_metadata"],
+        ({ id, include_sensitive_fields }) => [...Tables.getObjectStatePath(id), ...Tables.getObjectStatePath(include_sensitive_fields)],
+        ({ id, include_sensitive_fields }) => [...Tables.getObjectStatePath(id), ...Tables.getObjectStatePath(include_sensitive_fields), "fetch_query_metadata"],
       ),
       withNormalize(TableSchema),
-    )(({ id }) => async (dispatch, getState) => {
+    )(({ id, include_sensitive_fields }) => async (dispatch, getState) => {
       const table = await MetabaseApi.table_query_metadata({
         tableId: id,
+        include_sensitive_fields: include_sensitive_fields,
       });
       return addValidOperatorsToFields(table);
     }),
@@ -85,8 +86,8 @@ const Tables = createEntity({
     // like fetchMetadata but also loads tables linked by foreign key
     fetchTableMetadata: createThunkAction(
       FETCH_TABLE_METADATA,
-      ({ id }, options) => async (dispatch, getState) => {
-        await dispatch(Tables.actions.fetchMetadata({ id }, options));
+      ({ id, include_sensitive_fields }, options) => async (dispatch, getState) => {
+        await dispatch(Tables.actions.fetchMetadata({ id, include_sensitive_fields }, options));
         // fetch foreign key linked table's metadata as well
         const table = Tables.selectors.getObject(getState(), { entityId: id });
         await Promise.all(
