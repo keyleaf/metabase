@@ -42,47 +42,90 @@
   display: none;
 }
 
-/* Night mode */
-.Dashboard.Dashboard--night {
+/* moon mode start*/
+.Dashboard.Dashboard--moon {
   background-color: var(--color-bg-black);
 }
-
-.Dashboard.Dashboard--night .DashboardHeader {
+.Dashboard.Dashboard--moon .DashboardHeader {
   color: var(--color-text-white);
 }
-
-.Dashboard.Dashboard--night .Card {
+.Dashboard.Dashboard--moon .Card {
   color: var(--color-text-white);
 }
-
-.Dashboard.Dashboard--night .Header-button,
-.Dashboard.Dashboard--night .Header-button svg {
+.Dashboard.Dashboard--moon .Header-button,
+.Dashboard.Dashboard--moon .Header-button svg {
   color: color(var(--color-text-medium) alpha(-70%));
 }
-
-.Dashboard.Dashboard--fullscreen .fullscreen-normal-text {
+/* .Dashboard.Dashboard--fullscreen .fullscreen-normal-text {
   color: var(--color-text-dark);
   transition: color 1s linear;
-}
-
-.Dashboard.Dashboard--night.Dashboard--fullscreen .fullscreen-night-text {
+} */
+.Dashboard.Dashboard--moon.Dashboard--fullscreen .fullscreen-night-text {
   color: color(var(--color-text-white) alpha(-14%));
   transition: color 1s linear;
 }
-
-.Dashboard.Dashboard--night .DashCard .Card svg text {
+.Dashboard.Dashboard--moon .DashCard .Card svg text {
   fill: color(var(--color-text-white) alpha(-14%)) !important;
 }
-
-.Dashboard.Dashboard--night .DashCard .Card {
+.Dashboard.Dashboard--moon .DashCard .Card {
   background-color: var(--night-mode-card);
   border-color: var(--night-mode-card);
 }
-
-.Dashboard.Dashboard--night .enable-dots-onhover .dc-tooltip circle.dot:hover,
-.Dashboard.Dashboard--night .enable-dots .dc-tooltip circle.dot {
+.Dashboard.Dashboard--moon .enable-dots-onhover .dc-tooltip circle.dot:hover,
+.Dashboard.Dashboard--moon .enable-dots .dc-tooltip circle.dot {
   fill: currentColor;
 }
+/* moom mode end*/
+
+/* sun mode start*/
+.Dashboard.Dashboard--sun {
+  background-color: transparent;
+}
+.Dashboard.Dashboard--sun .DashCard .Card {
+  background-color: white;
+  border-color: var(--color-text-light);
+}
+.Dashboard.Dashboard--sun .enable-dots-onhover .dc-tooltip circle.dot:hover,
+.Dashboard.Dashboard--sun .enable-dots .dc-tooltip circle.dot {
+  fill: currentColor;
+}
+/* sun mode end*/
+
+/* blue mode start*/
+.Dashboard.Dashboard--blue {
+  /* background-color: var(--color-bg-blue); */
+  background: var(--color-bg-blue);
+}
+.Dashboard.Dashboard--blue .DashboardHeader {
+  color: var(--color-text-white);
+}
+.Dashboard.Dashboard--blue .Card {
+  color: var(--color-text-white);
+}
+.Dashboard.Dashboard--blue .Header-button,
+.Dashboard.Dashboard--blue .Header-button svg {
+  color: color(var(--color-text-medium) alpha(-70%));
+}
+/* .Dashboard.Dashboard--fullscreen .fullscreen-normal-text {
+  color: var(--color-text-dark);
+  transition: color 1s linear;
+} */
+.Dashboard.Dashboard--blue.Dashboard--fullscreen .fullscreen-night-text {
+  color: color(var(--color-text-white) alpha(-14%));
+  transition: color 1s linear;
+}
+.Dashboard.Dashboard--blue .DashCard .Card svg text {
+  fill: color(var(--color-text-white) alpha(-14%)) !important;
+}
+.Dashboard.Dashboard--blue .DashCard .Card {
+  background-color: var(--blue-mode-card);
+  border-color: var(--blue-mode-card);
+}
+.Dashboard.Dashboard--blue .enable-dots-onhover .dc-tooltip circle.dot:hover,
+.Dashboard.Dashboard--blue .enable-dots .dc-tooltip circle.dot {
+  fill: currentColor;
+}
+/* blue mode end*/
 
 /* Night mode transition */
 .Dashboard.Dashboard--fullscreen,

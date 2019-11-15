@@ -23,7 +23,7 @@ type Props = {
 
 type State = {
   isFullscreen: boolean,
-  isNightMode: boolean,
+  themeMode: string,
   refreshPeriod: ?number,
   hideParameters: ?string,
 };
@@ -47,7 +47,7 @@ export default (ComposedComponent: ReactClass<any>) =>
       props: Props;
       state: State = {
         isFullscreen: false,
-        isNightMode: false,
+        themeMode: "sun",
 
         refreshPeriod: null,
 
@@ -94,7 +94,7 @@ export default (ComposedComponent: ReactClass<any>) =>
             ? null
             : options.refresh,
         );
-        this.setNightMode(options.theme === "night" || options.night); // DEPRECATED: options.night
+        this.setThemeMode(options.theme); // DEPRECATED: options.night
         this.setFullscreen(options.fullscreen);
         this.setHideParameters(options.hide_parameters);
       };
@@ -112,7 +112,7 @@ export default (ComposedComponent: ReactClass<any>) =>
         };
         setValue("refresh", this.state.refreshPeriod);
         setValue("fullscreen", this.state.isFullscreen);
-        setValue("theme", this.state.isNightMode ? "night" : null);
+        setValue("theme", this.state.themeMode);
 
         delete options.night; // DEPRECATED: options.night
 
@@ -153,9 +153,9 @@ export default (ComposedComponent: ReactClass<any>) =>
         }
       };
 
-      setNightMode = isNightMode => {
-        isNightMode = !!isNightMode;
-        this.setState({ isNightMode });
+      setThemeMode = themeMode => {
+        // themeMode = !!themeMode;
+        this.setState({ themeMode });
       };
 
       setFullscreen = async (isFullscreen, browserFullscreen = true) => {
@@ -241,7 +241,7 @@ export default (ComposedComponent: ReactClass<any>) =>
             setRefreshElapsedHook={this.setRefreshElapsedHook}
             loadDashboardParams={this.loadDashboardParams}
             updateDashboardParams={this.updateDashboardParams}
-            onNightModeChange={this.setNightMode}
+            onThemeModeChange={this.setThemeMode}
             onFullscreenChange={this.setFullscreen}
             onRefreshPeriodChange={this.setRefreshPeriod}
           />

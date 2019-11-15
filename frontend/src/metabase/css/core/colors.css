@@ -22,6 +22,7 @@
   --color-text-white: #ffffff;
   --color-bg-black: #2e353b;
   --color-bg-dark: #93a1ab;
+  --color-bg-blue: #5895ca;
   --color-bg-medium: #edf2f5;
   --color-bg-light: #f9fbfc;
   --color-bg-white: #ffffff;
@@ -38,6 +39,7 @@
   /* night mode colors */
   --night-mode-color: color(var(--color-text-white) alpha(-14%));
   --night-mode-card: #42484e;
+  --blue-mode-card: #8788ec;
 }
 
 /* NOTE: DEPRECATED, replaced with colors above

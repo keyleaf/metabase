@@ -14,8 +14,9 @@ type Props = {
 };
 
 const THEME_OPTIONS = [
-  { name: t`Light`, value: null, icon: "sun" },
-  { name: t`Dark`, value: "night", icon: "moon" },
+  { name: t`白天模式`, value: "sun", icon: "sun" },
+  { name: t`夜晚模式`, value: "moon", icon: "moon" },
+  { name: t`蓝色模式`, value: "blue", icon: "blue" },
 ];
 
 const DisplayOptionsPane = ({
