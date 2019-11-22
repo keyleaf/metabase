@@ -2,8 +2,7 @@
   "Middlware that optimizes equality (`=` and `!=`) and comparison (`<`, `between`, etc.) filter clauses against
   bucketed datetime fields. See docstring for `optimize-datetime-filters` for more details."
   (:require [metabase.mbql.util :as mbql.u]
-            [metabase.util.date :as du]
-            [metabase.models.setting :as setting]))
+            [metabase.util.date :as du]))
 
 (def ^:private optimizable-units
   #{:second :minute :hour :day :week :month :quarter :year})
@@ -52,6 +51,8 @@
 
 (defmethod optimize-filter :=
   [[_ field [_ inst unit]] report-timezone]
+  (println "inst is : " report-timezone)
+  (println "report-timezone is : " report-timezone)
   (let [[_ _ datetime-field-unit] (mbql.u/match-one field :datetime-field)]
     (when (= unit datetime-field-unit)
       (let [field' (change-datetime-field-unit-to-default field)]
@@ -98,7 +99,7 @@
     (mbql.u/replace query
       (_ :guard (partial mbql.u/is-clause? (set (keys (methods optimize-filter)))))
       (if (can-optimize-filter? &match)
-        (optimize-filter &match (if (= driver :mongo) (setting/get :report-timezone) report-timezone))
+        (optimize-filter &match report-timezone)
         &match))))
 
 (defn optimize-datetime-filters
