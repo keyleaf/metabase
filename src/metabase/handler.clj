@@ -10,7 +10,8 @@
              [log :as mw.log]
              [misc :as mw.misc]
              [security :as mw.security]
-             [session :as mw.session]]
+             [session :as mw.session]
+             [cors :refer [wrap-cors]]]
             [metabase.plugins.classloader :as classloader]
             [ring.middleware
              [cookies :refer [wrap-cookies]]
@@ -47,6 +48,9 @@
    mw.misc/maybe-set-site-url              ; set the value of `site-url` if it hasn't been set yet
    mw.misc/bind-user-locale                ; Binds *locale* for i18n
    wrap-cookies                            ; Parses cookies in the request map and assocs as :cookies
+   (wrap-cors
+    :access-control-allow-origin [#"http://localhost:8080"]
+    :access-control-allow-methods [:OPTIONS :get :put :post :delete]); 跨域访问处理
    mw.misc/add-content-type                ; Adds a Content-Type header for any response that doesn't already have one
    mw.misc/disable-streaming-buffering     ; Add header to streaming (async) responses so ngnix doesn't buffer keepalive bytes
    wrap-gzip))                             ; GZIP response if client can handle it
