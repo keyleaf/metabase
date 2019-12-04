@@ -90,6 +90,32 @@ export default class TableSimple extends Component {
     }
   }
 
+  getGroupColSpan = ({ index }: { index: number }) => {
+    const {
+      getGroupTitle,
+      data: { cols },
+    } = this.props;
+
+    let initIndex = index;
+    if (index === 0 && getGroupTitle(index) !== getGroupTitle(index+1)) {
+      return (1);
+    }
+    if (index > 0  && index + 1 < cols.length && getGroupTitle(index) !== getGroupTitle(index-1) && getGroupTitle(index) !== getGroupTitle(index+1)) {
+      return (1);
+    }
+    if (index > 0  && index + 1 < cols.length && getGroupTitle(index) === getGroupTitle(index-1)) {
+      return (0);
+    }
+    let colSpanSize = 1;
+    while (initIndex + 1 < cols.length && getGroupTitle(initIndex) === getGroupTitle(initIndex+1)) {
+      colSpanSize = colSpanSize + 1;
+      initIndex = initIndex + 1;
+    }
+    return (
+      colSpanSize
+    );
+  };
+
   render() {
     const {
       data,
@@ -98,6 +124,7 @@ export default class TableSimple extends Component {
       isPivoted,
       settings,
       getColumnTitle,
+      getGroupTitle,
     } = this.props;
     const { rows, cols } = data;
     const getCellBackgroundColor = settings["table._cell_background_getter"];
@@ -131,6 +158,35 @@ export default class TableSimple extends Component {
               )}
             >
               <thead ref="header">
+                <tr>
+                  {cols.map((col, colIndex) => {
+                    let colSpan = this.getGroupColSpan({index: colIndex});
+                    if (colSpan > 1) {
+                      return (
+                        <th
+                          colSpan={colSpan}
+                          key={colIndex}
+                          className={cx(
+                            "TableInteractive-headerCellData cellData text-brand-hover text-medium",
+                            {
+                              "TableInteractive-headerCellData--sorted":
+                                sortColumn === colIndex,
+                              "text-right": isColumnRightAligned(col),
+                            },
+                          )}
+                          onClick={() => this.setSort(colIndex)}
+                        >
+                          <div className="relative" style={{ backgroundColor: 'aqua', borderWidth: 2, borderColor: 'white',borderRight: '2px #ccc solid;', textAlign: 'center' }} >
+                            <Ellipsified>{getGroupTitle(colIndex)}</Ellipsified>
+                          </div>
+                        </th>
+                      )
+                    } else if (colSpan === 1) {
+                      return (<th></th>)
+                    }
+
+                  })}
+                </tr>
                 <tr>
                   {cols.map((col, colIndex) => (
                     <th
