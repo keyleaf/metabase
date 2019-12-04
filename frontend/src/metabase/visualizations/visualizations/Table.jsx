@@ -235,6 +235,11 @@ export default class Table extends Component {
         widget: "input",
         getDefault: column => formatColumn(column),
       },
+      group_title: {
+        title: t`组名`,
+        widget: "input",
+        getDefault: column => "",
+      },
     };
     if (isNumber(column)) {
       settings["show_mini_bar"] = {
@@ -375,6 +380,22 @@ export default class Table extends Component {
     }
   };
 
+  getGroupTitle = (columnIndex: number): ?string => {
+    const cols = this.state.data && this.state.data.cols;
+    if (!cols) {
+      return null;
+    }
+    const { settings } = this.props;
+    const column = cols[columnIndex];
+    let groupTitle = settings.column(column)["group_title"];
+    if (!groupTitle || groupTitle === "") {
+      groupTitle = this.getColumnTitle(columnIndex);
+    }
+    return (
+      groupTitle
+    );
+  };
+
   render() {
     const {
       series: [{ card }],
@@ -418,6 +439,7 @@ export default class Table extends Component {
           isPivoted={isPivoted}
           sort={sort}
           getColumnTitle={this.getColumnTitle}
+          getGroupTitle={this.getGroupTitle}
         />
       );
     }

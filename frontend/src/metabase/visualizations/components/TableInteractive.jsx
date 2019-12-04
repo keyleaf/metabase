@@ -30,7 +30,7 @@ import { Grid, ScrollSync } from "react-virtualized";
 import Draggable from "react-draggable";
 import Ellipsified from "metabase/components/Ellipsified";
 
-const HEADER_HEIGHT = 36;
+const HEADER_HEIGHT = 50;
 const ROW_HEIGHT = 36;
 const MIN_COLUMN_WIDTH = ROW_HEIGHT;
 const RESIZE_HANDLE_WIDTH = 5;
@@ -562,6 +562,7 @@ export default class TableInteractive extends Component {
       sort,
       isPivoted,
       getColumnTitle,
+      getGroupTitle,
       renderTableHeaderWrapper,
     } = this.props;
     const { dragColIndex } = this.state;
@@ -588,6 +589,14 @@ export default class TableInteractive extends Component {
     const isAscending = isSorted && sort[sortIndex][0] === "asc";
 
     return (
+    <div style={{ backgroundColor: 'red', textAlign: 'center',
+      left: this.getColumnLeft(style, columnIndex) }}>
+      <div className="cellData" style={{ position: 'absolute', backgroundColor: 'aqua', textAlign: 'center', width: this.getGroupWidth({ index: columnIndex }),
+        left: this.getColumnLeft(style, columnIndex) }}>
+        {
+          (columnIndex + 1 < cols.length && getGroupTitle(columnIndex+1) === getGroupTitle(columnIndex) && (columnIndex === 0 || columnIndex > 0 && getGroupTitle(columnIndex-1) !== getGroupTitle(columnIndex)) && getGroupTitle(columnIndex))
+        }
+      </div>
       <Draggable
         /* needs to be index+name+counter so Draggable resets after each drag */
         key={columnIndex + column.name + DRAG_COUNTER}
@@ -638,6 +647,11 @@ export default class TableInteractive extends Component {
           ref={e => (this.headerRefs[columnIndex] = e)}
           style={{
             ...style,
+            // display: 'block',
+            borderLeftWidth: 0,
+            top: 16,
+            height: 27,
+            borderRightWidth: 0,
             overflow: "visible" /* ensure resize handle is visible */,
             // use computed left if dragging, except for the dragged header
             left: isDragging
@@ -716,6 +730,7 @@ export default class TableInteractive extends Component {
           </Draggable>
         </div>
       </Draggable>
+    </div>
     );
   };
 
@@ -725,6 +740,25 @@ export default class TableInteractive extends Component {
     const columnWidthsSetting = settings["table.column_widths"] || [];
     return (
       columnWidthsSetting[index] || columnWidths[index] || MIN_COLUMN_WIDTH
+    );
+  };
+
+  getGroupWidth = ({ index }: { index: number }) => {
+    const {
+      settings,
+      getGroupTitle,
+      data: { cols, rows },
+    } = this.props;
+    const { columnWidths } = this.state;
+    const columnWidthsSetting = settings["table.column_widths"] || [];
+    let initWidth = columnWidthsSetting[index] || columnWidths[index] || MIN_COLUMN_WIDTH;
+    let initIndex = index;
+    while (initIndex + 1 < cols.length && getGroupTitle(initIndex) === getGroupTitle(initIndex+1)) {
+      initWidth = initWidth + (columnWidthsSetting[initIndex + 1] || columnWidths[initIndex + 1] || MIN_COLUMN_WIDTH);
+      initIndex = initIndex + 1;
+    }
+    return (
+      initWidth - 2
     );
   };
 
