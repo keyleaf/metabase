@@ -438,7 +438,7 @@
                             :export-format dataset-api/export-format-regex]
   "Fetch the results of running a Card belonging to a Dashboard using a JSON Web Token signed with the
   `embedding-secret-key` return the data in one of the export formats"
-  [{{:keys [token export-format dashcard-id card-id]} :params, :keys [query-params]} respond raise]
+  [{{:keys [token export-format dashcard-id card-id file_name]} :params, :keys [query-params]} respond raise]
   {export-format dataset-api/ExportFormat}
   (dataset-api/as-format-async export-format respond raise
     (card-for-signed-token-async token
