@@ -103,7 +103,9 @@
 (defn- as-format-response
   "Return a response containing the `results` of a query in the specified format."
   {:style/indent 1, :arglists '([export-format results])}
-  [export-format {{:keys [rows cols]} :data, :keys [status error], error-type :error_type, :as response}]
+  ([export-format {{:keys [rows cols]} :data, :keys [status error], error-type :error_type, :as response}]
+   (as-format-response export-format results nil))
+  ([export-format {{:keys [rows cols]} :data, :keys [status error], error-type :error_type, :as response} file-name]
   (api/let-404 [export-conf (ex/export-formats export-format)]
     (if (= status :completed)
       ;; successful query, send file
@@ -112,30 +114,32 @@
                  (map #(some % [:display_name :name]) cols)
                  (maybe-modify-date-values cols rows))
        :headers {"Content-Type"        (str (:content-type export-conf) "; charset=utf-8")
-                 "Content-Disposition" (format "attachment; filename=\"query_result_%s.%s\""
-                                               (du/date->iso-8601) (:ext export-conf))}}
+                 "Content-Disposition" (str (if (nil? file-name) "attachment; filename=\"query_result_" (str "attachment; filename=\"" (String. (.getBytes file-name "UTF-8") "ISO-8859-1") "_"))  (.format (java.text.SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ss.SSS") (new java.util.Date))
+                                            "." (:ext export-conf) "\"")}}
       ;; failed query, send error message
       {:status (if (qp.error-type/server-error? error-type)
                  500
                  400)
-       :body   error})))
+       :body   error}))))
 
 (s/defn as-format-async
   "Write the results of an async query to API `respond` or `raise` functions in `export-format`. `in-chan` should be a
   core.async channel that can be used to fetch the results of the query."
   {:style/indent 3}
-  [export-format :- ExportFormat, respond :- (s/pred fn?), raise :- (s/pred fn?), in-chan :- ManyToManyChannel]
+  ([export-format :- ExportFormat, respond :- (s/pred fn?), raise :- (s/pred fn?), in-chan :- ManyToManyChannel]
+  (as-format-async export-format respond raise in-chan nil))
+  ([export-format :- ExportFormat, respond :- (s/pred fn?), raise :- (s/pred fn?), in-chan :- ManyToManyChannel, file-name]
   (a/go
     (try
       (let [results (a/<! in-chan)]
         (if (instance? Throwable results)
           (raise results)
-          (respond (as-format-response export-format results))))
+          (respond (as-format-response export-format results file-name))))
       (catch Throwable e
         (raise e))
       (finally
         (a/close! in-chan))))
-  nil)
+  nil))
 
 (def export-format-regex
   "Regex for matching valid export formats (e.g., `json`) for queries.
