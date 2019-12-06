@@ -591,8 +591,13 @@ export default class TableInteractive extends Component {
     return (
     <div style={{ backgroundColor: 'red', textAlign: 'center',
       left: this.getColumnLeft(style, columnIndex) }}>
-      <div className="cellData" style={{ position: 'absolute', backgroundColor: 'aqua', textAlign: 'center', width: this.getGroupWidth({ index: columnIndex }),
-        left: this.getColumnLeft(style, columnIndex) }}>
+      <div className="cellData" style={{ position: 'absolute',
+        backgroundColor: 'aqua',
+        textAlign: 'center', width: this.getGroupWidth({ index: columnIndex }),
+        // border: (columnIndex + 1 < cols.length && getGroupTitle(columnIndex+1) === getGroupTitle(columnIndex) && (columnIndex === 0 || columnIndex > 0 && getGroupTitle(columnIndex-1) !== getGroupTitle(columnIndex))) ? '1px solid rgb(238,238,238)' :'none',
+        height: (columnIndex + 1 < cols.length && getGroupTitle(columnIndex+1) === getGroupTitle(columnIndex) && (columnIndex === 0 || columnIndex > 0 && getGroupTitle(columnIndex-1) !== getGroupTitle(columnIndex))) ? 50 : 0,
+        fontSize: '1.2em',
+        left: this.getColumnLeft(style, columnIndex) - 7 }}>
         {
           (columnIndex + 1 < cols.length && getGroupTitle(columnIndex+1) === getGroupTitle(columnIndex) && (columnIndex === 0 || columnIndex > 0 && getGroupTitle(columnIndex-1) !== getGroupTitle(columnIndex)) && getGroupTitle(columnIndex))
         }
@@ -649,7 +654,7 @@ export default class TableInteractive extends Component {
             ...style,
             // display: 'block',
             borderLeftWidth: 0,
-            top: 16,
+            top: 22,
             height: 27,
             borderRightWidth: 0,
             overflow: "visible" /* ensure resize handle is visible */,
@@ -703,7 +708,7 @@ export default class TableInteractive extends Component {
           <Draggable
             axis="x"
             bounds={{ left: RESIZE_HANDLE_WIDTH }}
-            position={{ x: this.getColumnWidth({ index: columnIndex }), y: 0 }}
+            position={{ x: this.getColumnWidth({ index: columnIndex }) + 20, y: 0 }}
             onStart={e => {
               e.stopPropagation();
               this.setState({ dragColIndex: columnIndex });
