@@ -103,7 +103,7 @@
 (defn- as-format-response
   "Return a response containing the `results` of a query in the specified format."
   {:style/indent 1, :arglists '([export-format results])}
-  ([export-format {{:keys [rows cols]} :data, :keys [status error], error-type :error_type, :as response}]
+  ([export-format results]
    (as-format-response export-format results nil))
   ([export-format {{:keys [rows cols]} :data, :keys [status error], error-type :error_type, :as response} file-name]
   (api/let-404 [export-conf (ex/export-formats export-format)]
@@ -114,7 +114,7 @@
                  (map #(some % [:display_name :name]) cols)
                  (maybe-modify-date-values cols rows))
        :headers {"Content-Type"        (str (:content-type export-conf) "; charset=utf-8")
-                 "Content-Disposition" (str (if (nil? file-name) "attachment; filename=\"query_result_" (str "attachment; filename=\"" (String. (.getBytes file-name "UTF-8") "ISO-8859-1") "_"))  (.format (java.text.SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ss.SSS") (new java.util.Date))
+                 "Content-Disposition" (str (if (nil? file-name) "attachment; filename=\"query_result_" (str "attachment; filename=\"" (String. (.getBytes file-name "UTF-8") "ISO-8859-1") "_"))  (.format (java.text.SimpleDateFormat. "yyyy-MM-dd'_'HH:mm") (new java.util.Date))
                                             "." (:ext export-conf) "\"")}}
       ;; failed query, send error message
       {:status (if (qp.error-type/server-error? error-type)
