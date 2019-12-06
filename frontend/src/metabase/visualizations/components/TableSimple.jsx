@@ -177,8 +177,8 @@ export default class TableSimple extends Component {
                           onClick={() => this.setSort(colIndex)}
                         >
                           <div className="relative" style={{ backgroundColor: 'aqua', borderWidth: 2, borderColor: 'white',borderRight: '2px #ccc solid;',
-                            textAlign: 'center', height: 24, fontSize: 'large', lineHeight: '21px',
-                            marginBottom: '-16px' }} >
+                            textAlign: 'center', height: 20, fontSize: '1.2em', lineHeight: '21px',
+                            marginBottom: '-10px' }} >
                             {getGroupTitle(colIndex)}
                           </div>
                         </th>
