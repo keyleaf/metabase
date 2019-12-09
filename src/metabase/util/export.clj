@@ -1,13 +1,13 @@
 (ns metabase.util.export
   (:require [cheshire.core :as json]
             [clojure.data.csv :as csv]
+            [dk.ative.docjure.spreadsheet :as spreadsheet]
+            [clojure.string :as str]
             [clojure.tools.logging :as log]
             [metabase.api.common :as api]
             [metabase.public-settings :as public-settings]
             [metabase.api.common :refer [*current-user*]]
-            [metabase.util.date :as df]
-            [dk.ative.docjure.spreadsheet :as spreadsheet]
-            [clojure.string :as str])
+            [metabase.util.date :as df])
   (:import [java.io ByteArrayInputStream ByteArrayOutputStream File]
             (java.io ByteArrayOutputStream FileInputStream)
             (javax.imageio ImageIO)
