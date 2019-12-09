@@ -605,7 +605,7 @@
   [results]
   ;; Build a map of escaped key -> unescaped key by looking at the keys in the first result
   ;; e.g. {:source___username :source.username}
-  (let [replacements (create-unescaping-rename-map (keys (first results)))]
+  (let [replacements (create-unescaping-rename-map (keys (merge (first results) (last results))))]
     ;; If the map is non-empty then map set/rename-keys over the results with it
     (if-not (seq replacements)
       results
