@@ -14,8 +14,11 @@
             [metabase.query-processor.store :as qp.store]
             [metabase.util
              [i18n :refer [deferred-tru tru]]
-             [schema :as su]]
-            [schema.core :as s]))
+             [schema :as su]
+             [date :as du]]
+            [schema.core :as s])
+  (:import java.sql.Timestamp
+           [java.util Date TimeZone]))
 
 (def ^:private Col
   "Schema for a valid map of column info as found in the `:cols` key of the results after this namespace has ran."
@@ -506,11 +509,20 @@
          ; Otherwise add count to sum, decrease count and
          ; use recur to feed the new values back into the loop
       (recur (let [col (nth cols cnt)]
-               (if (= :type/CustomURL (:special_type col))
+               (cond
+                 (= :type/CustomURL (:special_type col))
                  (if (not (str/blank? (:link_text (:settings col))))
                    (assoc runrow (getIndex cols (:name col))
                           (str "###" (.get row (getIndex cols (:name col))) "###" (str/join (getLink-text runrow cols (:link_text (:settings col)))))) runrow)
-                 runrow)) (dec cnt)))))
+                 ;;mongo查询表(非全字段查询)，设置时间戳字段为UNIXTimestampSeconds类型，导出excel未格式化
+                 ;;备注:默认runrow为seq需要转换成vector才能用assoc
+                 (= :type/UNIXTimestampSeconds (:special_type col))
+                 (if (integer? (.get runrow (getIndex cols (:name col))))
+                   (let [abc (.toString (du/->Timestamp (.get row (getIndex cols (:name col))) (TimeZone/getDefault)))]
+                     (assoc (vec runrow) (getIndex cols (:name col))
+                            (.toString (du/->Timestamp (.get runrow (getIndex cols (:name col))) (TimeZone/getDefault)))))
+                   runrow)
+                 :else runrow)) (dec cnt)))))
 
 ; 格式化字段连接需求，中间过渡方法
 ; 返回值为rows结果
