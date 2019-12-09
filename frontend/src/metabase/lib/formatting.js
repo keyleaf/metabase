@@ -581,8 +581,48 @@ export function formatUrl(
       : isDefaultLinkProtocol(protocol))
   ) {
     return (
-      <ExternalLink className="link link--wrappable" href={encodeURI(encodeURI(url))}>
-        {url || link_text}
+      <ExternalLink className="link link--wrappable" href={url}>
+        {link_text || url}
+      </ExternalLink>
+    );
+  } else {
+    return url;
+  }
+}
+
+//连接格式化
+export function formatCustomUrl(
+  value: Value,
+  { jsx, rich, view_as = "auto", link_text, column }: FormattingOptions = {}, rowValue, colsValue
+) {
+  // const lt = link_text.split("#")
+  const valueSplit = value.split("###")
+
+  let url = String(value);
+  let linkUrl = "";
+  if(valueSplit && valueSplit.length > 1){
+    url = String(valueSplit[1])
+    linkUrl = String(valueSplit[2])
+  }
+  
+  const urlSpecialType = column && isa(column.special_type, TYPE.CustomURL);
+  const protocol = getUrlProtocol(url);
+  if (
+    jsx &&
+    rich &&
+    (view_as === "link" || view_as === "auto") &&
+    // undefined protocol means url didn't parse
+    // protocol &&
+    (linkUrl !== "") &&
+    // if the column type is URL, we show any safe url as a link
+    // otherwise, we just show the most common protocols
+    (urlSpecialType
+      ? isSafeProtocol(protocol)
+      : isDefaultLinkProtocol(protocol))
+  ) {
+    return (
+      <ExternalLink className="link link--wrappable" href={encodeURI(encodeURI(linkUrl))}>
+        {url}
       </ExternalLink>
     );
   } else {
@@ -685,6 +725,8 @@ export function formatValueRaw(value: Value, options: FormattingOptions = {}) {
     return null;
   } else if (column && isa(column.special_type, TYPE.URL)) {
     return formatUrl(value, options);
+  } else if (column && isa(column.special_type, TYPE.CustomURL)) {
+    return formatCustomUrl(value, options);
   } else if (column && isa(column.special_type, TYPE.Email)) {
     return formatEmail(value, options);
   } else if (column && isa(column.base_type, TYPE.Time)) {

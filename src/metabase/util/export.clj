@@ -6,7 +6,8 @@
             [metabase.public-settings :as public-settings]
             [metabase.api.common :refer [*current-user*]]
             [metabase.util.date :as df]
-            [dk.ative.docjure.spreadsheet :as spreadsheet])
+            [dk.ative.docjure.spreadsheet :as spreadsheet]
+            [clojure.string :as str])
   (:import [java.io ByteArrayInputStream ByteArrayOutputStream File]
             (java.io ByteArrayOutputStream FileInputStream)
             (javax.imageio ImageIO)
@@ -111,8 +112,27 @@
   (cons (map :display_name (get-in results [:result :data :cols]))
         (get-in results [:result :data :rows])))
 
+; 递归获取拼接处理后的row，去掉字段内容（3个#号中间内容），只保留链接
+; 返回结果为row
+; row行数据
+; excle公式(str "=HYPERLINK(\"" (re-find #"(?<=###).*?(?=###)" (nth runrow cnt)) "\",\"" (str/replace (nth runrow cnt) (re-find #"###.*?###" (nth runrow cnt)) "") "\")")
+(defn- remove-row-prefix [row]
+  (loop [runrow row
+         cnt (- (count row) 1)]
+    (if (= cnt -1)
+      runrow
+      (recur (if (string? (nth runrow cnt))
+               (if (re-find #"(?<=###).*?(?=###)" (nth runrow cnt))
+                 (assoc runrow cnt (str/replace (nth runrow cnt) (re-find #"###.*?###" (nth runrow cnt)) "")) runrow) runrow) (dec cnt)))))
+
+; 导出格式化字段连接需求，中间过渡方法
+(defn- update-rows-link [rows]
+  (for [row rows]
+      ; (assoc row 2 (handleCols cols row))
+    (remove-row-prefix row)))
+
 (defn- export-to-xlsx [column-names rows]
-  (let [wb  (spreadsheet/create-workbook "Query result" (cons (mapv name column-names) rows))
+  (let [wb  (spreadsheet/create-workbook "Query result" (cons (mapv name column-names) (update-rows-link rows)))
         ;; note: byte array streams don't need to be closed
         out (ByteArrayOutputStream.)]
     (add-background-image-to-sheet "Query result" wb)
@@ -131,7 +151,7 @@
 (defn- export-to-csv [column-names rows]
   (with-out-str
     ;; turn keywords into strings, otherwise we get colons in our output
-    (csv/write-csv *out* (into [(mapv name column-names)] rows))))
+    (csv/write-csv *out* (into [(mapv name column-names)] (update-rows-link rows)))))
 
 (defn export-to-csv-writer
   "Write a CSV to `file` with the header a and rows found in `results`"
@@ -140,7 +160,7 @@
     (csv/write-csv fw (results->cells results))))
 
 (defn- export-to-json [column-names rows]
-  (for [row rows]
+  (for [row (update-rows-link rows)]
     (zipmap column-names row)))
 
 ;; TODO - we should rewrite this whole thing as 4 multimethods. Then it would be possible to add new export types via
