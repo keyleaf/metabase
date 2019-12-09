@@ -100,6 +100,11 @@
   :type    :boolean
   :default false)
 
+(defsetting enable-hide-embed-branding
+  (deferred-tru "是否允许在嵌入式仪表板和报表上禁用“Powered by ...”?")
+  :type    :boolean
+  :default false)
+
 (defsetting enable-nested-queries
   (deferred-tru "Allow using a saved question as the source for other queries?")
   :type    :boolean
@@ -230,7 +235,7 @@
    :ga_code               "UA-60817802-1"
    :google_auth_client_id (resolve-setting 'metabase.api.session 'google-auth-client-id)
    :has_sample_dataset    (db/exists? 'Database, :is_sample true)
-   :hide_embed_branding   (metastore/hide-embed-branding?)
+   :hide_embed_branding   (enable-hide-embed-branding)
    :ldap_configured       (resolve-setting 'metabase.integrations.ldap 'ldap-configured?)
    :map_tile_server_url   (map-tile-server-url)
    :metastore_url         metastore/store-url
