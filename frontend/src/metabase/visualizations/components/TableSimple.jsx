@@ -160,7 +160,7 @@ export default class TableSimple extends Component {
               <thead ref="header">
                 <tr>
                   {cols.map((col, colIndex) => {
-                    let colSpan = this.getGroupColSpan({index: colIndex});
+                    const colSpan = this.getGroupColSpan({index: colIndex});
                     if (colSpan > 1) {
                       return (
                         <th
