@@ -172,7 +172,7 @@
     "xhr-mock": "^2.4.1"
   },
   "scripts": {
-    "dev": "concurrently --kill-others -p name -n 'backend,frontend,docs' -c 'blue,green,yellow' 'lein run' 'yarn build-hot' 'yarn docs'",
+    "dev": "concurrently --kill-others -p name -n 'backend' -c 'blue' 'lein ring server'",
     "lint": "yarn lint-eslint && yarn lint-prettier",
     "lint-eslint": "yarn && eslint --ext .js --ext .jsx --rulesdir frontend/lint/eslint-rules --max-warnings 0 frontend/src frontend/test",
     "lint-prettier": "yarn && prettier -l 'frontend/**/*.{js,jsx,css}' || (echo '\nThese files are not formatted correctly. Did you forget to \"yarn prettier\"?' && false)",

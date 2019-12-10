@@ -5,6 +5,7 @@
     "no-var": 1,
     "no-unused-vars": [1, { "vars": "all", "args": "none" }],
     "no-empty": [1, { "allowEmptyCatch": true }],
+    "no-debugger": 0,
     "curly": [1, "all"],
     "eqeqeq": [1, "smart"],
     "import/no-commonjs": 1,
