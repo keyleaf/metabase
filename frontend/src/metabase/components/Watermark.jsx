@@ -5,6 +5,8 @@ import MetabaseSettings from "metabase/lib/settings";
 
 import { getUser } from "metabase/selectors/user";
 
+import Cookies from "js-cookie";
+
 const buttonStyle = {
   display:"none"
 };
@@ -35,15 +37,21 @@ function addZero(str) {
 
 export function watermark (props) {
   let follow = '';
-
-  if (props) {
-    let user = props.user;
-    if (user) {
-      follow = user.first_name;
-    } else {
-      follow = MetabaseSettings.get("site_name","内部资料");
+  let baLoginName = Cookies.get('metabase.loginName');
+  if (props && props.user) {
+    follow = props.user.first_name;
+    if (follow === 'BA' && baLoginName && baLoginName !== '') {
+      follow = baLoginName;
+    }
+  } else {
+    follow = MetabaseSettings.get("site_name","内部资料");
+    if (baLoginName && baLoginName !== '') {
+      follow = baLoginName;
     }
   }
+
+  console.log("loginName is :", Cookies.get('metabase.loginName'));
+  console.log("follow is :", follow);
   var canvas = document.getElementById('waterMark');
   // canvas.width = window.innerWidth / 4;
   // 文本宽度+间隔宽度
