@@ -19,7 +19,6 @@
              [util :as qputil]]
             [metabase.query-processor.middleware.constraints :as constraints]
             [metabase.util
-             [date :as du]
              [export :as ex]
              [i18n :refer [trs tru]]
              [schema :as su]]
