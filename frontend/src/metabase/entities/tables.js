@@ -89,7 +89,7 @@ const Tables = createEntity({
     fetchTableMetadata: createThunkAction(
       FETCH_TABLE_METADATA,
       ({ id, include_sensitive_fields }, options) => async (dispatch, getState) => {
-        await dispatch(Tables.actions.fetchMetadata({ id, include_sensitive_fields }, options));
+        await dispatch(Tables.actions.fetchMetadata({ id, include_sensitive_fields: include_sensitive_fields === undefined ? true : include_sensitive_fields }, options));
         // fetch foreign key linked table's metadata as well
         const table = Tables.selectors.getObject(getState(), { entityId: id });
         await Promise.all(
