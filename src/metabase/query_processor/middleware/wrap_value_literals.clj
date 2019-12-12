@@ -91,7 +91,7 @@
                                      (string? this))
                             ;; TIMEZONE FIXME - I think this should actually use
                             ;; (qp.timezone/report-timezone-id-if-supported) instead ?
-                            (u.date/parse this (qp.timezone/results-timezone-id)))]
+                            (u.date/parse this "UTC"))]
     (if (some #(instance? % temporal-value) [LocalTime OffsetTime])
       [:time temporal-value unit]
       [:absolute-datetime temporal-value unit])

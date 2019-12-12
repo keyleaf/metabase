@@ -624,7 +624,7 @@
      (for [[k v] row]
        [k (if (and (map? v)
                    (contains? v :___date))
-            (u.date/parse (:___date v))
+            (u.date/parse (:___date v) "UTC")
             v)]))))
 
 
