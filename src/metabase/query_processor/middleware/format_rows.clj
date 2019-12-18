@@ -61,10 +61,10 @@
               (t/offset-date-time (t/with-zone-same-instant t timezone-id)))))
 
 (defn- format-rows* [rows]
-  (log/debug (tru "Formatting rows with results timezone ID {0}" (qp.timezone/results-timezone-id))
+  (log/debug (tru "Formatting rows with results timezone ID {0}" (str "UTC"))
              "\n"
              (u/pprint-to-str 'blue (take 5 rows)))
-  (let [timezone-id (t/zone-id (qp.timezone/results-timezone-id))]
+  (let [timezone-id (t/zone-id "UTC")]
     (for [row rows]
       (for [v row]
         (format-value v timezone-id)))))
