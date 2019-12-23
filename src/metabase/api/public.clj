@@ -123,11 +123,11 @@
 (api/defendpoint-async GET "/card/:uuid/query/:export-format"
   "Fetch a publicly-accessible Card and return query results in the specified format. Does not require auth
    credentials. Public sharing must be enabled."
-  [{{:keys [uuid export-format parameters]} :params}, respond raise]
+  [{{:keys [uuid export-format parameters file_name loginName]} :params}, respond raise]
   {parameters    (s/maybe su/JSONString)
    export-format dataset-api/ExportFormat}
   (dataset-api/as-format-async export-format respond raise
-    (run-query-for-card-with-public-uuid-async uuid (json/parse-string parameters keyword), :constraints nil)))
+    (run-query-for-card-with-public-uuid-async uuid (json/parse-string parameters keyword), :constraints nil) file_name loginName))
 
 
 

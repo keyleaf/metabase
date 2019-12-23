@@ -15,6 +15,7 @@ import * as Urls from "metabase/lib/urls";
 
 import _ from "underscore";
 import cx from "classnames";
+import Cookies from "js-cookie";
 
 const EXPORT_FORMATS = ["csv", "xlsx", "json"];
 
@@ -97,7 +98,10 @@ const QueryDownloadWidget = ({
 const UnsavedQueryButton = ({ type, result: { json_query }, card }) => (
   <DownloadButton
     url={`api/dataset/${type}`}
-    params={{ query: JSON.stringify(_.omit(json_query, "constraints")) }}
+    params={{ query: JSON.stringify(_.omit(json_query, "constraints")),
+              file_name: card.name,
+              loginName: Cookies.get('metabase.loginName')
+            }}
     extensions={[type]}
   >
     {type}
@@ -107,7 +111,10 @@ const UnsavedQueryButton = ({ type, result: { json_query }, card }) => (
 const SavedQueryButton = ({ type, result: { json_query }, card }) => (
   <DownloadButton
     url={`api/card/${card.id}/query/${type}`}
-    params={{ parameters: JSON.stringify(json_query.parameters), file_name: card.name }}
+    params={{ parameters: JSON.stringify(json_query.parameters), 
+              file_name: card.name,
+              loginName: Cookies.get('metabase.loginName')
+            }}
     extensions={[type]}
   >
     {type}
@@ -118,7 +125,10 @@ const PublicQueryButton = ({ type, uuid, result: { json_query } }) => (
   <DownloadButton
     method="GET"
     url={Urls.publicQuestion(uuid, type)}
-    params={{ parameters: JSON.stringify(json_query.parameters) }}
+    params={{ parameters: JSON.stringify(json_query.parameters),
+              file_name: card.name,
+              loginName: Cookies.get('metabase.loginName')
+            }}
     extensions={[type]}
   >
     {type}
@@ -137,7 +147,10 @@ const EmbedQueryButton = ({ type, token }) => {
     <DownloadButton
       method="GET"
       url={Urls.embedCard(token, type)}
-      params={params}
+      params={{params,
+              file_name: card.name,
+              loginName: Cookies.get('metabase.loginName')
+            }}
       extensions={[type]}
     >
       {type}

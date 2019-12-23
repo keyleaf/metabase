@@ -311,10 +311,10 @@
 
 (api/defendpoint-async GET ["/card/:token/query/:export-format", :export-format dataset-api/export-format-regex]
   "Like `GET /api/embed/card/query`, but returns the results as a file in the specified format."
-  [{{:keys [token export-format]} :params, :keys [query-params]} respond raise]
+  [{{:keys [token export-format file_name loginName]} :params, :keys [query-params]} respond raise]
   {export-format dataset-api/ExportFormat}
   (dataset-api/as-format-async export-format respond raise
-    (run-query-for-unsigned-token-async (eu/unsign token) (m/map-keys keyword query-params), :constraints nil)))
+    (run-query-for-unsigned-token-async (eu/unsign token) (m/map-keys keyword query-params), :constraints nil) file_name loginName))
 
 
 ;;; ----------------------------------------- /api/embed/dashboard endpoints -----------------------------------------
