@@ -121,7 +121,7 @@ const SavedQueryButton = ({ type, result: { json_query }, card }) => (
   </DownloadButton>
 );
 
-const PublicQueryButton = ({ type, uuid, result: { json_query } }) => (
+const PublicQueryButton = ({ type, uuid, result: { json_query }, card }) => (
   <DownloadButton
     method="GET"
     url={Urls.publicQuestion(uuid, type)}
@@ -135,7 +135,7 @@ const PublicQueryButton = ({ type, uuid, result: { json_query } }) => (
   </DownloadButton>
 );
 
-const EmbedQueryButton = ({ type, token }) => {
+const EmbedQueryButton = ({ type, token, card }) => {
   // Parse the query string part of the URL (e.g. the `?key=value` part) into an object. We need to pass them this
   // way to the `DownloadButton` because it's a form which means we need to insert a hidden `<input>` for each param
   // we want to pass along. For whatever wacky reason the /api/embed endpoint expect params like ?key=value instead
