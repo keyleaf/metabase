@@ -104,14 +104,14 @@
   {:style/indent 1, :arglists '([export-format results])}
   ([export-format results]
    (as-format-response export-format results nil))
-  ([export-format {{:keys [rows cols]} :data, :keys [status error], error-type :error_type, :as response} file-name]
+  ([export-format {{:keys [rows cols]} :data, :keys [status error], error-type :error_type, :as response} file-name, loginName]
   (api/let-404 [export-conf (ex/export-formats export-format)]
     (if (= status :completed)
       ;; successful query, send file
       {:status  200
        :body    ((:export-fn export-conf)
                  (map #(some % [:display_name :name]) cols)
-                 (maybe-modify-date-values cols rows))
+                 (maybe-modify-date-values cols rows) loginName)
        :headers {"Content-Type"        (str (:content-type export-conf) "; charset=utf-8")
                  "Content-Disposition" (str (if (nil? file-name) "attachment; filename=\"query_result_" (str "attachment; filename=\"" (String. (.getBytes file-name "UTF-8") "ISO-8859-1") "_"))  (.format (java.text.SimpleDateFormat. "yyyy-MM-dd'_'HH:mm") (new java.util.Date))
                                             "." (:ext export-conf) "\"")}}
@@ -127,13 +127,13 @@
   {:style/indent 3}
   ([export-format :- ExportFormat, respond :- (s/pred fn?), raise :- (s/pred fn?), in-chan :- ManyToManyChannel]
   (as-format-async export-format respond raise in-chan nil))
-  ([export-format :- ExportFormat, respond :- (s/pred fn?), raise :- (s/pred fn?), in-chan :- ManyToManyChannel, file-name]
+  ([export-format :- ExportFormat, respond :- (s/pred fn?), raise :- (s/pred fn?), in-chan :- ManyToManyChannel, file-name, loginName]
   (a/go
     (try
       (let [results (a/<! in-chan)]
         (if (instance? Throwable results)
           (raise results)
-          (respond (as-format-response export-format results file-name))))
+          (respond (as-format-response export-format results file-name loginName))))
       (catch Throwable e
         (raise e))
       (finally
@@ -149,7 +149,7 @@
 
 (api/defendpoint-async POST ["/:export-format", :export-format export-format-regex]
   "Execute a query and download the result data as a file in the specified format."
-  [{{:keys [export-format query]} :params} respond raise]
+  [{{:keys [export-format query]} :params} respond raise loginName]
   {query         su/JSONString
    export-format ExportFormat}
   (let [{:keys [database] :as query} (json/parse-string query keyword)]
@@ -161,7 +161,7 @@
            (dissoc :constraints)
            (m/dissoc-in [:middleware :add-default-userland-constraints?])
            (assoc-in [:middleware :skip-results-metadata?] true))
-       {:executed-by api/*current-user-id*, :context (export-format->context export-format)}))))
+       {:executed-by api/*current-user-id*, :context (export-format->context export-format)}) loginName)))
 
 
 ;;; ------------------------------------------------ Other Endpoints -------------------------------------------------

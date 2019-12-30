@@ -15,6 +15,7 @@ import * as Urls from "metabase/lib/urls";
 
 import _ from "underscore";
 import cx from "classnames";
+import Cookies from "js-cookie";
 
 const EXPORT_FORMATS = ["csv", "xlsx", "json"];
 
@@ -97,7 +98,10 @@ const QueryDownloadWidget = ({
 const UnsavedQueryButton = ({ type, result: { json_query }, card }) => (
   <DownloadButton
     url={`api/dataset/${type}`}
-    params={{ query: JSON.stringify(_.omit(json_query, "constraints")) }}
+    params={{ query: JSON.stringify(_.omit(json_query, "constraints")),
+              file_name: card.name,
+              loginName: Cookies.get('metabase.loginName')
+            }}
     extensions={[type]}
   >
     {type}
@@ -107,25 +111,31 @@ const UnsavedQueryButton = ({ type, result: { json_query }, card }) => (
 const SavedQueryButton = ({ type, result: { json_query }, card }) => (
   <DownloadButton
     url={`api/card/${card.id}/query/${type}`}
-    params={{ parameters: JSON.stringify(json_query.parameters), file_name: card.name }}
+    params={{ parameters: JSON.stringify(json_query.parameters), 
+              file_name: card.name,
+              loginName: Cookies.get('metabase.loginName')
+            }}
     extensions={[type]}
   >
     {type}
   </DownloadButton>
 );
 
-const PublicQueryButton = ({ type, uuid, result: { json_query } }) => (
+const PublicQueryButton = ({ type, uuid, result: { json_query }, card }) => (
   <DownloadButton
     method="GET"
     url={Urls.publicQuestion(uuid, type)}
-    params={{ parameters: JSON.stringify(json_query.parameters) }}
+    params={{ parameters: JSON.stringify(json_query.parameters),
+              file_name: card.name,
+              loginName: Cookies.get('metabase.loginName')
+            }}
     extensions={[type]}
   >
     {type}
   </DownloadButton>
 );
 
-const EmbedQueryButton = ({ type, token }) => {
+const EmbedQueryButton = ({ type, token, card }) => {
   // Parse the query string part of the URL (e.g. the `?key=value` part) into an object. We need to pass them this
   // way to the `DownloadButton` because it's a form which means we need to insert a hidden `<input>` for each param
   // we want to pass along. For whatever wacky reason the /api/embed endpoint expect params like ?key=value instead
@@ -137,7 +147,10 @@ const EmbedQueryButton = ({ type, token }) => {
     <DownloadButton
       method="GET"
       url={Urls.embedCard(token, type)}
-      params={params}
+      params={{params,
+              file_name: card.name,
+              loginName: Cookies.get('metabase.loginName')
+            }}
       extensions={[type]}
     >
       {type}
