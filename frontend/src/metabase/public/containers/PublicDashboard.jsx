@@ -66,7 +66,7 @@ type Props = {
 
   initialize: () => void,
   isFullscreen: boolean,
-  isNightMode: boolean,
+  themeMode: string,
   fetchDashboard: (
     dashId: string,
     query: { [key: string]: string },
@@ -133,7 +133,7 @@ export default class PublicDashboard extends Component {
       parameters,
       parameterValues,
       isFullscreen,
-      isNightMode,
+      themeMode,
     } = this.props;
     const buttons = !IFRAMED ? getDashboardActions(this.props) : [];
 
@@ -159,8 +159,10 @@ export default class PublicDashboard extends Component {
         <LoadingAndErrorWrapper
           className={cx("Dashboard p1 flex-full", {
             "Dashboard--fullscreen": isFullscreen,
-            "Dashboard--night": isNightMode,
-          })}
+          },
+          "Dashboard--" + themeMode,
+          )}
+          // style={{marginTop: -35}}
           loading={!dashboard}
         >
           {() => (

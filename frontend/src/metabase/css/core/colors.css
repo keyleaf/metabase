@@ -22,6 +22,7 @@
   --color-text-white: #ffffff;
   --color-bg-black: #2e353b;
   --color-bg-dark: #93a1ab;
+  --color-bg-blue: #5895ca;
   --color-bg-medium: #edf2f5;
   --color-bg-light: #f9fbfc;
   --color-bg-white: #ffffff;
@@ -38,6 +39,7 @@
   /* night mode colors */
   --night-mode-color: color(var(--color-text-white) alpha(-14%));
   --night-mode-card: #42484e;
+  --blue-mode-card: #8788ec;
 }
 
 /* NOTE: DEPRECATED, replaced with colors above
@@ -129,6 +131,7 @@
 .text-success {
   color: var(--color-accent1);
 }
+
 .bg-success {
   background-color: var(--color-accent1);
 }
@@ -145,6 +148,7 @@
 .bg-error-hover:hover {
   background-color: var(--color-error);
 }
+
 .bg-error-input {
   background-color: var(--color-bg-white);
 }
@@ -178,9 +182,11 @@
 .text-slate {
   color: var(--color-text-medium);
 }
+
 .text-slate-light {
   color: var(--color-text-light);
 }
+
 .text-slate-extra-light {
   background-color: var(--color-bg-light);
 }
@@ -197,6 +203,7 @@
 .bg-green {
   background-color: var(--color-accent1);
 }
+
 .bg-green-saturated,
 .bg-green-saturated-hover:hover {
   background-color: var(--color-accent1);
@@ -264,6 +271,7 @@
   color: var(--color-text-white);
   background-color: var(--color-brand);
 }
+
 .brand-hover:hover * {
   color: var(--color-text-white);
 }
@@ -286,6 +294,7 @@
 .text-light-blue-hover:hover {
   color: var(--color-text-light);
 }
+
 .text-slate {
   color: var(--color-text-medium);
 }
@@ -299,6 +308,7 @@
 .bg-metric {
   background-color: var(--color-accent1);
 }
+
 .text-metric {
   color: var(--color-accent1);
 }
@@ -306,6 +316,7 @@
 .bg-data {
   background-color: var(--color-accent1);
 }
+
 .text-data {
   color: var(--color-accent1);
 }
@@ -313,6 +324,7 @@
 .bg-segment {
   background-color: var(--color-accent2);
 }
+
 .text-segment {
   color: var(--color-accent2);
 }
@@ -320,6 +332,7 @@
 .bg-dashboard {
   background-color: var(--color-brand);
 }
+
 .text-dashboard {
   color: var(--color-brand);
 }
@@ -327,6 +340,7 @@
 .bg-pulse {
   background-color: var(--color-accent4);
 }
+
 .text-pulse {
   color: var(--color-accent4);
 }
@@ -334,6 +348,7 @@
 .bg-question {
   background-color: var(--color-bg-dark);
 }
+
 .text-question {
   color: var(--color-text-medium);
 }
@@ -341,9 +356,11 @@
 .text-light {
   color: var(--color-text-light);
 }
+
 .text-medium {
   color: var(--color-text-medium);
 }
+
 .text-dark {
   color: var(--color-text-dark);
 }

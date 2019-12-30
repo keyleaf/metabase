@@ -92,11 +92,11 @@ type Props = {
   refreshPeriod: number,
   setRefreshElapsedHook: Function,
   isFullscreen: boolean,
-  isNightMode: boolean,
+  themeMode: string,
   hideParameters: ?string,
 
   onRefreshPeriodChange: (?number) => void,
-  onNightModeChange: boolean => void,
+  onThemeModeChange: string => void,
   onFullscreenChange: boolean => void,
 
   loadDashboardParams: () => void,
@@ -226,11 +226,11 @@ export default class Dashboard extends Component {
       parameterValues,
       location,
       isFullscreen,
-      isNightMode,
+      themeMode,
       hideParameters,
     } = this.props;
     const { error } = this.state;
-    isNightMode = isNightMode && isFullscreen;
+    // themeMode = this.themeMode;
 
     let parametersWidget;
     if (parameters && parameters.length > 0) {
@@ -239,7 +239,7 @@ export default class Dashboard extends Component {
           syncQueryString
           isEditing={isEditing}
           isFullscreen={isFullscreen}
-          isNightMode={isNightMode}
+          themeMode={themeMode}
           hideParameters={hideParameters}
           parameters={parameters.map(p => ({
             ...p,
@@ -261,8 +261,10 @@ export default class Dashboard extends Component {
       <LoadingAndErrorWrapper
         className={cx("Dashboard flex-full pb4", {
           "Dashboard--fullscreen": isFullscreen,
-          "Dashboard--night": isNightMode,
-        })}
+        },
+        // 自定义主题模式
+        "Dashboard--" + themeMode,
+        )}
         loading={!dashboard}
         error={error}
       >
@@ -284,7 +286,8 @@ export default class Dashboard extends Component {
             )}
             <div className="wrapper">
               {dashboard.ordered_cards.length === 0 ? (
-                <Box mt={[2, 4]} color={isNightMode ? "white" : "inherit"}>
+                // 待处理
+                <Box mt={[2, 4]} color={themeMode === "sun" ? "white" : "inherit"}>
                   <EmptyState
                     illustrationElement={
                       <span className="QuestionCircle">?</span>

@@ -38,51 +38,114 @@
   background-color: transparent;
   border: none;
 }
+
 .Dashboard.Dashboard--fullscreen .Header-title-description {
   display: none;
 }
 
-/* Night mode */
-.Dashboard.Dashboard--night {
+/* moon mode start*/
+.Dashboard.Dashboard--moon {
   background-color: var(--color-bg-black);
 }
 
-.Dashboard.Dashboard--night .DashboardHeader {
+.Dashboard.Dashboard--moon .DashboardHeader {
   color: var(--color-text-white);
 }
 
-.Dashboard.Dashboard--night .Card {
+.Dashboard.Dashboard--moon .Card {
   color: var(--color-text-white);
 }
 
-.Dashboard.Dashboard--night .Header-button,
-.Dashboard.Dashboard--night .Header-button svg {
+.Dashboard.Dashboard--moon .Header-button,
+.Dashboard.Dashboard--moon .Header-button svg {
   color: color(var(--color-text-medium) alpha(-70%));
 }
 
-.Dashboard.Dashboard--fullscreen .fullscreen-normal-text {
-  color: var(--color-text-dark);
-  transition: color 1s linear;
-}
-
-.Dashboard.Dashboard--night.Dashboard--fullscreen .fullscreen-night-text {
+/* .Dashboard.Dashboard--fullscreen .fullscreen-normal-text {
+    color: var(--color-text-dark);
+    transition: color 1s linear;
+  } */
+.Dashboard.Dashboard--moon.Dashboard--fullscreen .fullscreen-night-text {
   color: color(var(--color-text-white) alpha(-14%));
   transition: color 1s linear;
 }
 
-.Dashboard.Dashboard--night .DashCard .Card svg text {
+.Dashboard.Dashboard--moon .DashCard .Card svg text {
   fill: color(var(--color-text-white) alpha(-14%)) !important;
 }
 
-.Dashboard.Dashboard--night .DashCard .Card {
+.Dashboard.Dashboard--moon .DashCard .Card {
   background-color: var(--night-mode-card);
   border-color: var(--night-mode-card);
 }
 
-.Dashboard.Dashboard--night .enable-dots-onhover .dc-tooltip circle.dot:hover,
-.Dashboard.Dashboard--night .enable-dots .dc-tooltip circle.dot {
+.Dashboard.Dashboard--moon .enable-dots-onhover .dc-tooltip circle.dot:hover,
+.Dashboard.Dashboard--moon .enable-dots .dc-tooltip circle.dot {
   fill: currentColor;
 }
+
+/* moom mode end*/
+
+/* sun mode start*/
+.Dashboard.Dashboard--sun {
+  background-color: transparent;
+}
+
+.Dashboard.Dashboard--sun .DashCard .Card {
+  background-color: white;
+  border-color: var(--color-text-light);
+}
+
+.Dashboard.Dashboard--sun .enable-dots-onhover .dc-tooltip circle.dot:hover,
+.Dashboard.Dashboard--sun .enable-dots .dc-tooltip circle.dot {
+  fill: currentColor;
+}
+
+/* sun mode end*/
+
+/* blue mode start*/
+.Dashboard.Dashboard--blue {
+  /* background-color: var(--color-bg-blue); */
+  background: var(--color-bg-blue);
+}
+
+.Dashboard.Dashboard--blue .DashboardHeader {
+  color: var(--color-text-white);
+}
+
+.Dashboard.Dashboard--blue .Card {
+  color: var(--color-text-white);
+}
+
+.Dashboard.Dashboard--blue .Header-button,
+.Dashboard.Dashboard--blue .Header-button svg {
+  color: color(var(--color-text-medium) alpha(-70%));
+}
+
+/* .Dashboard.Dashboard--fullscreen .fullscreen-normal-text {
+    color: var(--color-text-dark);
+    transition: color 1s linear;
+  } */
+.Dashboard.Dashboard--blue.Dashboard--fullscreen .fullscreen-night-text {
+  color: color(var(--color-text-white) alpha(-14%));
+  transition: color 1s linear;
+}
+
+.Dashboard.Dashboard--blue .DashCard .Card svg text {
+  fill: color(var(--color-text-white) alpha(-14%)) !important;
+}
+
+.Dashboard.Dashboard--blue .DashCard .Card {
+  background-color: var(--blue-mode-card);
+  border-color: var(--blue-mode-card);
+}
+
+.Dashboard.Dashboard--blue .enable-dots-onhover .dc-tooltip circle.dot:hover,
+.Dashboard.Dashboard--blue .enable-dots .dc-tooltip circle.dot {
+  fill: currentColor;
+}
+
+/* blue mode end*/
 
 /* Night mode transition */
 .Dashboard.Dashboard--fullscreen,
@@ -118,6 +181,7 @@
   pointer-events: none;
   transition: border 0.3s, background-color 0.3s;
 }
+
 .Dash--editing.Dash--editingParameter .DashCard .Card {
   pointer-events: auto;
 }
@@ -126,6 +190,7 @@
   from {
     background-color: var(--color-bg-white);
   }
+
   to {
     background-color: var(--color-bg-white);
   }
@@ -148,6 +213,7 @@
   opacity: 0.01;
   transition: opacity 0.3s linear;
 }
+
 .DashCard:hover .gm-style-mtc,
 .DashCard:hover .gm-bundled-control,
 .DashCard:hover .PinMapUpdateButton,
@@ -209,6 +275,7 @@
   right: -2px;
   top: -2px;
 }
+
 .Dash--editing .DashCard:hover .Visualization-slow-spinner {
   opacity: 0;
   transition: opacity 0.15s linear;
@@ -240,7 +307,8 @@
   bottom: 0;
   right: 0;
   cursor: nwse-resize;
-  z-index: 1; /* ensure the handle is above the card contents */
+  z-index: 1;
+  /* ensure the handle is above the card contents */
 }
 
 .Dash--editing .DashCard .react-resizable-handle:after {
@@ -293,19 +361,20 @@
 }
 
 /*
-
-  fullscreen text size modifications
-
-*/
+  
+    fullscreen text size modifications
+  
+  */
 
 /*
-  increase the base font size in fullscreen mode to bump things up to
-  accomodate for viewing distance on TVs etc
-*/
+    increase the base font size in fullscreen mode to bump things up to
+    accomodate for viewing distance on TVs etc
+  */
 @media screen and (min-width: 1280px) {
   .Dashboard.Dashboard--fullscreen {
     font-size: 1.2em;
   }
+
   /* keep the dashboard header title from being overwhelmingly large */
   .Dashboard.Dashboard--fullscreen .Header-title-name {
     font-size: 1em;
@@ -324,14 +393,17 @@
 
 /* what for to print the dashboards */
 @media print {
+
   header,
   nav {
     display: none;
   }
+
   .DashCard .Card {
     box-shadow: none;
     border-color: var(--color-border);
   }
+
   /* improve label contrast */
   .dc-chart .axis .tick text,
   .dc-chart .x-axis-label,
@@ -345,6 +417,7 @@
     width: 8.5in;
   }
 }
+
 @media print and (orientation: landscape) {
   html {
     width: 11in;
@@ -388,8 +461,8 @@
   .ScalarValue {
     font-size: 2.2rem;
   }
-  .AutomaticDashboard.AutomaticDashboard--withSidebar
-    #SmartScalar-PreviousValue {
+
+  .AutomaticDashboard.AutomaticDashboard--withSidebar #SmartScalar-PreviousValue {
     display: none;
   }
 }
@@ -398,8 +471,8 @@
   .ScalarValue {
     font-size: 2.8rem;
   }
-  .AutomaticDashboard.AutomaticDashboard--withSidebar
-    #SmartScalar-PreviousValue {
+
+  .AutomaticDashboard.AutomaticDashboard--withSidebar #SmartScalar-PreviousValue {
     display: inherit;
   }
 }

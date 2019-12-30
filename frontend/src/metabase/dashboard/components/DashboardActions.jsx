@@ -9,8 +9,8 @@ export const getDashboardActions = ({
   isEditing = false,
   isEmpty = false,
   isFullscreen,
-  isNightMode,
-  onNightModeChange,
+  themeMode,
+  onThemeModeChange,
   onFullscreenChange,
   refreshPeriod,
   setRefreshElapsedHook,
@@ -35,13 +35,13 @@ export const getDashboardActions = ({
     buttons.push(
       <Tooltip
         key="night"
-        tooltip={isNightMode ? t`Daytime mode` : t`Nighttime mode`}
+        tooltip={themeMode}
       >
-        <span data-metabase-event={"Dashboard;Night Mode;" + !isNightMode}>
+        <span data-metabase-event={"Dashboard;themeMode Mode;" + themeMode}>
           <NightModeIcon
             className="text-brand-hover cursor-pointer"
-            isNightMode={isNightMode}
-            onClick={() => onNightModeChange(!isNightMode)}
+            theme={themeMode}
+            onThemeModeChange={onThemeModeChange}
           />
         </span>
       </Tooltip>,
