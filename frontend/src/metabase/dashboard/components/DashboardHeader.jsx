@@ -46,7 +46,7 @@ type Props = {
   isEditable: boolean,
   isEditing: false | DashboardWithCards,
   isFullscreen: boolean,
-  isNightMode: boolean,
+  themeMode: string,
 
   refreshPeriod: ?number,
   setRefreshElapsedHook: Function,
@@ -66,7 +66,7 @@ type Props = {
 
   onEditingChange: (isEditing: false | DashboardWithCards) => void,
   onRefreshPeriodChange: (?number) => void,
-  onNightModeChange: boolean => void,
+  onThemeModeChange: string => void,
   onFullscreenChange: boolean => void,
 
   onChangeLocation: string => void,
@@ -88,7 +88,7 @@ export default class DashboardHeader extends Component {
     isEditing: PropTypes.oneOfType([PropTypes.bool, PropTypes.object])
       .isRequired,
     isFullscreen: PropTypes.bool.isRequired,
-    isNightMode: PropTypes.bool.isRequired,
+    themeMode: PropTypes.string.isRequired,
 
     refreshPeriod: PropTypes.number,
     setRefreshElapsedHook: PropTypes.func.isRequired,
@@ -103,7 +103,7 @@ export default class DashboardHeader extends Component {
 
     onEditingChange: PropTypes.func.isRequired,
     onRefreshPeriodChange: PropTypes.func.isRequired,
-    onNightModeChange: PropTypes.func.isRequired,
+    onThemeModeChange: PropTypes.func.isRequired,
     onFullscreenChange: PropTypes.func.isRequired,
   };
 

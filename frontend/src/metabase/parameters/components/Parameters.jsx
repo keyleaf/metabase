@@ -26,7 +26,7 @@ type Props = {
   parameterValues?: ParameterValues,
 
   isFullscreen?: boolean,
-  isNightMode?: boolean,
+  themeMode?: string,
   hideParameters?: ?string, // comma separated list of slugs
   isEditing?: false | DashboardWithCards,
   isQB?: boolean,
@@ -124,7 +124,7 @@ export default class Parameters extends Component {
       setEditingParameter,
       isEditing,
       isFullscreen,
-      isNightMode,
+      themeMode,
       hideParameters,
       isQB,
       setParameterName,
@@ -172,7 +172,7 @@ export default class Parameters extends Component {
               })}
               isEditing={isEditing}
               isFullscreen={isFullscreen}
-              isNightMode={isNightMode}
+              themeMode={themeMode}
               parameter={parameter}
               parameters={parameters}
               editingParameter={editingParameter}

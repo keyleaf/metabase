@@ -49,7 +49,7 @@ type Props = {
 
   initialize: () => void,
   isFullscreen: boolean,
-  isNightMode: boolean,
+  themeMode: string,
   fetchDashboard: (
     dashId: string,
     query?: { [key: string]: string },
