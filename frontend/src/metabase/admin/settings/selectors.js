@@ -14,11 +14,44 @@ import EmbeddingLegalese from "./components/widgets/EmbeddingLegalese";
 import EmbeddingLevel from "./components/widgets/EmbeddingLevel";
 import LdapGroupMappingsWidget from "./components/widgets/LdapGroupMappingsWidget";
 import FormattingWidget from "./components/widgets/FormattingWidget";
+import LogoUpload from "./components/widgets/LogoUpload";
 
 import { UtilApi } from "metabase/services";
 
 /* Note - do not translate slugs */
 const SECTIONS = [
+  {
+    name: t`whitelabel`,
+    slug: "whitelabel",
+    settings: [
+      {
+        key: "application-name",
+        display_name: t`application-name`,
+        type: "string",
+      },
+      // {
+      //   key: "application-colors",
+      //   display_name: t`application-colors`,
+      //   // type: "string",
+      // },
+      {
+        key: "application-logo-url",
+        display_name: t`application-logo-url`,
+        type: "string",
+        widget: LogoUpload,
+      },
+      // {
+      //   key: "application-favicon-url",
+      //   display_name: t`application-favicon-url`,
+      //   type: "string",
+      // },
+      // {
+      //   key: "landing-page",
+      //   display_name: t`application-favicon-url`,
+      //   type: "string",
+      // }
+    ],
+  },
   {
     name: t`Setup`,
     slug: "setup",
@@ -492,6 +525,9 @@ export const getSections = createSelector(
         const apiSetting =
           settingsByKey[setting.key] && settingsByKey[setting.key][0];
         if (apiSetting) {
+          if (apiSetting.description) {
+            apiSetting.description = apiSetting.description.replace(/Metabase/g, MetabaseSettings.get("application-name") || MetabaseSettings.get("application_name"))
+          }
           return {
             placeholder: apiSetting.default,
             ...apiSetting,

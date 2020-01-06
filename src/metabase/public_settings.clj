@@ -187,6 +187,31 @@
             :type    :boolean
             :default true)
 
+(defsetting application-name
+            (deferred-tru "This will replace the word \"Metabase\" wherever it appears.")
+            :type      :string
+            :default   "Metabase")
+
+(defsetting application-colors
+            (deferred-tru "These are the primary colors used in charts and throughout Metabase. You might need to refresh your browser to see your changes take effect.")
+            :type    :json
+            :default {})
+
+(defsetting application-logo-url
+            (deferred-tru "For best results, use an SVG file with a transparent background.")
+            :type    :string
+            :default "app/assets/img/logo.svg")
+
+(defsetting application-favicon-url
+            (deferred-tru "The url or image that you want to use as the favicon.")
+            :type    :string
+            :default "frontend_client/favicon.ico")
+
+(defsetting landing-page
+            (deferred-tru "Default page to show the user")
+            :type    :string
+            :default "")
+
 (defn remove-public-uuid-if-public-sharing-is-disabled
   "If public sharing is *disabled* and OBJECT has a `:public_uuid`, remove it so people don't try to use it (since it
    won't work). Intended for use as part of a `post-select` implementation for Cards and Dashboards."
@@ -245,6 +270,9 @@
    :report_timezone       (resolve-setting 'metabase.driver 'report-timezone)
    :setup_token           (resolve-setting 'metabase.setup 'token-value)
    :site_name             (site-name)
+   :application_name      (application-name)
+   :application_favicon_url      (application-favicon-url)
+   :application_logo_url      (application-logo-url)
    :site_url              (site-url)
    :timezone_short        (short-timezone-name (setting/get :report-timezone))
    :timezones             common/timezones
