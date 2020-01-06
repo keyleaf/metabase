@@ -77,16 +77,10 @@ const title = documentTitleOrGetter => ComposedComponent =>
 export default title;
 
 import { Route as _Route } from "react-router";
-import MetabaseSettings from "metabase/lib/settings";
 
 // react-router Route wrapper that adds a `title` property
 export class Route extends _Route {
   static createRouteFromReactElement(element) {
-    console.log("element.props.title is : ", element.props.title);
-    console.log("MetabaseSettings.get(\"application-name\") is : ", MetabaseSettings.get("application-name"));
-    console.log("MetabaseSettings.get(\"application_name\") is : ", MetabaseSettings.get("application_name"));
-    console.log("MetabaseSettings.get(\"application_favicon_url\") is : ", MetabaseSettings.get("application_favicon_url"));
-    debugger;
     if (element.props.title) {
       element = React.cloneElement(element, {
         component: title(element.props.title)(
