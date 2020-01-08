@@ -2,7 +2,7 @@ import React from "react";
 
 // import {TYPE} from "metabase/lib/types";
 import LogoIcon from "metabase/components/LogoIcon";
-import {color} from "metabase/lib/colors";
+import { color, getNavBarColor } from "metabase/lib/colors";
 // import { PermissionsApi, SettingsApi } from "metabase/services";
 // import { refreshSiteSettings } from "metabase/redux/settings";
 
@@ -40,7 +40,7 @@ class LogoUpload extends React.Component {
       <div className="flex">
         <div>
           <div className="mb1">
-            <span className="mb1 p1 rounded flex layout-centered" style={{ backgroundColor: color("#7172ad") }}>
+            <span className="mb1 p1 rounded flex layout-centered" style={{ backgroundColor: color(getNavBarColor()) }}>
               <span className="Icon text-white">
                 <LogoIcon className="Logo my4 sm-my0" width={32} height={32} />
               </span>

@@ -15,6 +15,7 @@ import EmbeddingLevel from "./components/widgets/EmbeddingLevel";
 import LdapGroupMappingsWidget from "./components/widgets/LdapGroupMappingsWidget";
 import FormattingWidget from "./components/widgets/FormattingWidget";
 import LogoUpload from "./components/widgets/LogoUpload";
+import ColorSchemeWidget from "./components/widgets/ColorSchemeWidget";
 
 import { UtilApi } from "metabase/services";
 
@@ -29,11 +30,11 @@ const SECTIONS = [
         display_name: t`application-name`,
         type: "string",
       },
-      // {
-      //   key: "application-colors",
-      //   display_name: t`application-colors`,
-      //   // type: "string",
-      // },
+      {
+        key: "application-colors",
+        display_name: t`application-colors`,
+        widget: ColorSchemeWidget,
+      },
       {
         key: "application-logo-url",
         display_name: t`application-logo-url`,

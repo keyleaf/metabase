@@ -200,7 +200,7 @@
 (defsetting application-logo-url
             (deferred-tru "For best results, use an SVG file with a transparent background.")
             :type    :string
-            :default "app/assets/img/logo.svg")
+            :default "app/assets/img/mam-logo.svg")
 
 (defsetting application-favicon-url
             (deferred-tru "The url or image that you want to use as the favicon.")
@@ -272,6 +272,7 @@
    :site_name             (site-name)
    :application_name      (application-name)
    :application_favicon_url      (application-favicon-url)
+   :application_colors      (application-colors)
    :application_logo_url      (application-logo-url)
    :site_url              (site-url)
    :timezone_short        (short-timezone-name (setting/get :report-timezone))
