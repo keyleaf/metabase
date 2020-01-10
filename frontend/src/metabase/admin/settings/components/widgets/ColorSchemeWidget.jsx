@@ -1,14 +1,15 @@
 import React from "react";
 
-import {originalColors, updateColors, color} from "metabase/lib/colors";
+import { originalColors, updateColors } from "metabase/lib/colors";
 import ColorPicker from "metabase/components/ColorPicker";
 
 const APPLICATION_COLORS_ARRAY = ["brand", "nav"].concat(function(e) {
   if (Array.isArray(e)) {
-    let n = Array(e.length);
-    for (let t = 0; t < e.length; t++)
+    const n = Array(e.length);
+    for (let t = 0; t < e.length; t++) {
       n[t] = e[t];
-    return n
+    }
+    return n;
   }
   return Array.from(e)
 }(Object.keys(originalColors).filter(function(e) {
@@ -51,7 +52,7 @@ const APPLICATION_COLORS = {
 
 const r = function(e) {
   for (let t = 1; t < arguments.length; t++) {
-    let n = arguments[t];
+    const n = arguments[t];
     for (let r in n)
       Object.prototype.hasOwnProperty.call(n, r) && (e[r] = n[r])
   }
@@ -66,12 +67,7 @@ class ColorSchemeWidget extends React.Component {
 
   render() {
     const {onChange, setting} = this.props;
-    console.log("this.props is :", this.props);
-    console.log("APPLICATION_COLORS_ARRAY is :", APPLICATION_COLORS_ARRAY);
-    console.log("APPLICATION_COLORS[\"brand\"].name is :", APPLICATION_COLORS["brand"].name);
-    console.log("setting is :", setting);
-    console.log("onChange is :", onChange);
-    let applicationColors = setting.value;
+    const applicationColors = setting.value;
     return (
       <div className="flex">
         <div>
