@@ -864,6 +864,9 @@ databaseChangeLog:
               name: description
               type: text
           - column:
+              name: setting
+              type: text
+          - column:
               constraints:
                 nullable: false
               name: public_perms

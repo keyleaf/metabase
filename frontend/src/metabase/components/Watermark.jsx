@@ -50,8 +50,6 @@ export function watermark (props) {
     }
   }
 
-  console.log("loginName is :", Cookies.get('metabase.loginName'));
-  console.log("follow is :", follow);
   var canvas = document.getElementById('waterMark');
   // canvas.width = window.innerWidth / 4;
   // 文本宽度+间隔宽度
@@ -87,7 +85,6 @@ class Watermark extends Component {
 
   constructor(props) {
     super(props);
-    console.log("this.state.user is :", this.props.user);
   }
 
   componentDidMount() {

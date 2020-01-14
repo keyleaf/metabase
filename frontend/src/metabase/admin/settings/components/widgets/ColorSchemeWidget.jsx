@@ -3,7 +3,7 @@ import React from "react";
 import { originalColors, updateColors } from "metabase/lib/colors";
 import ColorPicker from "metabase/components/ColorPicker";
 
-const APPLICATION_COLORS_ARRAY = ["brand", "nav"].concat(function(e) {
+const APPLICATION_COLORS_ARRAY = ["brand", "nav", "dashboard_bg"].concat(function(e) {
   if (Array.isArray(e)) {
     const n = Array(e.length);
     for (let t = 0; t < e.length; t++) {
@@ -24,6 +24,10 @@ const APPLICATION_COLORS = {
   nav: {
     name: "Navigation bar color",
     description: "The top nav bar of Metabase. Defaults to the Primary Color if not set."
+  },
+  dashboard_bg: {
+    name: "dashboard background color",
+    description: "The color of dashboard."
   },
   accent1: {
     name: "Accent 1",

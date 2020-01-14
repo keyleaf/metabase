@@ -16,6 +16,7 @@ export type ColorFamily = { [name: ColorName]: ColorString };
 /* eslint-disable no-color-literals */
 const colors = {
   brand: "#509EE3",
+  nav: undefined,
   accent1: "#88BF4D",
   accent2: "#A989C5",
   accent3: "#EF8C8C",
@@ -50,6 +51,7 @@ const colors = {
 
 export const originalColors = {
   brand: "#509EE3",
+  nav: undefined,
   accent1: "#88BF4D",
   accent2: "#A989C5",
   accent3: "#EF8C8C",
@@ -168,7 +170,7 @@ export const getRandomColor = (family: ColorFamily): ColorString => {
 };
 
 export const getNavBarColor = () => {
-  return colors["brand"];
+  return colors["nav"] || colors["brand"];
 };
 
 function updateColorsInit(){

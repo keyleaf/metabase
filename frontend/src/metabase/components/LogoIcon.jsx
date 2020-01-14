@@ -64,10 +64,10 @@ export default class LogoIcon extends Component {
   // };
 
   render() {
-    const { dark, height, width, size, logoUrl } = this.props;
-    let logo = logoUrl;
+    const { dark, height, width, size, logoUrl, value } = this.props;
+    let logo = value;
     if (!logo) {
-      logo = "../app/assets/img/mam-logo.svg"
+      logo = logoUrl || "../app/assets/img/mam-logo.svg";
     }
     return (
       <img

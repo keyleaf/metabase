@@ -35,6 +35,10 @@ import type {
   DashCardId,
 } from "metabase/meta/types/Dashboard";
 import { Link } from "react-router";
+import ColorPicker from "metabase/components/ColorPicker";
+import ImageUpload from "metabase/admin/settings/components/widgets/ImageUpload";
+import PopoverWithTrigger from "metabase/components/PopoverWithTrigger";
+import {color} from "metabase/lib/colors";
 
 type Props = {
   location: LocationDescriptor,
@@ -288,6 +292,47 @@ export default class DashboardHeader extends Component {
           >
             <Icon name="string" size={20} />
           </a>
+        </Tooltip>,
+      );
+
+      // Add background color edit button
+      buttons.push(
+        <Tooltip key="background-color" tooltip={t`修改背景色`}>
+          <ColorPicker
+            value={
+              dashboard.setting && dashboard.setting.bgColor ? dashboard.setting.bgColor : color(dashboard)
+            }
+            triggerSize={12}
+            fancy={true}
+            onChange={value =>this.props.setDashboardAttribute("setting", Object.assign(dashboard.setting || {}, { bgColor: value }))}
+          />
+        </Tooltip>,
+      );
+
+      // Add background image edit button
+      buttons.push(
+        <Tooltip key="background-image" tooltip={t`修改背景图片`}>
+          <PopoverWithTrigger ref="colorPopover"
+                              triggerElement={
+                                <div
+                                  className="bordered rounded flex align-center"
+                                  style={{ padding: 12 / 4 }}
+                                >
+                                  <div style={{
+                                    width: 12,
+                                    height: 12,
+                                    backgroundImage: `url('${dashboard.setting.imageUrl}')`,
+                                    backgroundColor: dashboard.setting && !dashboard.setting.imageUrl ? dashboard.setting.bgColor : color(dashboard),
+                                    borderRadius: 12 / 8,
+                                  }} />
+                                </div>
+                              }>
+            <ImageUpload imageUrl={ dashboard.setting.imageUrl || " " }
+                         bgColor={ dashboard.setting && dashboard.setting.bgColor ? dashboard.setting.bgColor : color(dashboard) }
+                         onChange={value =>this.props.setDashboardAttribute("setting", Object.assign(dashboard.setting || {}, { imageUrl: value ? value : "" }))}
+                         // onChange={value =>this.props.setDashboardAttribute("setting", value ? Object.assign(dashboard.setting || {}, { imageUrl: value }) : dashboard.setting ? delete dashboard.setting.imageUrl : {} )}
+            ></ImageUpload>
+          </PopoverWithTrigger>
         </Tooltip>,
       );
 

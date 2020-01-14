@@ -94,13 +94,6 @@ export default class Text extends Component {
       },
       default: "left",
     },
-    "dashcard.background": {
-      section: t`Display`,
-      title: t`Show background`,
-      dashboard: true,
-      widget: "toggle",
-      default: true,
-    },
   };
 
   componentWillReceiveProps(newProps: VisualizationProps) {

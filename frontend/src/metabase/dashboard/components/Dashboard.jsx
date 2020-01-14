@@ -15,6 +15,8 @@ import EmptyState from "metabase/components/EmptyState";
 
 import DashboardControls from "../hoc/DashboardControls";
 
+import { color } from "metabase/lib/colors";
+
 import _ from "underscore";
 import cx from "classnames";
 
@@ -269,7 +271,11 @@ export default class Dashboard extends Component {
         error={error}
       >
         {() => (
-          <div className="full" style={{ overflowX: "hidden" }}>
+          <div className="full" style={{ overflowX: "hidden",
+            backgroundColor: color(dashboard.setting.bgColor) || color("dashboard_bg"),
+            backgroundSize: 'cover',
+            backgroundImage: `url(${dashboard.setting.imageUrl})`
+            }}>
             <header className="DashboardHeader relative z2">
               <DashboardHeader
                 {...this.props}
