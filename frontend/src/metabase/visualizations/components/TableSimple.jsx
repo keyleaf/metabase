@@ -174,11 +174,13 @@ export default class TableSimple extends Component {
                               "text-right": isColumnRightAligned(col),
                             },
                           )}
+                          style={{paddingRight: 2, paddingLeft: 0}}
                           onClick={() => this.setSort(colIndex)}
                         >
-                          <div className="relative" style={{ backgroundColor: 'aqua', borderWidth: 2, borderColor: 'white',borderRight: '2px #ccc solid;',
-                            textAlign: 'center', height: 20, fontSize: '1.2em', lineHeight: '21px',
-                            marginBottom: '-10px' }} >
+                          <div className="relative" style={{ backgroundColor: 'rgba(243, 244, 245, 1)', borderWidth: 2, borderColor: 'white',borderRight: '2px #ccc solid;',
+                            textAlign: 'center', height: 25, fontSize: '1.2em', lineHeight: '25px',
+                            color: 'rgb(80, 158, 227)',
+                            marginBottom: '-7px' }} >
                             {getGroupTitle(colIndex)}
                           </div>
                         </th>
@@ -201,6 +203,7 @@ export default class TableSimple extends Component {
                           "text-right": isColumnRightAligned(col),
                         },
                       )}
+                      style={{backgroundColor: "aqua", color: "white", fontWeight: 900, textAlign: "center", borderRight: "2px solid white"}}
                       onClick={() => this.setSort(colIndex)}
                     >
                       <div className="relative">
@@ -210,7 +213,7 @@ export default class TableSimple extends Component {
                           height={8}
                           style={{
                             position: "absolute",
-                            right: "100%",
+                            left: "1%",
                             marginRight: 3,
                           }}
                         />
@@ -240,7 +243,7 @@ export default class TableSimple extends Component {
                           key={columnIndex}
                           style={{
                             whiteSpace: "nowrap",
-                            backgroundColor:
+                            backgroundColor: (columnIndex > 0 && getGroupTitle(columnIndex) === getGroupTitle(columnIndex-1) || columnIndex + 1 <= rows.length && getGroupTitle(columnIndex) === getGroupTitle(columnIndex+1)) ? "red" :
                               getCellBackgroundColor &&
                               getCellBackgroundColor(
                                 value,
