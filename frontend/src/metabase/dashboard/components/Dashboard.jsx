@@ -272,9 +272,9 @@ export default class Dashboard extends Component {
       >
         {() => (
           <div className="full" style={{ overflowX: "hidden",
-            backgroundColor: color(dashboard.setting.bgColor) || color("dashboard_bg"),
+            backgroundColor: dashboard.setting && dashboard.setting.bgColor ? color(dashboard.setting.bgColor) : color("dashboard_bg"),
             backgroundSize: 'cover',
-            backgroundImage: `url(${dashboard.setting.imageUrl})`
+            backgroundImage: dashboard.setting && dashboard.setting.imageUrl ? `url(${dashboard.setting.imageUrl})` : ''
             }}>
             <header className="DashboardHeader relative z2">
               <DashboardHeader

@@ -321,13 +321,13 @@ export default class DashboardHeader extends Component {
                                   <div style={{
                                     width: 12,
                                     height: 12,
-                                    backgroundImage: `url('${dashboard.setting.imageUrl}')`,
+                                    backgroundImage: dashboard.setting && dashboard.setting.imageUrl ? `url('${dashboard.setting.imageUrl}')` : '',
                                     backgroundColor: dashboard.setting && !dashboard.setting.imageUrl ? dashboard.setting.bgColor : color(dashboard),
                                     borderRadius: 12 / 8,
                                   }} />
                                 </div>
                               }>
-            <ImageUpload imageUrl={ dashboard.setting.imageUrl || " " }
+            <ImageUpload imageUrl={ dashboard.setting && dashboard.setting.imageUrl ? dashboard.setting.imageUrl : " " }
                          bgColor={ dashboard.setting && dashboard.setting.bgColor ? dashboard.setting.bgColor : color(dashboard) }
                          onChange={value =>this.props.setDashboardAttribute("setting", Object.assign(dashboard.setting || {}, { imageUrl: value ? value : "" }))}
                          // onChange={value =>this.props.setDashboardAttribute("setting", value ? Object.assign(dashboard.setting || {}, { imageUrl: value }) : dashboard.setting ? delete dashboard.setting.imageUrl : {} )}

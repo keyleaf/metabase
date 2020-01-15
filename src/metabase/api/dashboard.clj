@@ -213,6 +213,7 @@
         dashboard-data {:name                (or name (:name existing-dashboard))
                         :description         (or description (:description existing-dashboard))
                         :parameters          (or (:parameters existing-dashboard) [])
+                        :setting             (or (:setting existing-dashboard) {})
                         :creator_id          api/*current-user-id*
                         :collection_id       collection_id
                         :collection_position collection_position}
