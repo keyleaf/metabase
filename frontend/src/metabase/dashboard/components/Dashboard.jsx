@@ -65,6 +65,7 @@ type Props = {
   initialize: () => Promise<void>,
   addCardToDashboard: ({ dashId: DashCardId, cardId: CardId }) => void,
   addTextDashCardToDashboard: ({ dashId: DashCardId }) => void,
+  addRichTextDashCardToDashboard: ({ dashId: DashCardId }) => void,
   archiveDashboard: (dashboardId: DashboardId) => void,
   fetchCards: (filterMode?: string) => void,
   fetchDashboard: (dashboardId: DashboardId, queryParams: ?QueryParams) => void,

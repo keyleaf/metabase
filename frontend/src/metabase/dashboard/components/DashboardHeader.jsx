@@ -59,6 +59,7 @@ type Props = {
 
   addCardToDashboard: ({ dashId: DashCardId, cardId: CardId }) => void,
   addTextDashCardToDashboard: ({ dashId: DashCardId }) => void,
+  addRichTextDashCardToDashboard: ({ dashId: DashCardId }) => void,
   archiveDashboard: (dashboardId: DashboardId) => void,
   fetchCards: (filterMode?: string) => void,
   fetchDashboard: (dashboardId: DashboardId, queryParams: ?QueryParams) => void,
@@ -99,6 +100,7 @@ export default class DashboardHeader extends Component {
 
     addCardToDashboard: PropTypes.func.isRequired,
     addTextDashCardToDashboard: PropTypes.func.isRequired,
+    addRichTextDashCardToDashboard: PropTypes.func.isRequired,
     archiveDashboard: PropTypes.func.isRequired,
     fetchCards: PropTypes.func.isRequired,
     fetchDashboard: PropTypes.func.isRequired,
@@ -117,6 +119,10 @@ export default class DashboardHeader extends Component {
 
   onAddTextBox() {
     this.props.addTextDashCardToDashboard({ dashId: this.props.dashboard.id });
+  }
+
+  onAddRichTextBox() {
+    this.props.addRichTextDashCardToDashboard({ dashId: this.props.dashboard.id });
   }
 
   onDoneEditing() {
@@ -295,6 +301,21 @@ export default class DashboardHeader extends Component {
         </Tooltip>,
       );
 
+      // Add rich text card button
+      buttons.push(
+        <Tooltip key="add-a-rich-text-box" tooltip={t`添加富文本框`}>
+          <a
+            data-metabase-event="Dashboard;Add Rich Text Box"
+            key="add-rich-text"
+            title={t`添加富文本框`}
+            className="text-brand-hover cursor-pointer"
+            onClick={() => this.onAddRichTextBox()}
+          >
+            <Icon name="string" size={20} style={{ color: "aqua"}} />
+          </a>
+        </Tooltip>,
+      );
+
       // Add background color edit button
       buttons.push(
         <Tooltip key="background-color" tooltip={t`修改背景色`}>
@@ -316,7 +337,7 @@ export default class DashboardHeader extends Component {
                               triggerElement={
                                 <div
                                   className="bordered rounded flex align-center"
-                                  style={{ padding: 12 / 4 }}
+                                  style={{ padding: 12 / 4, borderColor: "aqua" }}
                                 >
                                   <div style={{
                                     width: 12,

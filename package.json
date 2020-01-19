@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "ace-builds": "^1.2.2",
+    "braft-editor": "^2.3.8",
     "chevrotain": "0.21.0",
     "classlist-polyfill": "^1.2.0",
     "classnames": "^2.1.3",

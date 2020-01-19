@@ -65,16 +65,18 @@
                                    (when config/is-dev?
                                      "localhost:8080")]
                                   (map (partial format "'sha256-%s'") inline-js-hashes))
-                  :child-src    ["'self'"
-                                 ;; TODO - double check that we actually need this for Google Auth
-                                 "https://accounts.google.com"]
+                  :child-src    ["* data:"]
                   :style-src    ["'self'"
                                  "'unsafe-inline'"]
-                  :font-src     ["'self'"
+                  :font-src     ["* data:"
                                  (when config/is-dev?
                                    "localhost:8080")]
-                  :img-src      ["*"
-                                 "'self' data:"]
+                  :img-src      ["* blob: data:"
+                                 (when config/is-dev?
+                                   "localhost:8080")]
+                  :media-src      ["* data:"
+                                 (when config/is-dev?
+                                   "localhost:8080")]
                   :connect-src  ["'self'"
                                  ;; MailChimp. So people can sign up for the Metabase mailing list in the sign up process
                                  "metabase.us10.list-manage.com"
