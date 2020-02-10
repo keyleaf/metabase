@@ -243,7 +243,7 @@ export default class TableSimple extends Component {
                           key={columnIndex}
                           style={{
                             whiteSpace: "nowrap",
-                            backgroundColor: (columnIndex > 0 && getGroupTitle(columnIndex) === getGroupTitle(columnIndex-1) || columnIndex + 1 <= rows.length && getGroupTitle(columnIndex) === getGroupTitle(columnIndex+1)) ? "red" :
+                            backgroundColor:
                               getCellBackgroundColor &&
                               getCellBackgroundColor(
                                 value,
