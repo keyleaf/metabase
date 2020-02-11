@@ -183,9 +183,19 @@
                          u/lower-case-en)))
 
 (defsetting enable-watermark
-            (deferred-tru "水印格式为：当前用户名 + 当前时间")
+            (deferred-tru "是否启用水印功能")
             :type    :boolean
             :default true)
+
+(defsetting watermark-content
+            (deferred-tru "水印默认格式为：用户名 + 当前时间（年-月-日 时:分）")
+            :type    :string
+            :default "watermark-content-1")
+
+(defsetting watermark-color
+            (deferred-tru "水印的字体颜色")
+            :type    :string
+            :default "#000000")
 
 (defsetting application-name
             (deferred-tru "This will replace the word \"Metabase\" wherever it appears.")
@@ -255,6 +265,8 @@
    :enable_query_caching  (enable-query-caching)
    :enable_xrays          (enable-xrays)
    :enable_watermark      (enable-watermark)
+   :watermark_content     (watermark-content)
+   :watermark_color     (watermark-color)
    :engines               (driver.u/available-drivers-info)
    :entities              (types/types->parents :entity/*)
    :ga_code               "UA-60817802-1"

@@ -18,6 +18,8 @@ import LogoUpload from "./components/widgets/LogoUpload";
 import ColorSchemeWidget from "./components/widgets/ColorSchemeWidget";
 
 import { UtilApi } from "metabase/services";
+import WatermarkColorWidget from "metabase/admin/settings/components/widgets/WatermarkColorWidget";
+import WatermarkPreviewWidget from "metabase/admin/settings/components/widgets/WatermarkPreviewWidget";
 
 /* Note - do not translate slugs */
 const SECTIONS = [
@@ -102,6 +104,41 @@ const SECTIONS = [
         key: "enable-watermark",
         display_name: t`开启水印功能`,
         type: "boolean",
+      },
+      {
+        key: "watermark-content",
+        display_name: t`水印内容配置`,
+        type: "select",
+        options: [
+          { value: "watermark-content-1",
+            name: t`用户名 年-月-日 时:分`
+          },
+          {
+            value: "watermark-content-2",
+            name: t`用户名 年-月-日`,
+          },
+          { value: "watermark-content-3",
+            name: t`用户名 年/月/日 时:分`
+          },
+          {
+            value: "watermark-content-4",
+            name: t`用户名 年/月/日`,
+          },
+        ],
+        defaultValue: "watermark-content-1",
+        getHidden: settings => !settings["enable-watermark"],
+      },
+      {
+        key: "watermark-color",
+        display_name: t`水印颜色`,
+        widget: WatermarkColorWidget,
+        getHidden: settings => !settings["enable-watermark"],
+      },
+      {
+        key: "-watermark-config",
+        display_name: t`水印预览`,
+        widget: WatermarkPreviewWidget,
+        getHidden: settings => !settings["enable-watermark"],
       },
       {
         key: "anon-tracking-enabled",
