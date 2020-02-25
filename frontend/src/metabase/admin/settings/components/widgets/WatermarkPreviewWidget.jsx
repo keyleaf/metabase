@@ -9,7 +9,7 @@ class WatermarkPreviewWidget extends React.Component {
       <div>
         <div className={"Watermark-target"} style={{height: 200, width: 300, border: '2px solid aqua'}}>
           <Watermark selector=".Watermark-target"
-                     color={MetabaseSettings.get("watermark-color", '#000000')}
+                     color={MetabaseSettings.get("watermark-color", '#c5cbcf')}
                      contentFormat={MetabaseSettings.get("watermark-content", 'watermark-content-1')}></Watermark>
         </div>
       </div>

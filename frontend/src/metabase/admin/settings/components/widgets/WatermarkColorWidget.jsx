@@ -13,7 +13,7 @@ class WatermarkColorWidget extends React.Component {
         <Tooltip key="background-color" tooltip={t`水印字体颜色`}>
           <ColorPicker
             value={
-              MetabaseSettings.get("watermark-color", '#000000')
+              MetabaseSettings.get("watermark-color", '#c5cbcf') || '#c5cbcf'
             }
             triggerSize={12}
             fancy={true}

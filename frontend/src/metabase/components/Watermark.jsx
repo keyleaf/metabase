@@ -70,7 +70,7 @@ export function watermark (props) {
     }
     const date = formatDate(new Date(), dateFormatStr);
     // const follow = localStorage.follow
-    ctx.fillStyle = MetabaseSettings.get("watermark-color",'rgba(0, 0, 0, .15)');
+    ctx.fillStyle = MetabaseSettings.get("watermark-color",'rgba(197,203,207)') || 'rgba(197,203,207)';
     ctx.rotate(-Math.PI / 12);
     // 后面的100可以控制宽度
     if (follow.length > 4) {

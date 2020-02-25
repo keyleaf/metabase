@@ -195,7 +195,7 @@
 (defsetting watermark-color
             (deferred-tru "水印的字体颜色")
             :type    :string
-            :default "#000000")
+            :default "#c5cbcf")
 
 (defsetting application-name
             (deferred-tru "This will replace the word \"Metabase\" wherever it appears.")
