@@ -664,7 +664,8 @@ export default class TableInteractive extends Component {
             borderRightWidth: 2,
             borderRightColor: 'white',
             // backgroundColor: 'rgb(85, 152, 209, 1)',
-            backgroundColor: 'aqua',
+            // backgroundColor: 'aqua',
+            backgroundColor: '#4f9ee3',
             // backgroundColor: cols.length >= 2 && (columnIndex + 1 < cols.length && getGroupTitle(columnIndex+1) === getGroupTitle(columnIndex) || columnIndex - 1 >= 0 && getGroupTitle(columnIndex-1) === getGroupTitle(columnIndex)) ? 'aqua' : 'white',
             overflow: "visible" /* ensure resize handle is visible */,
             // use computed left if dragging, except for the dragged header

@@ -203,7 +203,7 @@ export default class TableSimple extends Component {
                           "text-right": isColumnRightAligned(col),
                         },
                       )}
-                      style={{backgroundColor: "aqua", color: "white", fontWeight: 900, textAlign: "center", borderRight: "2px solid white"}}
+                      style={{backgroundColor: "#4f9ee3", color: "white", fontWeight: 900, textAlign: "center", borderRight: "2px solid white"}}
                       onClick={() => this.setSort(colIndex)}
                     >
                       <div className="relative">
