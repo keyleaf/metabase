@@ -72,6 +72,21 @@
   :setter (fn [new-value]
             (setting/set-string! :site-url (some-> new-value normalize-site-url))))
 
+(defsetting record-sql-url
+            (deferred-tru "将执行sql语句post到第三方系统的接口地址，例如 \"http://core.my-company.com\".")
+            :visibility :public
+            :getter (fn []
+                      (try
+                        (some-> (setting/get-string :record-sql-url) normalize-site-url)
+                        (catch AssertionError e
+                          (log/error e (trs "无效的接口地址"))))
+                      )
+            :setter (fn [new-value]
+                      (println "new-value is :" new-value)
+                      (println "(nil? new-value) :" (nil? new-value))
+                      (println "(= \"\" new-value) :" (= "" new-value))
+                      (setting/set-string! :record-sql-url (if (= "" new-value) new-value (some-> new-value normalize-site-url)))))
+
 (defsetting site-locale
   (str  (deferred-tru "The default language for this Metabase instance.")
         " "

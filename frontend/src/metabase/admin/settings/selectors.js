@@ -49,6 +49,11 @@ const SECTIONS = updateSectionsWithPlugins({
         type: "string",
       },
       {
+        key: "record-sql-url",
+        display_name: t`记录执行SQL的接口地址`,
+        type: "string",
+      },
+      {
         key: "admin-email",
         display_name: t`Email Address for Help Requests`,
         type: "string",
