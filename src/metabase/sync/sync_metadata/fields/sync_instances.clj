@@ -46,7 +46,7 @@
       (for [{:keys [database-type base-type field-comment], field-name :name :as field} new-field-metadatas]
         {:table_id      (u/get-id table)
          :name          field-name
-         :display_name  (humanization/name->human-readable-name field-name)
+         :display_name  (if-not (nil? field-comment) field-comment (humanization/name->human-readable-name field-name))
          :database_type (or database-type "NULL") ; placeholder for Fields w/ no type info (e.g. Mongo) & all NULL
          :base_type     base-type
          :special_type  (common/special-type field)
